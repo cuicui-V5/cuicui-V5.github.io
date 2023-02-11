@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2286c3">
+  <meta name="author" content="cuicui">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一个分页器组件最重要的四个参数(需要外界传入)    当前第几页: pageNo   每页展示的数据数量: pageSize   共有多少数据: total   显示的连续页码: continues  通过以上信息可以计算出来的数据    共有多少页: total&#x2F;pageSize 向上取整  显示的连续页码的起始与结束  如果总页数小于要显示的连续页码    起始为 1   结束为总页数   如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用vue封装一个分页器组件">
+<meta property="og:url" content="htttps://blog.cuijunyu.win/2022/12/01/使用vue封装一个分页器组件/index.html">
+<meta property="og:site_name" content="cuicui&#39;Blog">
+<meta property="og:description" content="一个分页器组件最重要的四个参数(需要外界传入)    当前第几页: pageNo   每页展示的数据数量: pageSize   共有多少数据: total   显示的连续页码: continues  通过以上信息可以计算出来的数据    共有多少页: total&#x2F;pageSize 向上取整  显示的连续页码的起始与结束  如果总页数小于要显示的连续页码    起始为 1   结束为总页数   如">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-01T03:22:15.000Z">
+<meta property="article:modified_time" content="2023-02-11T13:21:57.599Z">
+<meta property="article:author" content="cuicui">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>使用vue封装一个分页器组件 - cuicui&#39;Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.cuijunyu.win","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>cuicui&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="使用vue封装一个分页器组件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-01 11:22" pubdate>
+          2022年12月1日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">使用vue封装一个分页器组件</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>一个分页器组件最重要的四个参数(需要外界传入)</p>
+<ul>
+<li>  当前第几页: pageNo</li>
+<li>  每页展示的数据数量: pageSize</li>
+<li>  共有多少数据: total</li>
+<li>  显示的连续页码: continues</li>
+</ul>
+<p>通过以上信息可以计算出来的数据</p>
+<ul>
+<li><p>  共有多少页: total/pageSize 向上取整</p>
+</li>
+<li><p>显示的连续页码的起始与结束</p>
+<ul>
+<li><p>如果总页数小于要显示的连续页码</p>
+<ul>
+<li>  起始为 1</li>
+<li>  结束为总页数</li>
+</ul>
+</li>
+<li><p>如果总页数大于连续页码</p>
+<ul>
+<li><p>先计算出当前页码左边和右边要显示几个页码: 连续页码/2 向下取整</p>
+<ul>
+<li><p>起始页码: 当前显示的页码-上边计算出来的数据</p>
+<ul>
+<li>  如果小于 1, 那么起始页码等于 1, 结束页码等于要显示的连续页码</li>
+</ul>
+</li>
+<li><p>结束页码: 当前显示的页码+上边计算出来的数据</p>
+<ul>
+<li>  如果大于总页码, 那么起始页码等于总页码-连续页码+1, 结束页码等于总页码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="分页器组件"><a href="#分页器组件" class="headerlink" title="分页器组件"></a>分页器组件</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs ts">&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;pagination&quot;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span></span></span><br><span class="hljs-tag"><span class="language-xml">            <span class="hljs-attr">:disabled</span>=<span class="hljs-string">&quot;pageNo == 1&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">            @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;emit(&#x27;changePage&#x27;, pageNo - 1)&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">        &gt;</span></span><br><span class="language-xml">            上一页</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;startAndEnd.start &gt; 1&quot;</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;startAndEnd.start &gt; 2&quot;</span>&gt;</span>···<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span></span></span><br><span class="hljs-tag"><span class="language-xml">            <span class="hljs-attr">:class</span>=<span class="hljs-string">&quot;&#123;</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">                active: pageNo == index + 1,</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">            &#125;&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">            <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(page, index) in startAndEnd.end&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">            <span class="hljs-attr">v-show</span>=<span class="hljs-string">&quot;page &gt;= startAndEnd.start&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">            @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;emit(&#x27;changePage&#x27;, index + 1)&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">        &gt;</span></span><br><span class="language-xml">            &#123;&#123; page &#125;&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;startAndEnd.end &lt; totalPage - 1&quot;</span>&gt;</span>···<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;startAndEnd.end &lt; totalPage&quot;</span>&gt;</span>&#123;&#123; totalPage &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span></span></span><br><span class="hljs-tag"><span class="language-xml">            <span class="hljs-attr">:disabled</span>=<span class="hljs-string">&quot;pageNo == totalPage&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">            @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;emit(&#x27;changePage&#x27;, pageNo + 1)&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">        &gt;</span></span><br><span class="language-xml">            下一页</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml"></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-left: 30px&quot;</span>&gt;</span>共 &#123;&#123; total &#125;&#125; 条<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">import</span> &#123; computed, toRefs, type <span class="hljs-title class_">Ref</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;</span></span><br><span class="language-javascript"><span class="language-xml"></span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">const</span> props = defineProps&lt;&#123;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">pageNo</span>: number;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">pageSize</span>: number;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">total</span>: number;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">continues</span>: number;</span></span><br><span class="language-javascript"><span class="language-xml">    &#125;&gt;();</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">const</span> &#123; pageNo, pageSize, total, continues &#125; = <span class="hljs-title function_">toRefs</span>(props);</span></span><br><span class="language-javascript"><span class="language-xml"></span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">const</span> emit = <span class="hljs-title function_">defineEmits</span>([<span class="hljs-string">&quot;changePage&quot;</span>]);</span></span><br><span class="language-javascript"><span class="language-xml"></span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">const</span> totalPage = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">ceil</span>(total.<span class="hljs-property">value</span> / pageSize.<span class="hljs-property">value</span>);</span></span><br><span class="language-javascript"><span class="language-xml">    &#125;);</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">const</span> <span class="hljs-title function_">test</span> = (<span class="hljs-params"></span>) =&gt; &#123;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(pageNo.<span class="hljs-property">value</span>);</span></span><br><span class="language-javascript"><span class="language-xml">    &#125;;</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">const</span> startAndEnd = <span class="hljs-title function_">computed</span>(<span class="hljs-function">() =&gt;</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">let</span> start = <span class="hljs-number">0</span>,</span></span><br><span class="language-javascript"><span class="language-xml">            end = <span class="hljs-number">0</span>;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(pageNo.<span class="hljs-property">value</span>);</span></span><br><span class="language-javascript"><span class="language-xml"></span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-comment">// 如果总页数小于要显示的页数</span></span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">if</span> (totalPage.<span class="hljs-property">value</span> &lt; continues.<span class="hljs-property">value</span>) &#123;</span></span><br><span class="language-javascript"><span class="language-xml">            start = <span class="hljs-number">1</span>;</span></span><br><span class="language-javascript"><span class="language-xml">            end = totalPage.<span class="hljs-property">value</span>;</span></span><br><span class="language-javascript"><span class="language-xml">        &#125; <span class="hljs-keyword">else</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-comment">// 正常情况</span></span></span><br><span class="language-javascript"><span class="language-xml">            start = pageNo.<span class="hljs-property">value</span> - <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(continues.<span class="hljs-property">value</span> / <span class="hljs-number">2</span>);</span></span><br><span class="language-javascript"><span class="language-xml">            end = pageNo.<span class="hljs-property">value</span> + <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(continues.<span class="hljs-property">value</span> / <span class="hljs-number">2</span>);</span></span><br><span class="language-javascript"><span class="language-xml">        &#125;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-comment">// 异常情况</span></span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">if</span> (start &lt; <span class="hljs-number">1</span>) &#123;</span></span><br><span class="language-javascript"><span class="language-xml">            start = <span class="hljs-number">1</span>;</span></span><br><span class="language-javascript"><span class="language-xml">            end = continues.<span class="hljs-property">value</span>;</span></span><br><span class="language-javascript"><span class="language-xml">        &#125;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">if</span> (end &gt; totalPage.<span class="hljs-property">value</span>) &#123;</span></span><br><span class="language-javascript"><span class="language-xml">            start = totalPage.<span class="hljs-property">value</span> - continues.<span class="hljs-property">value</span> + <span class="hljs-number">1</span>;</span></span><br><span class="language-javascript"><span class="language-xml">            end = totalPage.<span class="hljs-property">value</span>;</span></span><br><span class="language-javascript"><span class="language-xml">        &#125;</span></span><br><span class="language-javascript"><span class="language-xml"></span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-comment">// debugger;</span></span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">return</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">            start,</span></span><br><span class="language-javascript"><span class="language-xml">            end,</span></span><br><span class="language-javascript"><span class="language-xml">        &#125;;</span></span><br><span class="language-javascript"><span class="language-xml">    &#125;);</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ts&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;pagination&quot;</span>,</span></span><br><span class="language-javascript"><span class="language-xml">    &#125;;</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br></code></pre></td></tr></table></figure>
+
+<h1 id="使用分页器组件"><a href="#使用分页器组件" class="headerlink" title="使用分页器组件"></a>使用分页器组件</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ts">                  &lt;pagination<br>                      v-<span class="hljs-keyword">if</span>=<span class="hljs-string">&quot;store.searchList&quot;</span><br>                      :pageNo=<span class="hljs-string">&quot;searchParams.pageNo&quot;</span><br>                      :pageSize=<span class="hljs-string">&quot;searchParams.pageSize&quot;</span><br>                      :total=<span class="hljs-string">&quot;store.searchList.total&quot;</span><br>                      :continues=<span class="hljs-string">&quot;5&quot;</span><br>                      <span class="hljs-meta">@changePage</span>=<span class="hljs-string">&quot;changePage&quot;</span><br>                  &gt;&lt;/pagination&gt;<br><br><span class="hljs-comment">//改变页码并且发送请求</span><br>  		<span class="hljs-keyword">const</span> <span class="hljs-title function_">changePage</span> = (<span class="hljs-params">pageNo: <span class="hljs-built_in">number</span></span>) =&gt; &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(pageNo);<br><br>        searchParams.<span class="hljs-property">value</span>.<span class="hljs-property">pageNo</span> = pageNo;<br>        store.<span class="hljs-title function_">getSearchList</span>(searchParams.<span class="hljs-property">value</span>);<br>    &#125;;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/vue/">#vue</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>使用vue封装一个分页器组件</div>
+      <div>htttps://blog.cuijunyu.win/2022/12/01/使用vue封装一个分页器组件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cuicui</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年12月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/01/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/" title="vue vee-validate 表单验证">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vue vee-validate 表单验证</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/11/TypeScript%E4%B8%8B%E7%BB%99%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B/" title="TypeScript下给定时器标注类型">
+                        <span class="hidden-mobile">TypeScript下给定时器标注类型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"BbitKGRD3uWgA01OfBFX6pXC-gzGzoHsz","appKey":"prG5UI8WBINxl5YzmALKOZGN","path":"window.location.pathname","placeholder":"just so so","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
