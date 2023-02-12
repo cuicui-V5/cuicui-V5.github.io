@@ -18,22 +18,22 @@
   <meta name="author" content="cuicui">
   <meta name="keywords" content="">
   
-    <meta name="description" content="v-model 传进来的数据为modelValue, 要手动触发的事件为update:modelValue 父组件 123456&lt;template&gt;    &lt;div class&#x3D;&quot;hello&quot;&gt;        &lt;h1&gt;&amp;#123;&amp;#123; msg &amp;#125;&amp;#125;&lt;&#x2F;h1&gt;        &lt;test v-mode">
+    <meta name="description" content="123background: url(@&#x2F;img&#x2F;bg.jpg) rgba(0, 0, 0, 0.3);background-size: cover;background-blend-mode: multiply;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue3中 v-model封装自定义组件实现数据双向绑定">
-<meta property="og:url" content="htttps://blog.cuijunyu.win/2023/02/11/Vue3中-v-model封装自定义组件实现数据双向绑定/index.html">
+<meta property="og:title" content="css实现遮罩效果">
+<meta property="og:url" content="htttps://blog.cuijunyu.win/2022/12/16/css实现遮罩效果/index.html">
 <meta property="og:site_name" content="cuicui&#39;Blog">
-<meta property="og:description" content="v-model 传进来的数据为modelValue, 要手动触发的事件为update:modelValue 父组件 123456&lt;template&gt;    &lt;div class&#x3D;&quot;hello&quot;&gt;        &lt;h1&gt;&amp;#123;&amp;#123; msg &amp;#125;&amp;#125;&lt;&#x2F;h1&gt;        &lt;test v-mode">
+<meta property="og:description" content="123background: url(@&#x2F;img&#x2F;bg.jpg) rgba(0, 0, 0, 0.3);background-size: cover;background-blend-mode: multiply;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-11T13:03:45.000Z">
-<meta property="article:modified_time" content="2023-02-11T13:21:04.740Z">
+<meta property="article:published_time" content="2022-12-16T08:03:48.000Z">
+<meta property="article:modified_time" content="2023-02-11T13:29:09.112Z">
 <meta property="article:author" content="cuicui">
-<meta property="article:tag" content="vue">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Vue3中 v-model封装自定义组件实现数据双向绑定 - cuicui&#39;Blog</title>
+  <title>css实现遮罩效果 - cuicui&#39;Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Vue3中 v-model封装自定义组件实现数据双向绑定"></span>
+            <span id="subtitle" data-typed-text="css实现遮罩效果"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-11 21:03" pubdate>
-          2023年2月11日 晚上
+        <time datetime="2022-12-16 16:03" pubdate>
+          2022年12月16日 下午
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          545 字
+          100 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          5 分钟
+          1 分钟
         
       </span>
     
@@ -271,17 +271,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Vue3中 v-model封装自定义组件实现数据双向绑定</h1>
+            <h1 style="display: none">css实现遮罩效果</h1>
             
             
               <div class="markdown-body">
                 
-                <p>v-model 传进来的数据为<code>modelValue</code>, 要手动触发的事件为<code>update:modelValue</code></p>
-<p>父组件</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ts">&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">&quot;msg&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br></code></pre></td></tr></table></figure>
-
-<p>子组件</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ts">&lt;template&gt;<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    请输入</span><br><span class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">input</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">:value</span>=<span class="hljs-string">&quot;modelValue&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      @<span class="hljs-attr">input</span>=<span class="hljs-string">&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">    /&gt;</span></span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="language-javascript"><span class="language-xml">  <span class="hljs-attr">props</span>: [<span class="hljs-string">&quot;modelValue&quot;</span>],</span></span><br><span class="language-javascript"><span class="language-xml">&#125;;</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+                <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-attr">background</span>: <span class="hljs-title function_">url</span>(@/img/bg.<span class="hljs-property">jpg</span>) <span class="hljs-title function_">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.3</span>);<br>background-<span class="hljs-attr">size</span>: cover;<br>background-blend-<span class="hljs-attr">mode</span>: multiply;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -294,7 +289,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/vue/">#vue</a>
+        <a href="/tags/css/">#css</a>
       
     </div>
   
@@ -306,8 +301,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Vue3中 v-model封装自定义组件实现数据双向绑定</div>
-      <div>htttps://blog.cuijunyu.win/2023/02/11/Vue3中-v-model封装自定义组件实现数据双向绑定/</div>
+      <div>css实现遮罩效果</div>
+      <div>htttps://blog.cuijunyu.win/2022/12/16/css实现遮罩效果/</div>
     </div>
     <div class="license-meta">
       
@@ -319,7 +314,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月11日</div>
+          <div>2022年12月16日</div>
         </div>
       
       
@@ -351,9 +346,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/11/css%E5%AE%9E%E7%8E%B0%E9%81%AE%E7%BD%A9%E6%95%88%E6%9E%9C/" title="css实现遮罩效果">
+                      <a href="/2023/01/05/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/" title="vue vee-validate 表单验证">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">css实现遮罩效果</span>
+                        <span class="hidden-mobile">vue vee-validate 表单验证</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -361,8 +356,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/01/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/" title="vue vee-validate 表单验证">
-                        <span class="hidden-mobile">vue vee-validate 表单验证</span>
+                      <a href="/2022/12/01/%E4%BD%BF%E7%94%A8vue%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%88%86%E9%A1%B5%E5%99%A8%E7%BB%84%E4%BB%B6/" title="使用vue封装一个分页器组件">
+                        <span class="hidden-mobile">使用vue封装一个分页器组件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
