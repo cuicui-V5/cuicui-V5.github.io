@@ -1,347 +1,294 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
-  <link rel="icon" href="/img/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#2286c3">
-  <meta name="author" content="cuicui">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="js 中的数组拥有众多方法, 在这里我加以总结便于复习 数组的定义12let arr &#x3D; new Array(1, 2, 3);let arr &#x3D; [1, 2, 3];  检测是否为数组使用 instanceof 运算符instanceof ﻿ 可以判断原型是否处于原型链上 12arr&#x3D;[1,2,3];console.log(arr instanceof Array); &#x2F;&#x2F;输出true  使用">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.ic">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.ico">
+  <link rel="mask-icon" href="/img/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="js 中的数组拥有众多方法, 在这里我加以总结便于复习 数组的定义">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript数组总结">
 <meta property="og:url" content="htttps://blog.cuijunyu.win/2023/02/12/JavaScript数组总结/index.html">
 <meta property="og:site_name" content="cuicui&#39;Blog">
-<meta property="og:description" content="js 中的数组拥有众多方法, 在这里我加以总结便于复习 数组的定义12let arr &#x3D; new Array(1, 2, 3);let arr &#x3D; [1, 2, 3];  检测是否为数组使用 instanceof 运算符instanceof ﻿ 可以判断原型是否处于原型链上 12arr&#x3D;[1,2,3];console.log(arr instanceof Array); &#x2F;&#x2F;输出true  使用">
+<meta property="og:description" content="js 中的数组拥有众多方法, 在这里我加以总结便于复习 数组的定义">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-12T06:30:55.000Z">
-<meta property="article:modified_time" content="2023-02-12T06:34:06.314Z">
+<meta property="article:modified_time" content="2023-02-12T07:40:10.910Z">
 <meta property="article:author" content="cuicui">
 <meta property="article:tag" content="JavaScript">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>JavaScript数组总结 - cuicui&#39;Blog</title>
+<meta name="twitter:card" content="summary">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+<link rel="canonical" href="htttps://blog.cuijunyu.win/2023/02/12/JavaScript数组总结/">
 
 
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://blog.cuijunyu.win/2023/02/12/JavaScript数组总结/","path":"2023/02/12/JavaScript数组总结/","title":"JavaScript数组总结"}</script>
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaScript数组总结 | cuicui'Blog</title>
   
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.cuijunyu.win","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
 
 
-  
-<meta name="generator" content="Hexo 5.4.2"></head>
 
 
-<body>
-  
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-  <header>
-    
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
 
-<div class="header-inner" style="height: 40vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>cuicui&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">cuicui'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">弱小和无知从不是生存的障碍, 傲慢才是</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
 </nav>
 
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">数组的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E7%BB%84"><span class="nav-number">2.</span> <span class="nav-text">检测是否为数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-instanceof-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.1.</span> <span class="nav-text">使用 instanceof 运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Array-isArray-%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">使用 Array.isArray()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">数组操作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#push"><span class="nav-number">3.1.1.</span> <span class="nav-text">push()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unshift"><span class="nav-number">3.1.2.</span> <span class="nav-text">unshift()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pop"><span class="nav-number">3.1.3.</span> <span class="nav-text">pop()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shift"><span class="nav-number">3.1.4.</span> <span class="nav-text">shift()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splice"><span class="nav-number">3.1.5.</span> <span class="nav-text">splice()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F"><span class="nav-number">3.2.</span> <span class="nav-text">数组排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse"><span class="nav-number">3.2.1.</span> <span class="nav-text">reverse()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">3.2.2.</span> <span class="nav-text">sort()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E7%BB%84"><span class="nav-number">3.3.</span> <span class="nav-text">连接数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#concat"><span class="nav-number">3.3.1.</span> <span class="nav-text">concat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E8%BF%AD%E4%BB%A3%E6%96%B9%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">数组迭代方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#every"><span class="nav-number">3.4.1.</span> <span class="nav-text">every()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#some"><span class="nav-number">3.4.2.</span> <span class="nav-text">some()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter"><span class="nav-number">3.4.3.</span> <span class="nav-text">filter()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map"><span class="nav-number">3.4.4.</span> <span class="nav-text">map()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach"><span class="nav-number">3.4.5.</span> <span class="nav-text">foreach()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce"><span class="nav-number">3.4.6.</span> <span class="nav-text">reduce()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.5.</span> <span class="nav-text">生成数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#from"><span class="nav-number">3.5.1.</span> <span class="nav-text">from()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%90%9C%E7%B4%A2%E6%96%B9%E6%B3%95"><span class="nav-number">3.6.</span> <span class="nav-text">数组搜索方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#indexOf"><span class="nav-number">3.6.1.</span> <span class="nav-text">indexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lastIndexOf"><span class="nav-number">3.6.2.</span> <span class="nav-text">lastIndexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#includes"><span class="nav-number">3.6.3.</span> <span class="nav-text">includes()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">3.6.4.</span> <span class="nav-text">find()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#findIndex"><span class="nav-number">3.6.5.</span> <span class="nav-text">findIndex()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#findLast"><span class="nav-number">3.6.6.</span> <span class="nav-text">findLast()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#findLastIndex"><span class="nav-number">3.6.7.</span> <span class="nav-text">findLastIndex()</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cuicui</p>
+  <div class="site-description" itemprop="description">不愿透露姓名的崔崔</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cuicui-V5" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cuicui-V5" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xrswyea@foxmail.com" title="E-Mail → mailto:xrswyea@foxmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="JavaScript数组总结"></span>
-          
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="htttps://blog.cuijunyu.win/2023/02/12/JavaScript数组总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cuicui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cuicui'Blog">
+      <meta itemprop="description" content="不愿透露姓名的崔崔">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaScript数组总结 | cuicui'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript数组总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-02-12 14:30:55 / 修改时间：15:40:10" itemprop="dateCreated datePublished" datetime="2023-02-12T14:30:55+08:00">2023-02-12</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
         </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-12 14:30" pubdate>
-          2023年2月12日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          3.3k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          28 分钟
-        
-      </span>
-    
+      </header>
 
     
     
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">JavaScript数组总结</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <p>js 中的数组拥有众多方法, 在这里我加以总结便于复习</p>
-<h1 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-keyword">let</span> arr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<br></code></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody">
+        <p>js 中的数组拥有众多方法, 在这里我加以总结便于复习</p>
+<h1 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
 
 <h1 id="检测是否为数组"><a href="#检测是否为数组" class="headerlink" title="检测是否为数组"></a>检测是否为数组</h1><h2 id="使用-instanceof-运算符"><a href="#使用-instanceof-运算符" class="headerlink" title="使用 instanceof 运算符"></a>使用 instanceof 运算符</h2><p>instanceof ﻿ 可以判断原型是否处于原型链上</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">arr=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Array</span>); <span class="hljs-comment">//输出true</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr <span class="keyword">instanceof</span> <span class="title class_">Array</span>); <span class="comment">//输出true</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="使用-Array-isArray-方法"><a href="#使用-Array-isArray-方法" class="headerlink" title="使用 Array.isArray()方法"></a>使用 Array.isArray()方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">arr=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(arr)); <span class="hljs-comment">//输出true</span><br></code></pre></td></tr></table></figure>
+<h2 id="使用-Array-isArray-方法"><a href="#使用-Array-isArray-方法" class="headerlink" title="使用 Array.isArray()方法"></a>使用 Array.isArray()方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Array</span>.<span class="title function_">isArray</span>(arr)); <span class="comment">//输出true</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h1><h2 id="数组操作方法"><a href="#数组操作方法" class="headerlink" title="数组操作方法"></a>数组操作方法</h2><h3 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h3><p>向数组后方添加一个或多个元素, <strong>改变</strong>原数组, 返回<strong>数组长度</strong></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr.<span class="hljs-title function_">push</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">push</span>(<span class="number">10</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
 
 <h3 id="unshift"><a href="#unshift" class="headerlink" title="unshift()"></a>unshift()</h3><p>在数组前方添加一或多个元素, <strong>改变</strong>原数组, 返回<strong>数组长度</strong></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr.<span class="hljs-title function_">unshitf</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">unshitf</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
 <h3 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h3><p>删除数组后方的元素, <strong>改变</strong>原数组, 返回<strong>删除的内容</strong></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr.<span class="hljs-title function_">pop</span>();<br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">pop</span>();</span><br></pre></td></tr></table></figure>
 
 <h3 id="shift"><a href="#shift" class="headerlink" title="shift()"></a>shift()</h3><p>删除数组前方的元素, <strong>改变</strong>原数组, 返回<strong>删除的内容</strong></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr.<span class="hljs-title function_">shift</span>();<br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">shift</span>();</span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
 <h3 id="splice"><a href="#splice" class="headerlink" title="splice()"></a>splice()</h3><p>在指定位置删除或添加元素, <strong>改变</strong>原数组, 返回<strong>删除的元素组成的数组</strong></p>
 <p>用法:</p>
 <p>​<code>splice(操作元素的下标, 删除几个元素, 要添加的元素...)</code>​</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<br>arr.<span class="hljs-title function_">splice</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>);<br><br><span class="hljs-comment">//arr [1,4,5,6,3]</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr.<span class="title function_">splice</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//arr [1,4,5,6,3]</span></span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
-<h2 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h2><h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h2><p>​<code>reverse() ​</code>​ 可以翻转数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">arr=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>];<br>arr.<span class="hljs-title function_">reverse</span>();<br></code></pre></td></tr></table></figure>
+<h2 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h2><h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p>​<code>reverse() ​</code>​ 可以翻转数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">arr.<span class="title function_">reverse</span>();</span><br></pre></td></tr></table></figure>
 
 <h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>对数组进行排序, <strong>改变</strong>原数组, 返回<strong>排序结果</strong></p>
 <p>用法:</p>
 <p>​<code>arr.sort(排序函数)</code>​</p>
 <p><strong>排序函数</strong>: 排序函数传入两个参数, 分别为依次比较的两个元素, 如果返回大于 0 的值, 就交换位置, 如果小于 0, 就不交换</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b); <span class="hljs-comment">// 升序</span><br>arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a); <span class="hljs-comment">// 降序</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b); <span class="comment">// 升序</span></span><br><span class="line">arr.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b - a); <span class="comment">// 降序</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="连接数组"><a href="#连接数组" class="headerlink" title="连接数组"></a>连接数组</h2><h3 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h3><p>用来连接两个数组, <strong>不改变</strong>原数组, 返回<strong>连接后的数组</strong></p>
 <p>语法: <code>arr1.concat(arr2, arr3)</code>​</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr.<span class="hljs-title function_">concat</span>(arr2, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);<br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">concat</span>(arr2, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
 <h2 id="数组迭代方法"><a href="#数组迭代方法" class="headerlink" title="数组迭代方法"></a>数组迭代方法</h2><p>数组迭代方法<strong>都不会更改</strong>原数组</p>
 <h3 id="every"><a href="#every" class="headerlink" title="every()"></a>every()</h3><p>判断数组元素是否<strong>全部符合</strong>某个条件, 返回 <code>true</code> ​ 或 <code>false</code>​</p>
 <p>语法: <code>every(item=&gt;true)</code>​</p>
 <p>如果回调函数<strong>全部</strong>返回 <code>true</code>​, 那么才返回 <code>true</code>​, 否则就是 <code>false</code>​</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br>arr.<span class="hljs-title function_">every</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">arr.<span class="title function_">every</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="some"><a href="#some" class="headerlink" title="some()"></a>some()</h3><p>判断数组元素<strong>是否符合条件</strong>, 只要有一个符合条件就返回 <code>true</code>​</p>
 <p>语法: <code>some(item=&gt;true)</code>​</p>
 <p>只要回调函数有一个返回了 <code>true</code>​, 那么 <code>some</code> ​ 的返回值就为 <code>true</code>​, 只有全部都是 <code>false</code>​, 那么才是 <code>false</code>​</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br>arr.<span class="hljs-title function_">some</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">arr.<span class="title function_">some</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item % <span class="number">2</span> == <span class="number">0</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h3><p><strong>返回一个符合条件的新数组</strong>, 用于从数组内部筛选元素</p>
 <p>语法: <code>filter(item=&gt;item)</code>​</p>
 <p>filter 会遍历数组的每一个元素传入回调函数, 如果回调返回 true, 那么这个元素就会被加入返回的数组内</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts">arr = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>];<br>arr.<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>);<br><br><span class="hljs-comment">// [ 4, 6 ]</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line">arr.<span class="title function_">filter</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item % <span class="number">2</span> == <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [ 4, 6 ]</span></span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
 <h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><p><strong>返回回调函数返回值组成的数组</strong>, 可以用来处理数组</p>
 <p>语法: <code>map(item=&gt;item)</code>​</p>
 <p>map 会遍历数组的每一个元素传入回调函数, 并将回调函数的返回值放入 map 返回的数组中</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts">&gt; arr=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br>[ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> ]<br>&gt; arr.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item+<span class="hljs-number">10</span>)<br>[ <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span> ]<br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ]</span><br><span class="line">&gt; arr.<span class="title function_">map</span>(<span class="function"><span class="params">item</span>=&gt;</span>item+<span class="number">10</span>)</span><br><span class="line">[ <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span> ]</span><br></pre></td></tr></table></figure>
 
 <h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach()"></a>foreach()</h3><p><strong>无返回值</strong>, 遍历数组每个元素并执行回调函数</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ts">&gt; arr=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br>[ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> ]<br>&gt; arr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item,index</span>)=&gt;</span>&#123;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item,index)&#125;)<br><span class="hljs-number">1</span> <span class="hljs-number">0</span><br><span class="hljs-number">2</span> <span class="hljs-number">1</span><br><span class="hljs-number">3</span> <span class="hljs-number">2</span><br><span class="hljs-number">4</span> <span class="hljs-number">3</span><br><span class="hljs-number">5</span> <span class="hljs-number">4</span><br><span class="hljs-literal">undefined</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ]</span><br><span class="line">&gt; arr.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item,index</span>)=&gt;</span>&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(item,index)&#125;)</span><br><span class="line"><span class="number">1</span> <span class="number">0</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">3</span> <span class="number">2</span></span><br><span class="line"><span class="number">4</span> <span class="number">3</span></span><br><span class="line"><span class="number">5</span> <span class="number">4</span></span><br><span class="line"><span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce()"></a>reduce()</h3><p>详情参阅<br><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/chinese/news/the-ultimate-guide-to-javascript-array-methods-reduce/">https://www.freecodecamp.org/chinese/news/the-ultimate-guide-to-javascript-array-methods-reduce/</a></p>
 <p>用来处理数组, 最后返回一个任意类型的值</p>
@@ -354,402 +301,110 @@
 </ul>
 <p>执行过程: <code>reduce</code> ​ 方法会迭代数组内所有值, 并且会把上次 <code>return</code> ​ 的执行结果作为当前的 <code>pre</code> ​ 参数</p>
 <p>注意: <code>reduce</code> ​ 中一定要使用 <code>return</code> ​ 返回值</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 累加值</span><br><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><br><span class="hljs-keyword">let</span> res = arr.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">sum, val</span>) =&gt;</span> &#123;<br>    sum += val;<br>    <span class="hljs-keyword">return</span> sum;<br>&#125;, <span class="hljs-number">0</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);<br><br><span class="hljs-comment">// 拼合字符串</span><br><span class="hljs-keyword">let</span> arr2 = [<span class="hljs-string">&quot;小明&quot;</span>, <span class="hljs-string">&quot;小红&quot;</span>, <span class="hljs-string">&quot;小强&quot;</span>];<br><br><span class="hljs-keyword">let</span> res2 = arr2.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">sum, val</span>) =&gt;</span> &#123;<br>    sum += val;<br>    <span class="hljs-keyword">return</span> sum;<br>&#125;, <span class="hljs-string">&quot;&quot;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res2);<br><br><span class="hljs-comment">// 求每个人的年龄和</span><br><br><span class="hljs-keyword">let</span> arr3 = [<br>    &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;小明&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">20</span>,<br>    &#125;,<br>    &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;小hs&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>,<br>    &#125;,<br>    &#123;<br>        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;小a&quot;</span>,<br>        <span class="hljs-attr">age</span>: <span class="hljs-number">50</span>,<br>    &#125;,<br>];<br><br><span class="hljs-keyword">let</span> res3 = arr3.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">sum, val</span>) =&gt;</span> &#123;<br>    sum += val.<span class="hljs-property">age</span>;<br>    <span class="hljs-keyword">return</span> sum;<br>&#125;, <span class="hljs-number">0</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res3);<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 累加值</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> res = arr.<span class="title function_">reduce</span>(<span class="function">(<span class="params">sum, val</span>) =&gt;</span> &#123;</span><br><span class="line">    sum += val;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拼合字符串</span></span><br><span class="line"><span class="keyword">let</span> arr2 = [<span class="string">&quot;小明&quot;</span>, <span class="string">&quot;小红&quot;</span>, <span class="string">&quot;小强&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> res2 = arr2.<span class="title function_">reduce</span>(<span class="function">(<span class="params">sum, val</span>) =&gt;</span> &#123;</span><br><span class="line">    sum += val;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求每个人的年龄和</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr3 = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;小明&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;小hs&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">30</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;小a&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">50</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> res3 = arr3.<span class="title function_">reduce</span>(<span class="function">(<span class="params">sum, val</span>) =&gt;</span> &#123;</span><br><span class="line">    sum += val.<span class="property">age</span>;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res3);</span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
 <h2 id="生成数组方法"><a href="#生成数组方法" class="headerlink" title="生成数组方法"></a>生成数组方法</h2><h3 id="from"><a href="#from" class="headerlink" title="from()"></a>from()</h3><p>可以将伪数组(例如函数的 <code>arguments</code>​)转换为真正的数组, 返回转换完成的数组</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(<span class="hljs-variable language_">arguments</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="variable language_">arguments</span>);</span><br></pre></td></tr></table></figure>
 
 <h2 id="数组搜索方法"><a href="#数组搜索方法" class="headerlink" title="数组搜索方法"></a>数组搜索方法</h2><p>​<code>index</code>​ 系列方法直接传入要搜索的值, <code>find</code>​ 系列方法传入回调</p>
 <h3 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf()"></a>indexOf()</h3><p>返回<strong>搜索结果所在的下标,</strong> 如果没有结果那么返回 **<code>-1</code>**​</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ts">&gt; arr<br>[ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> ]<br>&gt; arr.<span class="hljs-title function_">indexOf</span>(<span class="hljs-number">3</span>)<br><span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; arr</span><br><span class="line">[ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ]</span><br><span class="line">&gt; arr.<span class="title function_">indexOf</span>(<span class="number">3</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title="lastIndexOf()"></a>lastIndexOf()</h3><p>从<strong>后面开始搜索</strong>, 返回<strong>搜索结果所在的下标, ​</strong> 如果没有结果那么返回 **<code>-1</code>**​</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ts">&gt; arr=[<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>,<span class="hljs-number">11</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>]<br>[<br>  <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>,<br>  <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span><br>]<br>&gt; arr.<span class="hljs-title function_">lastIndexOf</span>(<span class="hljs-number">11</span>)<br><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; arr=[<span class="number">11</span>,<span class="number">12</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">11</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>]</span><br><span class="line">[</span><br><span class="line">  <span class="number">11</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">13</span>,</span><br><span class="line">  <span class="number">11</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span></span><br><span class="line">]</span><br><span class="line">&gt; arr.<span class="title function_">lastIndexOf</span>(<span class="number">11</span>)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="includes"><a href="#includes" class="headerlink" title="includes()"></a>includes()</h3><p>搜索数组, 如果包含参数值, 返回<code>true</code>​, 否则返回<code>false</code>​</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ts">&gt; arr.<span class="hljs-title function_">includes</span>(<span class="hljs-number">11</span>)<br><span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; arr.<span class="title function_">includes</span>(<span class="number">11</span>)</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h3><p>传入一个回单函数, <code>find</code>​<strong>返回第一个回调函数返回 true 的元素</strong></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ts">&gt; arr=[<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>,<span class="hljs-number">11</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>]<br>[<br>  <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>,<br>  <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span><br>]<br>&gt; arr.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item&gt;<span class="hljs-number">0</span>)<br><span class="hljs-number">11</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; arr=[<span class="number">11</span>,<span class="number">12</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">11</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>]</span><br><span class="line">[</span><br><span class="line">  <span class="number">11</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">13</span>,</span><br><span class="line">  <span class="number">11</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span></span><br><span class="line">]</span><br><span class="line">&gt; arr.<span class="title function_">find</span>(<span class="function"><span class="params">item</span>=&gt;</span>item&gt;<span class="number">0</span>)</span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
 
 <p>‍</p>
 <h3 id="findIndex"><a href="#findIndex" class="headerlink" title="findIndex()"></a>findIndex()</h3><p>传入一个回单函数, <code>find</code>​<strong>返回第一个回调函数返回 true 的元素的下标</strong></p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ts">&gt; arr.<span class="hljs-title function_">findIndex</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span>item&gt;<span class="hljs-number">12</span>)<br><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; arr.<span class="title function_">findIndex</span>(<span class="function"><span class="params">item</span>=&gt;</span>item&gt;<span class="number">12</span>)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="findLast"><a href="#findLast" class="headerlink" title="findLast()"></a>findLast()</h3><p>与<code>find</code>​ 类似, 从后查找</p>
 <h3 id="findLastIndex"><a href="#findLastIndex" class="headerlink" title="findLastIndex()"></a>findLastIndex()</h3><p>与<code>findIndex</code>​ 类似, 从后查找</p>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/JavaScript/">#JavaScript</a>
-      
     </div>
-  
-</div>
 
+    
+    
+    
 
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>JavaScript数组总结</div>
-      <div>htttps://blog.cuijunyu.win/2023/02/12/JavaScript数组总结/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>cuicui</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年2月12日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
 
+        
 
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/02/05/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" title="Vue3中 v-model封装自定义组件实现数据双向绑定">
-                        <span class="hidden-mobile">Vue3中 v-model封装自定义组件实现数据双向绑定</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/02/05/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" rel="prev" title="Vue3中 v-model封装自定义组件实现数据双向绑定">
+                  <i class="fa fa-chevron-left"></i> Vue3中 v-model封装自定义组件实现数据双向绑定
+                </a>
             </div>
-
-            
-  
-  
-    <article id="comments" lazyload>
-      
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"BbitKGRD3uWgA01OfBFX6pXC-gzGzoHsz","appKey":"prG5UI8WBINxl5YzmALKOZGN","path":"window.location.pathname","placeholder":"just so so","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
-          {
-            el: "#valine",
-            path: window.location.pathname
-          }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-    </article>
-  
-
-
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
 
 
 
-  
 
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
 </div>
-
-    
-
-    
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
 
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuicui</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+
+    </div>
   </footer>
 
-  <!-- Scripts -->
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
 
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
   
 
 
 
 
   
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>
