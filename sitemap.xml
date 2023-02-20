@@ -173,13 +173,6 @@
 
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/tags/git/</loc>
-    <lastmod>2023-02-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>htttps://blog.cuijunyu.win/tags/css/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -188,13 +181,6 @@
   
   <url>
     <loc>htttps://blog.cuijunyu.win/tags/JavaScript/</loc>
-    <lastmod>2023-02-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>htttps://blog.cuijunyu.win/tags/WebSocket/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -216,6 +202,20 @@
   
   <url>
     <loc>htttps://blog.cuijunyu.win/tags/test/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/WebSocket/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/git/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
