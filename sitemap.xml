@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/通过Acme-sh-CloudFlare-Dns认证申请泛域名证书/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230220/通过Acme-sh-CloudFlare-Dns认证申请泛域名证书/</loc>
     
     <lastmod>2023-02-19</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/利用pandoc合并markdown及转换为docx/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230220/利用pandoc合并markdown及转换为docx/</loc>
     
     <lastmod>2023-02-19</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/JavaScript数组总结/</loc>
+    <loc>htttps://blog.cuijunyu.win/20221205/JavaScript数组总结/</loc>
     
     <lastmod>2023-02-17</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/JavaScript实现图片压缩/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230203/JavaScript实现图片压缩/</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/Vue3中-v-model封装自定义组件实现数据双向绑定/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230114/Vue3中-v-model封装自定义组件实现数据双向绑定/</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/JavaScript获取剪贴板文件/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230113/JavaScript获取剪贴板文件/</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/vue-vee-validate-表单验证/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230106/vue-vee-validate-表单验证/</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -65,7 +65,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/Vue封装一个分页器组件/</loc>
+    <loc>htttps://blog.cuijunyu.win/20221204/Vue封装一个分页器组件/</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/Chrome-单独清除某个网页的缓存/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230216/Chrome-单独清除某个网页的缓存/</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/纯CSS实现全屏滚动效果/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230213/纯CSS实现全屏滚动效果/</loc>
     
     <lastmod>2023-02-13</lastmod>
     
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/Git批量修改已提交的邮箱信息/</loc>
+    <loc>htttps://blog.cuijunyu.win/20220511/Git批量修改已提交的邮箱信息/</loc>
     
     <lastmod>2023-02-13</lastmod>
     
@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/CSS实现遮罩效果/</loc>
+    <loc>htttps://blog.cuijunyu.win/20221216/CSS实现遮罩效果/</loc>
     
     <lastmod>2023-02-13</lastmod>
     
@@ -110,7 +110,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/数据结构学习-栈/</loc>
+    <loc>htttps://blog.cuijunyu.win/20221214/数据结构学习-栈/</loc>
     
     <lastmod>2023-02-13</lastmod>
     
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/JavaScript使用WebSocket/</loc>
+    <loc>htttps://blog.cuijunyu.win/20221123/JavaScript使用WebSocket/</loc>
     
     <lastmod>2023-02-13</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/TypeScript下给定时器标注类型/</loc>
+    <loc>htttps://blog.cuijunyu.win/20220720/TypeScript下给定时器标注类型/</loc>
     
     <lastmod>2023-02-11</lastmod>
     
@@ -173,14 +173,14 @@
 
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/tags/css/</loc>
+    <loc>htttps://blog.cuijunyu.win/tags/git/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/tags/git/</loc>
+    <loc>htttps://blog.cuijunyu.win/tags/css/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -208,13 +208,6 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/tags/vue/</loc>
-    <lastmod>2023-02-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>htttps://blog.cuijunyu.win/tags/TypeScript/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -223,6 +216,13 @@
   
   <url>
     <loc>htttps://blog.cuijunyu.win/tags/test/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/vue/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

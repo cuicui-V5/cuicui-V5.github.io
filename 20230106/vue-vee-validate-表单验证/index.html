@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.ic">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.ico">
+  <link rel="mask-icon" href="/img/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="使用步骤    使用第三包提供的Form标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给Form打ref   使用第三方包提供的Filed标签将输入框的input替换掉   如果表单需要校验，那么必须有name属性   将校验规则通过rules绑定到需要校验的Field标签上   当用户输入的内容未通过验证规则时，错误信息是从Form标签上的插槽中解构出来的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue vee-validate 表单验证">
+<meta property="og:url" content="htttps://blog.cuijunyu.win/20230106/vue-vee-validate-表单验证/index.html">
+<meta property="og:site_name" content="cuicui&#39;Blog">
+<meta property="og:description" content="使用步骤    使用第三包提供的Form标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给Form打ref   使用第三方包提供的Filed标签将输入框的input替换掉   如果表单需要校验，那么必须有name属性   将校验规则通过rules绑定到需要校验的Field标签上   当用户输入的内容未通过验证规则时，错误信息是从Form标签上的插槽中解构出来的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-06T06:14:58.000Z">
+<meta property="article:modified_time" content="2023-02-16T05:38:15.338Z">
+<meta property="article:author" content="cuicui">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="htttps://blog.cuijunyu.win/20230106/vue-vee-validate-表单验证/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://blog.cuijunyu.win/20230106/vue-vee-validate-表单验证/","path":"20230106/vue-vee-validate-表单验证/","title":"vue vee-validate 表单验证"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>vue vee-validate 表单验证 | cuicui'Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">cuicui'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">弱小和无知从不是生存的障碍, 傲慢才是</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cuicui"
+      src="/img/avatar.jpg">
+  <p class="site-author-name" itemprop="name">cuicui</p>
+  <div class="site-description" itemprop="description">崔崔的博客网站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cuicui-V5" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cuicui-V5" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xrswyea@foxmail.com" title="E-Mail → mailto:xrswyea@foxmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="htttps://blog.cuijunyu.win/20230106/vue-vee-validate-表单验证/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.jpg">
+      <meta itemprop="name" content="cuicui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cuicui'Blog">
+      <meta itemprop="description" content="崔崔的博客网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="vue vee-validate 表单验证 | cuicui'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue vee-validate 表单验证
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-06 14:14:58" itemprop="dateCreated datePublished" datetime="2023-01-06T14:14:58+08:00">2023-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-16 13:38:15" itemprop="dateModified" datetime="2023-02-16T13:38:15+08:00">2023-02-16</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>336</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>使用步骤</p>
+<ul>
+<li>  使用第三包提供的<code>Form</code>标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给<code>Form</code>打<code>ref</code></li>
+<li>  使用第三方包提供的<code>Filed</code>标签将输入框的<code>input</code>替换掉</li>
+<li>  如果表单需要校验，那么必须有<code>name</code>属性</li>
+<li>  将校验规则通过<code>rules</code>绑定到需要校验的<code>Field</code>标签上</li>
+<li>  当用户输入的内容未通过验证规则时，错误信息是从<code>Form</code>标签上的插槽中解构出来的</li>
+</ul>
+<span id="more"></span>
+
+<p>引入组件</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Form</span>, <span class="title class_">Field</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vee-validate&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>模板写法</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Form</span></span><br><span class="line">    v-slot=<span class="string">&quot;&#123; errors &#125;&quot;</span></span><br><span class="line">    ref=<span class="string">&quot;fromValidate&quot;</span></span><br><span class="line">&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;邮箱/用户名/手机号&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;phone&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;account&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span>&#123;&#123; errors.account &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;&#123; errors.password &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        @<span class="attr">click.prevent</span>=<span class="string">&quot;login&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        登<span class="symbol">&amp;nbsp;</span><span class="symbol">&amp;nbsp;</span>录</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Form</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>书写验证规则</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkAccount</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="regexp">/^[\a-zA-Z0-9_]+$/</span>;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入账号&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.<span class="title function_">test</span>(val <span class="keyword">as</span> <span class="built_in">string</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;账号不合法 请输入6-16位数字字母下划线&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkPassword</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入密码&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>进行整体验证</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; valid &#125; = <span class="keyword">await</span> fromValidate.<span class="property">value</span>?.<span class="title function_">validate</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(valid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            <span class="comment">// 如果验证通过进行下一步</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue/" rel="tag"># vue</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20221216/CSS%E5%AE%9E%E7%8E%B0%E9%81%AE%E7%BD%A9%E6%95%88%E6%9E%9C/" rel="prev" title="CSS实现遮罩效果">
+                  <i class="fa fa-chevron-left"></i> CSS实现遮罩效果
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20230113/JavaScript%E8%8E%B7%E5%8F%96%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%96%87%E4%BB%B6/" rel="next" title="JavaScript获取剪贴板文件">
+                  JavaScript获取剪贴板文件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuicui</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
