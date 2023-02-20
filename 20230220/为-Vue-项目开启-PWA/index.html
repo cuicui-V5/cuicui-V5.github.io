@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.ic">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.ico">
+  <link rel="mask-icon" href="/img/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="之前的网络上的教程都是 vue&#x2F;cli 的, 经过我的一番摸索, 终于弄明白了 vite+vue3+pwa 的正确打开方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为 Vue 项目开启 PWA">
+<meta property="og:url" content="htttps://blog.cuijunyu.win/20230220/为-Vue-项目开启-PWA/index.html">
+<meta property="og:site_name" content="cuicui&#39;Blog">
+<meta property="og:description" content="之前的网络上的教程都是 vue&#x2F;cli 的, 经过我的一番摸索, 终于弄明白了 vite+vue3+pwa 的正确打开方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="htttps:///20230220/%E4%B8%BA-Vue-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%90%AF-PWA/pwa%E6%95%88%E6%9E%9C.png">
+<meta property="article:published_time" content="2023-02-20T15:15:19.000Z">
+<meta property="article:modified_time" content="2023-02-20T15:45:11.358Z">
+<meta property="article:author" content="cuicui">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="pwa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="htttps:///20230220/%E4%B8%BA-Vue-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%90%AF-PWA/pwa%E6%95%88%E6%9E%9C.png">
+
+
+<link rel="canonical" href="htttps://blog.cuijunyu.win/20230220/为-Vue-项目开启-PWA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://blog.cuijunyu.win/20230220/为-Vue-项目开启-PWA/","path":"20230220/为-Vue-项目开启-PWA/","title":"为 Vue 项目开启 PWA"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>为 Vue 项目开启 PWA | cuicui'Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SEM6KXGMX4"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SEM6KXGMX4","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">cuicui'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">弱小和无知从不是生存的障碍, 傲慢才是</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">使 PWA 可安装</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cuicui"
+      src="/img/avatar.jpg">
+  <p class="site-author-name" itemprop="name">cuicui</p>
+  <div class="site-description" itemprop="description">崔崔的博客网站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cuicui-V5" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cuicui-V5" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xrswyea@foxmail.com" title="E-Mail → mailto:xrswyea@foxmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="htttps://blog.cuijunyu.win/20230220/为-Vue-项目开启-PWA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.jpg">
+      <meta itemprop="name" content="cuicui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cuicui'Blog">
+      <meta itemprop="description" content="崔崔的博客网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="为 Vue 项目开启 PWA | cuicui'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          为 Vue 项目开启 PWA
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-02-20 23:15:19 / 修改时间：23:45:11" itemprop="dateCreated datePublished" datetime="2023-02-20T23:15:19+08:00">2023-02-20</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>336</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="/20230220/%E4%B8%BA-Vue-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%90%AF-PWA/pwa%E6%95%88%E6%9E%9C.png" class="" title="pwa效果">
+<p>之前的网络上的教程都是 vue/cli 的, 经过我的一番摸索, 终于弄明白了 vite+vue3+pwa 的正确打开方式</p>
+<ol>
+<li class="lvl-3">
+<p>安装 <code>​ vite-plugin-pwa</code></p>
+<p><code>npm i vite-plugin-pwa -D</code></p>
+</li>
+<li class="lvl-3">
+<p>配置 <code>vite-plugin-pwa</code></p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">VitePWA</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vite-plugin-pwa&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">    <span class="attr">plugins</span>: [<span class="title class_">VitePWA</span>(&#123; <span class="attr">registerType</span>: <span class="string">&quot;autoUpdate&quot;</span> &#125;)],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1>使 PWA 可安装</h1>
+<p>一开始配置好后, 浏览器并没有提示可以安装, 经过一晚上的摸索(看文档), 最终总结如下</p>
+<p>使 PWA 可安装的前置要求: <a target="_blank" rel="noopener" href="https://vite-pwa-org.netlify.app/guide/pwa-minimal-requirements.html">https://vite-pwa-org.netlify.app/guide/pwa-minimal-requirements.html</a></p>
+<p>必须?同时满足以下条件</p>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p><code>index.html</code> 中的 <code>&lt;head&gt;</code> 标签中配置如下条目</p>
+<ul class="lvl-2">
+<li class="lvl-8"><code>viewport</code></li>
+<li class="lvl-8"><code>title</code> 标签</li>
+<li class="lvl-8"><code>description</code></li>
+<li class="lvl-8"><code>favicon</code></li>
+<li class="lvl-8"><code>apple-touch-icon</code></li>
+<li class="lvl-8"><code>mask-icon</code></li>
+<li class="lvl-8"><code>theme-color</code></li>
+</ul>
+</li>
+<li class="lvl-4">
+<p><code>Manifest</code> 清单文件中有如下配置</p>
+<ul class="lvl-2">
+<li class="lvl-8">a scope: omitted here for simplicity, the <code>vite-plugin-pwa</code> plugin will use the <code>Vite</code> base option to configure it (default is <code>/</code>)</li>
+<li class="lvl-8">a name</li>
+<li class="lvl-8">a short description</li>
+<li class="lvl-8">a description</li>
+<li class="lvl-8">a <code>theme_color</code>: <strong>must match</strong> the configured one on <code>Entry Point theme-color</code></li>
+<li class="lvl-8">an icon with <code>192x192</code> size</li>
+<li class="lvl-8">an icon with <code>512x512</code> size</li>
+</ul>
+</li>
+<li class="lvl-4">
+<p>也就是 <code>vite.config.js</code> 进行如下配置</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">VitePWA</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vite-plugin-pwa&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="title class_">VitePWA</span>(&#123;</span><br><span class="line">            <span class="attr">includeAssets</span>: [</span><br><span class="line">                <span class="string">&quot;favicon.ico&quot;</span>,</span><br><span class="line">                <span class="string">&quot;apple-touch-icon.png&quot;</span>,</span><br><span class="line">                <span class="string">&quot;masked-icon.svg&quot;</span>,</span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">manifest</span>: &#123;</span><br><span class="line">                <span class="attr">name</span>: <span class="string">&quot;My Awesome App&quot;</span>,</span><br><span class="line">                <span class="attr">short_name</span>: <span class="string">&quot;MyApp&quot;</span>,</span><br><span class="line">                <span class="attr">description</span>: <span class="string">&quot;My Awesome App description&quot;</span>,</span><br><span class="line">                <span class="attr">theme_color</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">                <span class="attr">icons</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">src</span>: <span class="string">&quot;pwa-192x192.png&quot;</span>,</span><br><span class="line">                        <span class="attr">sizes</span>: <span class="string">&quot;192x192&quot;</span>,</span><br><span class="line">                        <span class="attr">type</span>: <span class="string">&quot;image/png&quot;</span>,</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">src</span>: <span class="string">&quot;pwa-512x512.png&quot;</span>,</span><br><span class="line">                        <span class="attr">sizes</span>: <span class="string">&quot;512x512&quot;</span>,</span><br><span class="line">                        <span class="attr">type</span>: <span class="string">&quot;image/png&quot;</span>,</span><br><span class="line">                    &#125;,</span><br><span class="line">                ],</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-4">
+<p>配置 <code>robots.txt</code></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>-<span class="attr">agent</span>: *</span><br><span class="line"><span class="title class_">Allow</span>: /</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-4">
+<p>服务端满足以下要求 <a target="_blank" rel="noopener" href="https://vite-pwa-org.netlify.app/deployment/">https://vite-pwa-org.netlify.app/deployment/</a></p>
+<ul class="lvl-2">
+<li class="lvl-8">serve <code>manifest.webmanifest</code> with <code>application/manifest+json</code> mime type</li>
+<li class="lvl-8">必须使用 <code>https</code></li>
+<li class="lvl-8"><code>http ​</code> 重定向 <code>https</code></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue/" rel="tag"># vue</a>
+              <a href="/tags/pwa/" rel="tag"># pwa</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/" rel="prev" title="Chrome 单独清除某个网页的缓存">
+                  <i class="fa fa-chevron-left"></i> Chrome 单独清除某个网页的缓存
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuicui</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

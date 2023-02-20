@@ -18,28 +18,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="实现全屏滚动可以不依赖 JS, 只使用纯 CSS 实现, 不过只有较新版本的浏览器支持这一特性 主要使用了以下 CSS 属性   scroll-snap-type: y mandatory; 给父元素设置, 设置贴合类型   scroll-snap-align: start; 给子元素设置, 设置贴合点">
+    <meta name="description" content="最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="纯CSS实现全屏滚动效果">
-<meta property="og:url" content="htttps://blog.cuijunyu.win/20230213/纯CSS实现全屏滚动效果/index.html">
+<meta property="og:title" content="利用pandoc合并markdown及转换为docx">
+<meta property="og:url" content="htttps://blog.cuijunyu.win/20230120/利用pandoc合并markdown及转换为docx/index.html">
 <meta property="og:site_name" content="cuicui&#39;Blog">
-<meta property="og:description" content="实现全屏滚动可以不依赖 JS, 只使用纯 CSS 实现, 不过只有较新版本的浏览器支持这一特性 主要使用了以下 CSS 属性   scroll-snap-type: y mandatory; 给父元素设置, 设置贴合类型   scroll-snap-align: start; 给子元素设置, 设置贴合点">
+<meta property="og:description" content="最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-13T15:18:30.000Z">
-<meta property="article:modified_time" content="2023-02-13T15:39:11.333Z">
+<meta property="article:published_time" content="2023-01-19T16:35:43.000Z">
+<meta property="article:modified_time" content="2023-02-20T15:19:39.623Z">
 <meta property="article:author" content="cuicui">
-<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="小工具">
+<meta property="article:tag" content="pandoc">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="htttps://blog.cuijunyu.win/20230213/纯CSS实现全屏滚动效果/">
+<link rel="canonical" href="htttps://blog.cuijunyu.win/20230120/利用pandoc合并markdown及转换为docx/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://blog.cuijunyu.win/20230213/纯CSS实现全屏滚动效果/","path":"20230213/纯CSS实现全屏滚动效果/","title":"纯CSS实现全屏滚动效果"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://blog.cuijunyu.win/20230120/利用pandoc合并markdown及转换为docx/","path":"20230120/利用pandoc合并markdown及转换为docx/","title":"利用pandoc合并markdown及转换为docx"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>纯CSS实现全屏滚动效果 | cuicui'Blog</title>
+<title>利用pandoc合并markdown及转换为docx | cuicui'Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SEM6KXGMX4"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-SEM6KXGMX4","only_pageview":false}</script>
@@ -170,7 +171,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="htttps://blog.cuijunyu.win/20230213/纯CSS实现全屏滚动效果/">
+    <link itemprop="mainEntityOfPage" href="htttps://blog.cuijunyu.win/20230120/利用pandoc合并markdown及转换为docx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.jpg">
@@ -183,12 +184,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="纯CSS实现全屏滚动效果 | cuicui'Blog">
+      <meta itemprop="name" content="利用pandoc合并markdown及转换为docx | cuicui'Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          纯CSS实现全屏滚动效果
+          利用pandoc合并markdown及转换为docx
         </h1>
 
         <div class="post-meta-container">
@@ -198,9 +199,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-02-13 23:18:30 / 修改时间：23:39:11" itemprop="dateCreated datePublished" datetime="2023-02-13T23:18:30+08:00">2023-02-13</time>
+      <time title="创建时间：2023-01-20 00:35:43" itemprop="dateCreated datePublished" datetime="2023-01-20T00:35:43+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-20 23:19:39" itemprop="dateModified" datetime="2023-02-20T23:19:39+08:00">2023-02-20</time>
     </span>
 
   
@@ -210,7 +217,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>135</span>
+      <span>113</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -228,21 +235,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>实现全屏滚动可以不依赖 JS, 只使用纯 CSS 实现, 不过只有较新版本的浏览器支持这一特性</p>
-<p>主要使用了以下 CSS 属性</p>
+        <p>最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器</p>
+<span id="more"></span>
 <ul class="lvl-0">
 <li class="lvl-4">
-<p><code>scroll-snap-type: y mandatory;</code> 给父元素设置, 设置贴合类型</p>
-</li>
-<li class="lvl-4">
-<p><code>scroll-snap-align: start;</code> 给子元素设置, 设置贴合点</p>
+<p>批量合并 markdown<br>
+小 tips: 如果需要大批量文件, 可以在资源管理器中全选, 然后拖到终端窗口中, 自动填充路径及文件名</p>
 </li>
 </ul>
-<span id="more"></span>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;main&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/main&gt;</span><br></pre></td></tr></table></figure>
-<p>容器布局</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="selector-tag">main</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">        <span class="attribute">overflow</span>: scroll;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">main</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">border</span>: black <span class="number">2px</span> solid;</span><br><span class="line">        <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<p>样式设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandoc -s file1.md file2.md -o AllJavaScript.md</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p>markdown 转 doc</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandoc -o output.docx -f markdown -t docx .\AllInOne.md</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -252,20 +259,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/" rel="tag"># 小工具</a>
+              <a href="/tags/pandoc/" rel="tag"># pandoc</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/20230203/JavaScript%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/" rel="prev" title="JavaScript实现图片压缩">
-                  <i class="fa fa-chevron-left"></i> JavaScript实现图片压缩
+                <a href="/20230114/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" rel="prev" title="Vue3中 v-model封装自定义组件实现数据双向绑定">
+                  <i class="fa fa-chevron-left"></i> Vue3中 v-model封装自定义组件实现数据双向绑定
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/" rel="next" title="Chrome 单独清除某个网页的缓存">
-                  Chrome 单独清除某个网页的缓存 <i class="fa fa-chevron-right"></i>
+                <a href="/20230120/%E9%80%9A%E8%BF%87Acme-sh-CloudFlare-Dns%E8%AE%A4%E8%AF%81%E7%94%B3%E8%AF%B7%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/" rel="next" title="通过Acme.sh + CloudFlare Dns认证申请泛域名证书">
+                  通过Acme.sh + CloudFlare Dns认证申请泛域名证书 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

@@ -2,18 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/20230220/通过Acme-sh-CloudFlare-Dns认证申请泛域名证书/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230220/为-Vue-项目开启-PWA/</loc>
     
-    <lastmod>2023-02-19</lastmod>
+    <lastmod>2023-02-20</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/20230220/利用pandoc合并markdown及转换为docx/</loc>
+    <loc>htttps://blog.cuijunyu.win/20230120/利用pandoc合并markdown及转换为docx/</loc>
     
-    <lastmod>2023-02-19</lastmod>
+    <lastmod>2023-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/20230120/通过Acme-sh-CloudFlare-Dns认证申请泛域名证书/</loc>
+    
+    <lastmod>2023-02-20</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -180,6 +189,13 @@
   </url>
   
   <url>
+    <loc>htttps://blog.cuijunyu.win/tags/git/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>htttps://blog.cuijunyu.win/tags/JavaScript/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -187,7 +203,14 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/tags/数据结构/</loc>
+    <loc>htttps://blog.cuijunyu.win/tags/WebSocket/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/vue/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -208,21 +231,7 @@
   </url>
   
   <url>
-    <loc>htttps://blog.cuijunyu.win/tags/WebSocket/</loc>
-    <lastmod>2023-02-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>htttps://blog.cuijunyu.win/tags/git/</loc>
-    <lastmod>2023-02-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>htttps://blog.cuijunyu.win/tags/vue/</loc>
+    <loc>htttps://blog.cuijunyu.win/tags/数据结构/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -237,6 +246,34 @@
   
   <url>
     <loc>htttps://blog.cuijunyu.win/tags/Chrome/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/pwa/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/小工具/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/pandoc/</loc>
+    <lastmod>2023-02-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://blog.cuijunyu.win/tags/CloudFlare/</loc>
     <lastmod>2023-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
