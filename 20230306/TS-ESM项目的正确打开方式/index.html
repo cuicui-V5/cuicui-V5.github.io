@@ -18,26 +18,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="崔崔的博客网站">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cuicui&#39;Blog">
-<meta property="og:url" content="htttps://cuijunyu.win/tags/typeScript/index.html">
+    <meta name="description" content="折腾了俩小时, 基本弄明白了如何在 TS 中使用 ESM 模块 一开始以为直接导入文件名就行, 不需要扩展名, 可是这样使用 TSC 编译出来之后报错, 原来因为 ESM 规范要求导入自定义模块必须带有拓展名, 然而默认配置下 TSC 编译出来的项目中导入是不带拓展名的, 所以会报错">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TS+ESM项目的正确打开方式">
+<meta property="og:url" content="htttps://cuijunyu.win/20230306/TS-ESM项目的正确打开方式/index.html">
 <meta property="og:site_name" content="cuicui&#39;Blog">
-<meta property="og:description" content="崔崔的博客网站">
+<meta property="og:description" content="折腾了俩小时, 基本弄明白了如何在 TS 中使用 ESM 模块 一开始以为直接导入文件名就行, 不需要扩展名, 可是这样使用 TSC 编译出来之后报错, 原来因为 ESM 规范要求导入自定义模块必须带有拓展名, 然而默认配置下 TSC 编译出来的项目中导入是不带拓展名的, 所以会报错">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-06T14:21:30.000Z">
+<meta property="article:modified_time" content="2023-03-06T14:22:06.018Z">
 <meta property="article:author" content="cuicui">
-<meta property="article:tag" content="cuicuiv5 blog">
+<meta property="article:tag" content="typeScript">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="htttps://cuijunyu.win/tags/typeScript/">
+<link rel="canonical" href="htttps://cuijunyu.win/20230306/TS-ESM项目的正确打开方式/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/typeScript/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://cuijunyu.win/20230306/TS-ESM项目的正确打开方式/","path":"20230306/TS-ESM项目的正确打开方式/","title":"TS+ESM项目的正确打开方式"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: typeScript | cuicui'Blog</title>
+<title>TS+ESM项目的正确打开方式 | cuicui'Blog</title>
   
 
 
@@ -135,7 +137,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -148,6 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">解决方案</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -192,50 +195,123 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">typeScript
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="htttps://cuijunyu.win/20230306/TS-ESM项目的正确打开方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.jpg">
+      <meta itemprop="name" content="cuicui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cuicui'Blog">
+      <meta itemprop="description" content="崔崔的博客网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="TS+ESM项目的正确打开方式 | cuicui'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TS+ESM项目的正确打开方式
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-03-06 22:21:30 / 修改时间：22:22:06" itemprop="dateCreated datePublished" datetime="2023-03-06T22:21:30+08:00">2023-03-06</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>262</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>折腾了俩小时, 基本弄明白了如何在 TS 中使用 ESM 模块</p>
+<p>一开始以为直接导入文件名就行, 不需要扩展名, 可是这样使用 TSC 编译出来之后报错, 原来因为 ESM 规范要求导入自定义模块必须带有拓展名, 然而默认配置下 TSC 编译出来的项目中导入是不带拓展名的, 所以会报错</p>
+<p>所以我就想当然的, 直接<code>import router from &quot;./router.ts&quot;;</code></p>
+<p>这下好了, TS 直接不允许, 要求启用<code>allowImportingTsExtensions</code>, 然而加了这个出现了更多的错误…</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> error <span class="title class_">TS2691</span>: <span class="title class_">An</span> <span class="keyword">import</span> path cannot end <span class="keyword">with</span> a <span class="string">&#x27;.ts&#x27;</span> extension. <span class="title class_">Consider</span> importing <span class="string">&#x27;./router.js&#x27;</span> instead.</span><br><span class="line">error <span class="title class_">TS2835</span>: <span class="title class_">Relative</span> <span class="keyword">import</span> paths need explicit file extensions <span class="keyword">in</span> <span class="title class_">EcmaScript</span> imports when <span class="string">&#x27;--moduleResolution&#x27;</span> is <span class="string">&#x27;node16&#x27;</span> or <span class="string">&#x27;nodenext&#x27;</span>. <span class="title class_">Did</span> you mean <span class="string">&#x27;./event.js&#x27;</span>?</span><br></pre></td></tr></table></figure>
+<br />
+<h1>解决方案</h1>
+<ol>
+<li class="lvl-3">
+<p>tsconfig.json 中 <code>moduleResolution</code> 设置为<code>nodenext</code></p>
+</li>
+<li class="lvl-3">
+<p>使用 <code>import router from &quot;./router.js&quot;;</code> 注意这里拓展名为.js</p>
+</li>
+</ol>
+<p>其实上面的报错也说明了, An import path cannot end with a ‘.ts’ extension. Consider importing ‘./router.js’ instead.</p>
+<p>非常坑啊有没有, 明明是 ts 为什么要导入 js</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-03-06T22:21:30+08:00"
-              content="2023-03-06">
-          03-06
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/20230306/TS-ESM%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">TS+ESM项目的正确打开方式</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/typeScript/" rel="tag"># typeScript</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230306/%E9%80%9A%E8%BF%87nginx%E5%8F%8D%E4%BB%A3openai-api/" rel="prev" title="通过nginx反代openai api">
+                  <i class="fa fa-chevron-left"></i> 通过nginx反代openai api
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 
 </div>
   </main>
@@ -288,5 +364,4 @@
 
 
 </body>
-</html>
 </html>

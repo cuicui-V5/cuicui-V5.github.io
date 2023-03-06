@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>htttps://cuijunyu.win/20230306/TS-ESM项目的正确打开方式/</loc>
+    
+    <lastmod>2023-03-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>htttps://cuijunyu.win/20230306/通过nginx反代openai-api/</loc>
     
     <lastmod>2023-03-06</lastmod>
@@ -313,6 +322,13 @@
   
   <url>
     <loc>htttps://cuijunyu.win/tags/openai/</loc>
+    <lastmod>2023-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://cuijunyu.win/tags/typeScript/</loc>
     <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

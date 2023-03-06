@@ -584,4 +584,29 @@
         <tag>openai</tag>
       </tags>
   </entry>
+  <entry>
+    <title>TS+ESM项目的正确打开方式</title>
+    <url>/20230306/TS-ESM%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>折腾了俩小时, 基本弄明白了如何在 TS 中使用 ESM 模块</p>
+<p>一开始以为直接导入文件名就行, 不需要扩展名, 可是这样使用 TSC 编译出来之后报错, 原来因为 ESM 规范要求导入自定义模块必须带有拓展名, 然而默认配置下 TSC 编译出来的项目中导入是不带拓展名的, 所以会报错</p>
+<p>所以我就想当然的, 直接<code>import router from &quot;./router.ts&quot;;</code></p>
+<p>这下好了, TS 直接不允许, 要求启用<code>allowImportingTsExtensions</code>, 然而加了这个出现了更多的错误…</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"> error <span class="title class_">TS2691</span>: <span class="title class_">An</span> <span class="keyword">import</span> path cannot end <span class="keyword">with</span> a <span class="string">&#x27;.ts&#x27;</span> extension. <span class="title class_">Consider</span> importing <span class="string">&#x27;./router.js&#x27;</span> instead.</span><br><span class="line">error <span class="title class_">TS2835</span>: <span class="title class_">Relative</span> <span class="keyword">import</span> paths need explicit file extensions <span class="keyword">in</span> <span class="title class_">EcmaScript</span> imports when <span class="string">&#x27;--moduleResolution&#x27;</span> is <span class="string">&#x27;node16&#x27;</span> or <span class="string">&#x27;nodenext&#x27;</span>. <span class="title class_">Did</span> you mean <span class="string">&#x27;./event.js&#x27;</span>?</span><br></pre></td></tr></table></figure>
+<br />
+<h1>解决方案</h1>
+<ol>
+<li class="lvl-3">
+<p>tsconfig.json 中 <code>moduleResolution</code> 设置为<code>nodenext</code></p>
+</li>
+<li class="lvl-3">
+<p>使用 <code>import router from &quot;./router.js&quot;;</code> 注意这里拓展名为.js</p>
+</li>
+</ol>
+<p>其实上面的报错也说明了, An import path cannot end with a ‘.ts’ extension. Consider importing ‘./router.js’ instead.</p>
+<p>非常坑啊有没有, 明明是 ts 为什么要导入 js</p>
+]]></content>
+      <tags>
+        <tag>typeScript</tag>
+      </tags>
+  </entry>
 </search>
