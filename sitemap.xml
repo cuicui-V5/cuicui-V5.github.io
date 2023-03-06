@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>htttps://cuijunyu.win/20230306/通过nginx反代openai-api/</loc>
+    
+    <lastmod>2023-03-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>htttps://cuijunyu.win/20230306/数据结构学习-队列/</loc>
     
     <lastmod>2023-03-06</lastmod>
@@ -290,6 +299,20 @@
   
   <url>
     <loc>htttps://cuijunyu.win/tags/javaScript/</loc>
+    <lastmod>2023-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://cuijunyu.win/tags/nginx/</loc>
+    <lastmod>2023-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>htttps://cuijunyu.win/tags/openai/</loc>
     <lastmod>2023-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -570,4 +570,18 @@
         <tag>javaScript</tag>
       </tags>
   </entry>
+  <entry>
+    <title>通过nginx反代openai api</title>
+    <url>/20230306/%E9%80%9A%E8%BF%87nginx%E5%8F%8D%E4%BB%A3openai-api/</url>
+    <content><![CDATA[<p>最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…</p>
+<span id="more"></span>
+<p>那么解决方案也很简单, 首先你需要一台安装了 nginx 境外服务器, 然后配置如下即可使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 8443 ssl;</span><br><span class="line">	server_name openai.example.com;</span><br><span class="line">	ssl_certificate /etc/nginx/ssl/cuijunyu.pem;</span><br><span class="line">	ssl_certificate_key /etc/nginx/ssl/cuijunyu.key;</span><br><span class="line">        ssl_protocols TLSv1.2 TLSv1.3;</span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass https://api.openai.com/;</span><br><span class="line">		proxy_set_header Host api.openai.com;</span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>请求 api 的时候, 你只需要把 URL 换成 <a href="http://openai.example.com">openai.example.com</a> 就可以了</p>
+]]></content>
+      <tags>
+        <tag>nginx</tag>
+        <tag>openai</tag>
+      </tags>
+  </entry>
 </search>
