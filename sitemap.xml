@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>htttps://cuijunyu.win/20230307/ts-node调试ESM项目/</loc>
+    
+    <lastmod>2023-03-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>htttps://cuijunyu.win/20230306/TS+ESM项目导入自定义模块不加拓展名就报错的问题/</loc>
     
     <lastmod>2023-03-07</lastmod>

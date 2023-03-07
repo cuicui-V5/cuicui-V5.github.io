@@ -544,11 +544,11 @@
       </tags>
   </entry>
   <entry>
-    <title>TS+ESM项目导入自定义模块不加拓展名就报错的问题</title>
+    <title>TS+ESM项目导入自定义模块不加扩展名就报错的问题</title>
     <url>/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。</p>
-<p>一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有拓展名。然而，TSC 编译出来的项目中导入模块是不带拓展名的，所以 Node.js 会报错。</p>
-<p>于是，我想当然地写了 <code>import router from &quot;./router.ts&quot;;</code>，认为 TypeScript 会自动处理拓展名。然而，并不是这样的。</p>
+<p>一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有扩展名。然而，TSC 编译出来的项目中导入模块是不带扩展名的，所以 Node.js 会报错。</p>
+<p>于是，我想当然地写了 <code>import router from &quot;./router.ts&quot;;</code>，认为 TypeScript 会自动处理扩展名。然而，并不是这样的。</p>
 <p>TypeScript 直接不允许导入 <code>.ts</code> 后缀的文件，要求启用 <code>allowImportingTsExtensions</code>。但是加了这个选项之后，出现了更多的错误：</p>
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">error <span class="title class_">TS2691</span>: <span class="title class_">An</span> <span class="keyword">import</span> path cannot end <span class="keyword">with</span> a <span class="string">&#x27;.ts&#x27;</span> extension. <span class="title class_">Consider</span> importing <span class="string">&#x27;./router.js&#x27;</span> instead.</span><br><span class="line">error <span class="title class_">TS2835</span>: <span class="title class_">Relative</span> <span class="keyword">import</span> paths need explicit file extensions <span class="keyword">in</span> <span class="title class_">EcmaScript</span> imports when <span class="string">&#x27;--moduleResolution&#x27;</span> is <span class="string">&#x27;node16&#x27;</span> or <span class="string">&#x27;nodenext&#x27;</span>. <span class="title class_">Did</span> you mean <span class="string">&#x27;./event.js&#x27;</span>?</span><br></pre></td></tr></table></figure>
 <p>关于这个问题，在 GitHub 上有相关的讨论：<a href="https://github.com/microsoft/TypeScript/issues/16577">https://github.com/microsoft/TypeScript/issues/16577</a></p>
@@ -558,7 +558,7 @@
 <p>在 <code>tsconfig.json</code> 中将 <code>moduleResolution</code> 设置为 <code>nodenext</code>。设置之后，VS Code 导入模块时会自动加上 <code>.js</code> 后缀。</p>
 </li>
 <li class="lvl-3">
-<p>使用 <code>import router from &quot;./router.js&quot;;</code>，注意这里拓展名为 <code>.js</code>。</p>
+<p>使用 <code>import router from &quot;./router.js&quot;;</code>，注意这里扩展名为 <code>.js</code>。</p>
 </li>
 </ol>
 <p>实际上，上面的报错也说明了问题：“An import path cannot end with a ‘.ts’ extension. Consider importing ‘./router.js’ instead.”（导入路径不能以 <code>.ts</code> 结尾，考虑导入 ‘./router.js’）</p>
@@ -613,6 +613,18 @@
       <tags>
         <tag>nginx</tag>
         <tag>openai</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ts-node调试ESM项目</title>
+    <url>/20230307/ts-node%E8%B0%83%E8%AF%95ESM%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<p>如果使用传统的 ts-node 运行开启了 ESM 的项目, 会提示找不到扩展名,</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="variable constant_">PS</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend&gt; ts-node .\src\index.<span class="property">ts</span></span><br><span class="line"><span class="title class_">TypeError</span> [<span class="variable constant_">ERR_UNKNOWN_FILE_EXTENSION</span>]: <span class="title class_">Unknown</span> file extension <span class="string">&quot;.ts&quot;</span> <span class="keyword">for</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend\src\index.<span class="property">ts</span></span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">NodeError</span> (<span class="attr">node</span>:internal/<span class="attr">errors</span>:<span class="number">399</span>:<span class="number">5</span>)</span><br><span class="line">    at <span class="title class_">Object</span>.<span class="property">getFileProtocolModuleFormat</span> [<span class="keyword">as</span> <span class="attr">file</span>:] (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">79</span>:<span class="number">11</span>)</span><br><span class="line">    at defaultGetFormat (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">121</span>:<span class="number">38</span>)</span><br><span class="line">    at defaultLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">load</span>:<span class="number">81</span>:<span class="number">20</span>)</span><br><span class="line">    at nextLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">163</span>:<span class="number">28</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">load</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">605</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">moduleProvider</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">457</span>:<span class="number">22</span>)</span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">ModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">module_job</span>:<span class="number">64</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.#createModuleJob (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">480</span>:<span class="number">17</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">getModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">434</span>:<span class="number">34</span>) &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="string">&#x27;ERR_UNKNOWN_FILE_EXTENSION&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决方法: 将运行命令改为</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">ts-node --esm .\src\index.<span class="property">ts</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>typeScript</tag>
       </tags>
   </entry>
 </search>
