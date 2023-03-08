@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.ic">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.ico">
+  <link rel="mask-icon" href="/img/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="链表 链表是一种物理存储单元上非连续, 非顺序的存储结构, 数据元素的逻辑顺序是通过链表指针实现的, 链表由一些列结点组成, 每个节点包含两个部分: 一个是存储数据元素的数据域, 另一个是存储下一个结点地址的指针域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习-链表">
+<meta property="og:url" content="htttps://cuijunyu.win/20230308/数据结构学习-链表/index.html">
+<meta property="og:site_name" content="cuicui&#39;Blog">
+<meta property="og:description" content="链表 链表是一种物理存储单元上非连续, 非顺序的存储结构, 数据元素的逻辑顺序是通过链表指针实现的, 链表由一些列结点组成, 每个节点包含两个部分: 一个是存储数据元素的数据域, 另一个是存储下一个结点地址的指针域">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="htttps:///20230308/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%93%BE%E8%A1%A8/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8.png">
+<meta property="og:image" content="htttps:///20230308/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%93%BE%E8%A1%A8/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png">
+<meta property="article:published_time" content="2023-03-08T09:16:32.000Z">
+<meta property="article:modified_time" content="2023-03-08T09:25:32.556Z">
+<meta property="article:author" content="cuicui">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="htttps:///20230308/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%93%BE%E8%A1%A8/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8.png">
+
+
+<link rel="canonical" href="htttps://cuijunyu.win/20230308/数据结构学习-链表/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://cuijunyu.win/20230308/数据结构学习-链表/","path":"20230308/数据结构学习-链表/","title":"数据结构学习-链表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据结构学习-链表 | cuicui'Blog</title>
+  
+
+
+
+
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEM6KXGMX4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SEM6KXGMX4');
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6180734682067365"
+     crossorigin="anonymous"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">cuicui'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">弱小和无知从不是生存的障碍, 傲慢才是</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.0.1.</span> <span class="nav-text">链表的特点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">单链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.0.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">2.0.2.</span> <span class="nav-text">单链表的应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-2"><span class="nav-number">3.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">循环链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-3"><span class="nav-number">4.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cuicui"
+      src="/img/avatar.jpg">
+  <p class="site-author-name" itemprop="name">cuicui</p>
+  <div class="site-description" itemprop="description">崔崔的博客网站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cuicui-V5" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cuicui-V5" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xrswyea@foxmail.com" title="E-Mail → mailto:xrswyea@foxmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="htttps://cuijunyu.win/20230308/数据结构学习-链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.jpg">
+      <meta itemprop="name" content="cuicui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cuicui'Blog">
+      <meta itemprop="description" content="崔崔的博客网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据结构学习-链表 | cuicui'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构学习-链表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-08 17:16:32 / 修改时间：17:25:32" itemprop="dateCreated datePublished" datetime="2023-03-08T17:16:32+08:00">2023-03-08</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1>链表</h1>
+<p>链表是一种物理存储单元上非连续, 非顺序的存储结构, 数据元素的逻辑顺序是通过链表指针实现的, 链表由一些列结点组成, 每个节点包含两个部分: 一个是存储数据元素的数据域, 另一个是存储下一个结点地址的指针域</p>
+<p>链表结构可以充分利用计算机内存空间, 实现灵活的内存动态管理, 但是链表失去了数组孙继读取的优点, 同时链表由于增加了结点的指针域, 空间开销比较大</p>
+<h3 id="链表的特点">链表的特点</h3>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p>插入删除效率高 O(1), 只需要改变指针指向即可, 随机访问效率低 O(n)(需要从链头到链尾遍历)</p>
+</li>
+<li class="lvl-4">
+<p>与数组相比, 内存空间消耗更大, 因为每个存储数据的节点都需要额外的空间存储后继指针</p>
+</li>
+</ul>
+<p>‍</p>
+<p>‍</p>
+<h1>单链表</h1>
+<p>单链表的每一个节点, 都包含了数据区域和 next 指向下一个节点的指针</p>
+<img src="/20230308/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%93%BE%E8%A1%A8/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8.png" class="" title="单向链表">
+<h3 id="代码实现">代码实现</h3>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LinkNode</span> &#123;</span><br><span class="line">    <span class="attr">element</span>: <span class="built_in">any</span>;</span><br><span class="line">    <span class="attr">next</span>: <span class="title class_">LinkNode</span> | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">element</span> = element;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">next</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LinkedList</span> &#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">head</span>: <span class="title class_">LinkNode</span> | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">count</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">head</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">push</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="comment">// 新建节点</span></span><br><span class="line">        <span class="keyword">const</span> newNode = <span class="keyword">new</span> <span class="title class_">LinkNode</span>(element);</span><br><span class="line">        <span class="comment">// 如果链表为空</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">head</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line">            <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">            <span class="comment">// 遍历链表, 直到最后一个元素</span></span><br><span class="line">            <span class="keyword">while</span> (current.<span class="property">next</span>) &#123;</span><br><span class="line">                current = current.<span class="property">next</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            current.<span class="property">next</span> = newNode;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除指定位置的节点</span></span><br><span class="line">    <span class="title function_">removeAt</span>(<span class="params">index: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="attr">removeNode</span>: <span class="title class_">LinkNode</span> | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= <span class="variable language_">this</span>.<span class="property">count</span> || <span class="variable language_">this</span>.<span class="property">count</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果删除第一个元素</span></span><br><span class="line">            <span class="keyword">if</span> (index == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 头指针指向第二个元素</span></span><br><span class="line">                removeNode = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = removeNode?.<span class="property">next</span>;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">count</span>--;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;要删除的元素是&quot;</span> + removeNode?.<span class="property">element</span>);</span><br><span class="line">                <span class="keyword">return</span> removeNode?.<span class="property">element</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果删除的不是第一个元素</span></span><br><span class="line">                <span class="comment">// 找到他的前一个元素</span></span><br><span class="line">                <span class="keyword">const</span> prev = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(index - <span class="number">1</span>);</span><br><span class="line">                removeNode = prev?.<span class="property">next</span>;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;要删除的元素是&quot;</span> + removeNode?.<span class="property">element</span>);</span><br><span class="line">                <span class="comment">// 要删除的元素前一个元素的next=要删除的元素后一个元素</span></span><br><span class="line">                prev!.<span class="property">next</span> = removeNode?.<span class="property">next</span>;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">count</span>--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> removeNode?.<span class="property">element</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">remove</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> index = <span class="variable language_">this</span>.<span class="title function_">indexOf</span>(element);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index === -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">removeAt</span>(index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">indexOf</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="comment">// 根据数据, 返回索引</span></span><br><span class="line">        <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (current?.<span class="property">next</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(current.<span class="property">element</span>) == <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(element)) &#123;</span><br><span class="line">                <span class="keyword">return</span> index;</span><br><span class="line">            &#125;</span><br><span class="line">            index++;</span><br><span class="line">            current = current?.<span class="property">next</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">getNodeAt</span>(<span class="params">index: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= <span class="variable language_">this</span>.<span class="property">count</span> || <span class="variable language_">this</span>.<span class="property">count</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">                current = current?.<span class="property">next</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> current;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        <span class="keyword">let</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">while</span> (current) &#123;</span><br><span class="line">            str += <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(current.<span class="property">element</span>) + <span class="string">&quot;-&quot;</span>;</span><br><span class="line">            current = current?.<span class="property">next</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">insertElement</span>(<span class="params">element: <span class="built_in">any</span>, index: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; <span class="variable language_">this</span>.<span class="property">count</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果插入最后一个元素</span></span><br><span class="line">        <span class="keyword">if</span> (index === <span class="variable language_">this</span>.<span class="property">count</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">push</span>(element);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> newNode = <span class="keyword">new</span> <span class="title class_">LinkNode</span>(element);</span><br><span class="line">        <span class="comment">// 如果在第一个元素之前插入</span></span><br><span class="line">        <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line">            newNode.<span class="property">next</span> = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 在指定位置插入一个元素</span></span><br><span class="line">        <span class="comment">// 新建一个节点, 新节点的next=插入位置的next, 插入位置的next=新节点,</span></span><br><span class="line">        <span class="comment">// 插入位置的节点</span></span><br><span class="line">        <span class="keyword">const</span> insertedNode = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(index - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (insertedNode) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line">            newNode.<span class="property">next</span> = insertedNode?.<span class="property">next</span>;</span><br><span class="line">            insertedNode.<span class="property">next</span> = newNode;</span><br><span class="line">            <span class="keyword">return</span> newNode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">count</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">size</span>() === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>‍</p>
+<p>‍</p>
+<h3 id="单链表的应用">单链表的应用</h3>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回文数检查</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">check</span>(<span class="params">str: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="comment">// 全部转小写, 去掉空格</span></span><br><span class="line">    str = str.<span class="title function_">toLocaleLowerCase</span>().<span class="title function_">split</span>(<span class="string">&quot; &quot;</span>).<span class="title function_">join</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;处理后的字符串:&quot;</span> + str);</span><br><span class="line">    <span class="comment">// 将字符串加入队列</span></span><br><span class="line">    <span class="keyword">const</span> list = <span class="keyword">new</span> <span class="title class_">LinkedList</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        list.<span class="title function_">push</span>(str[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> tag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出首尾元素进行对比</span></span><br><span class="line">    <span class="keyword">while</span> (list.<span class="title function_">size</span>() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (list.<span class="title function_">removeAt</span>(<span class="number">0</span>) !== list.<span class="title function_">removeAt</span>(list.<span class="title function_">size</span>() - <span class="number">1</span>)) &#123;</span><br><span class="line">            tag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(tag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">check</span>(<span class="string">&quot;abc dc bA&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h1>双向链表</h1>
+<p>节点除了数据区域外, 还有两个指针, 分别为前驱指针 prev 和后继指针 next</p>
+<img src="/20230308/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%93%BE%E8%A1%A8/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png" class="" title="双向链表">
+<p>在双向链表中删除元素需要考虑以下边界条件：</p>
+<ol>
+<li class="lvl-3">
+<p>如果链表为空，不能进行删除操作。</p>
+</li>
+<li class="lvl-3">
+<p>如果要删除的元素是头结点或者尾节点，则需要更新 <code>head</code>​ 或 <code>tail</code>​ 指针。</p>
+</li>
+<li class="lvl-3">
+<p>如果要删除的元素不是头节点或尾节点，则需要更新其前驱节点的 <code>next</code>​ 指针和后继节点的 <code>prev</code>​ 指针。</p>
+</li>
+<li class="lvl-3">
+<p>如果输入的索引超出链表长度，应该返回 <code>undefined</code>​。</p>
+</li>
+</ol>
+<p>特别地，如果链表只有一个元素，那么删除唯一一个元素后，需要将 <code>head</code>​ 和 <code>tail</code>​ 指针都置为 <code>null</code>​。</p>
+<h2 id="代码实现-2">代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">LinkNode</span>, <span class="title class_">LinkedList</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./单链表&quot;</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">doubleLinkNode</span> <span class="keyword">extends</span> <span class="title class_ inherited__">LinkNode</span> &#123;</span><br><span class="line">    <span class="attr">prev</span>: doubleLinkNode | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line">    <span class="attr">next</span>: doubleLinkNode | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(element);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">prev</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">doubleLinkList</span> <span class="keyword">extends</span> <span class="title class_ inherited__">LinkedList</span> &#123;</span><br><span class="line">    <span class="attr">head</span>: doubleLinkNode | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line">    <span class="attr">tail</span>: doubleLinkNode | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">tail</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">push</span>(<span class="attr">element</span>: <span class="built_in">any</span>): doubleLinkNode &#123;</span><br><span class="line">        <span class="keyword">const</span> node = <span class="keyword">new</span> <span class="title function_">doubleLinkNode</span>(element);</span><br><span class="line">        <span class="comment">// 如果链表内没有元素,</span></span><br><span class="line">        <span class="comment">// 直接添加</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">head</span> == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">head</span> = node;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">tail</span> = node;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果链表内有元素</span></span><br><span class="line">            <span class="comment">// 当前的最后一个元素的next指向新元素,</span></span><br><span class="line">            <span class="comment">// 新元素的prev指向当前的元素</span></span><br><span class="line">            <span class="comment">// 改变tail的指向</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">tail</span>!.<span class="property">next</span> = node;</span><br><span class="line">            node.<span class="property">prev</span> = <span class="variable language_">this</span>.<span class="property">tail</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">tail</span> = node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">insert</span>(<span class="params">element: <span class="built_in">any</span>, index: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="comment">// 首先判断index是否符合条件</span></span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; <span class="variable language_">this</span>.<span class="property">count</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> node = <span class="keyword">new</span> <span class="title function_">doubleLinkNode</span>(element);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果没有元素</span></span><br><span class="line">            <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">head</span>) &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = node;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">tail</span> = node;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果有元素想要插入最前</span></span><br><span class="line">                node.<span class="property">next</span> = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span>.<span class="property">prev</span> = node;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (index === <span class="variable language_">this</span>.<span class="property">count</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果是在最后插入</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">tail</span>!.<span class="property">next</span> = node;</span><br><span class="line">            node.<span class="property">prev</span> = <span class="variable language_">this</span>.<span class="property">tail</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">tail</span> = node;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 在内部插入</span></span><br><span class="line">            <span class="comment">// 前一个结点的next=新节点</span></span><br><span class="line">            <span class="comment">// 后一个节点的prev=新节点</span></span><br><span class="line">            <span class="comment">// 新节点的prev=前一个结点</span></span><br><span class="line">            <span class="comment">// 新节点的next=后一个节点</span></span><br><span class="line">            <span class="keyword">const</span> prevNode = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(index - <span class="number">1</span>) <span class="keyword">as</span> doubleLinkNode;</span><br><span class="line">            <span class="keyword">const</span> nextNode = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(index) <span class="keyword">as</span> doubleLinkNode;</span><br><span class="line"></span><br><span class="line">            prevNode.<span class="property">next</span> = node;</span><br><span class="line">            nextNode.<span class="property">prev</span> = node;</span><br><span class="line">            node.<span class="property">prev</span> = prevNode;</span><br><span class="line">            node.<span class="property">next</span> = nextNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">removeAt</span>(<span class="params">index: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="comment">//在双向链表中删除元素需要考虑以下边界条件：</span></span><br><span class="line">        <span class="comment">// 如果链表为空，不能进行删除操作。</span></span><br><span class="line">        <span class="comment">// 如果要删除的元素是头结点或者尾节点，则需要更新 head 或 tail 指针。</span></span><br><span class="line">        <span class="comment">// 如果要删除的元素不是头节点或尾节点，则需要更新其前驱节点的 next 指针和后继节点的 prev 指针。</span></span><br><span class="line">        <span class="comment">// 如果输入的索引超出链表长度，应该返回 undefined。</span></span><br><span class="line">        <span class="comment">// 特别地，如果链表只有一个元素，那么删除唯一一个元素后，需要将 head 和 tail 指针都置为 null。</span></span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= <span class="variable language_">this</span>.<span class="property">count</span> || <span class="variable language_">this</span>.<span class="property">count</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> <span class="attr">current</span>: doubleLinkNode | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line">        <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</span><br><span class="line">            current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">count</span> === <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = <span class="literal">null</span>;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">tail</span> = <span class="literal">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = current?.<span class="property">next</span>;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span>!.<span class="property">prev</span> = <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (index === <span class="variable language_">this</span>.<span class="property">count</span> - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 删除最后的元素</span></span><br><span class="line">            current = <span class="variable language_">this</span>.<span class="property">tail</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">tail</span> = current?.<span class="property">prev</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">tail</span>!.<span class="property">next</span> = <span class="literal">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 删除中间的元素</span></span><br><span class="line">            <span class="keyword">const</span> prevNode = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(index - <span class="number">1</span>) <span class="keyword">as</span> doubleLinkNode;</span><br><span class="line">            current = prevNode.<span class="property">next</span>;</span><br><span class="line">            prevNode.<span class="property">next</span> = current?.<span class="property">next</span>;</span><br><span class="line">            current!.<span class="property">next</span>!.<span class="property">prev</span> = prevNode;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">count</span>--;</span><br><span class="line">        <span class="keyword">return</span> current;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>‍</p>
+<h1>循环链表</h1>
+<p>循环列表的最后一个结点的 next 指向 head 结点</p>
+<h2 id="代码实现-3">代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">LinkNode</span>, <span class="title class_">LinkedList</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./单链表&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">circularLinkedList</span> <span class="keyword">extends</span> <span class="title class_ inherited__">LinkedList</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">push</span>(<span class="attr">element</span>: <span class="built_in">any</span>): <span class="title class_">LinkNode</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newNode = <span class="keyword">new</span> <span class="title class_">LinkNode</span>(element);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果空表</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">count</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> current = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(<span class="variable language_">this</span>.<span class="property">count</span> - <span class="number">1</span>);</span><br><span class="line">            current!.<span class="property">next</span> = newNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        newNode.<span class="property">next</span> = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line">        <span class="keyword">return</span> newNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">insertElement</span>(<span class="attr">element</span>: <span class="built_in">any</span>, <span class="attr">index</span>: <span class="built_in">number</span>): <span class="title class_">LinkNode</span> | <span class="literal">undefined</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; <span class="variable language_">this</span>.<span class="property">count</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> newNode = <span class="keyword">new</span> <span class="title class_">LinkNode</span>(element);</span><br><span class="line">        <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果没有元素</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">count</span> === <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line">                newNode.<span class="property">next</span> = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                newNode.<span class="property">next</span> = current;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = newNode;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 将最后的元素重新指向头</span></span><br><span class="line">                current = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(<span class="variable language_">this</span>.<span class="property">count</span> - <span class="number">1</span>);</span><br><span class="line">                current!.<span class="property">next</span> = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 在中间插入</span></span><br><span class="line">            current = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(index - <span class="number">1</span>);</span><br><span class="line">            newNode.<span class="property">next</span> = current?.<span class="property">next</span>;</span><br><span class="line">            current!.<span class="property">next</span> = newNode;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">count</span>++;</span><br><span class="line">        <span class="keyword">return</span> newNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">removeAt</span>(<span class="params">index: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= <span class="variable language_">this</span>.<span class="property">count</span> || <span class="variable language_">this</span>.<span class="property">count</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> current = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">        <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">count</span> === <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 如果只有一个元素</span></span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = <span class="literal">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> last = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(<span class="variable language_">this</span>.<span class="property">count</span> - <span class="number">1</span>);</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">head</span> = current?.<span class="property">next</span>;</span><br><span class="line">                last!.<span class="property">next</span> = <span class="variable language_">this</span>.<span class="property">head</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            current = <span class="variable language_">this</span>.<span class="title function_">getNodeAt</span>(index - <span class="number">1</span>);</span><br><span class="line">            current!.<span class="property">next</span> = current?.<span class="property">next</span>?.<span class="property">next</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">count</span>--;</span><br><span class="line">        <span class="keyword">return</span> current;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>‍</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230307/ts-node%E8%B0%83%E8%AF%95ESM%E9%A1%B9%E7%9B%AE/" rel="prev" title="ts-node调试ESM项目提示[ERR_UNKNOWN_FILE_EXTENSION]">
+                  <i class="fa fa-chevron-left"></i> ts-node调试ESM项目提示[ERR_UNKNOWN_FILE_EXTENSION]
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuicui</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
