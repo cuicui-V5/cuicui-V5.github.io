@@ -18,29 +18,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…">
+    <meta name="description" content="Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr 在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 tesseract-ocr 实现 ocr 功能, 而且体验很好">
 <meta property="og:type" content="article">
-<meta property="og:title" content="通过nginx反代openai api">
-<meta property="og:url" content="htttps://cuijunyu.win/20230306/通过nginx反代openai-api/index.html">
+<meta property="og:title" content="让Snipaste中支持ocr[需高级版]">
+<meta property="og:url" content="htttps://cuijunyu.win/20230310/让Snipaste中支持ocr-需高级版/index.html">
 <meta property="og:site_name" content="cuicui&#39;Blog">
-<meta property="og:description" content="最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…">
+<meta property="og:description" content="Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr 在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 tesseract-ocr 实现 ocr 功能, 而且体验很好">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-06T12:45:45.000Z">
-<meta property="article:modified_time" content="2023-03-06T12:51:12.677Z">
+<meta property="og:image" content="htttps:///20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif">
+<meta property="og:image" content="htttps:///20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png">
+<meta property="article:published_time" content="2023-03-10T07:59:08.000Z">
+<meta property="article:modified_time" content="2023-03-10T08:04:39.953Z">
 <meta property="article:author" content="cuicui">
-<meta property="article:tag" content="nginx">
-<meta property="article:tag" content="openai">
+<meta property="article:tag" content="ocr">
+<meta property="article:tag" content="snipaste">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="htttps:///20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif">
 
 
-<link rel="canonical" href="htttps://cuijunyu.win/20230306/通过nginx反代openai-api/">
+<link rel="canonical" href="htttps://cuijunyu.win/20230310/让Snipaste中支持ocr-需高级版/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://cuijunyu.win/20230306/通过nginx反代openai-api/","path":"20230306/通过nginx反代openai-api/","title":"通过nginx反代openai api"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://cuijunyu.win/20230310/让Snipaste中支持ocr-需高级版/","path":"20230310/让Snipaste中支持ocr-需高级版/","title":"让Snipaste中支持ocr[需高级版]"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>通过nginx反代openai api | cuicui'Blog</title>
+<title>让Snipaste中支持ocr[需高级版] | cuicui'Blog</title>
   
 
 
@@ -138,7 +141,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -151,6 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">配置过程</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -206,7 +210,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="htttps://cuijunyu.win/20230306/通过nginx反代openai-api/">
+    <link itemprop="mainEntityOfPage" href="htttps://cuijunyu.win/20230310/让Snipaste中支持ocr-需高级版/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.jpg">
@@ -219,12 +223,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="通过nginx反代openai api | cuicui'Blog">
+      <meta itemprop="name" content="让Snipaste中支持ocr[需高级版] | cuicui'Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          通过nginx反代openai api
+          让Snipaste中支持ocr[需高级版]
         </h1>
 
         <div class="post-meta-container">
@@ -236,7 +240,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-03-06 20:45:45 / 修改时间：20:51:12" itemprop="dateCreated datePublished" datetime="2023-03-06T20:45:45+08:00">2023-03-06</time>
+      <time title="创建时间：2023-03-10 15:59:08 / 修改时间：16:04:39" itemprop="dateCreated datePublished" datetime="2023-03-10T15:59:08+08:00">2023-03-10</time>
     </span>
 
   
@@ -246,7 +250,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>483</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -264,11 +268,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…</p>
-<span id="more"></span>
-<p>那么解决方案也很简单, 首先你需要一台安装了 nginx 境外服务器, 然后配置如下即可使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 8443 ssl;</span><br><span class="line">	server_name openai.example.com;</span><br><span class="line">	ssl_certificate /etc/nginx/ssl/cuijunyu.pem;</span><br><span class="line">	ssl_certificate_key /etc/nginx/ssl/cuijunyu.key;</span><br><span class="line">        ssl_protocols TLSv1.2 TLSv1.3;</span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass https://api.openai.com/;</span><br><span class="line">		proxy_set_header Host api.openai.com;</span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>请求 api 的时候, 你只需要把 URL 换成 <a target="_blank" rel="noopener" href="http://openai.example.com">openai.example.com</a> 就可以了</p>
+        <p>Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr</p>
+<p>在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 <code>tesseract-ocr</code> 实现 ocr 功能, 而且体验很好</p>
+<img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif" class="" title="演示ocr效果">
+<h1>配置过程</h1>
+<ol>
+<li class="lvl-3">
+<p>前往 <a target="_blank" rel="noopener" href="https://digi.bib.uni-mannheim.de/tesseract/">https://digi.bib.uni-mannheim.de/tesseract/</a> 下载安装最新版<code>​ tesseract-ocr</code>,</p>
+<ol>
+<li class="lvl-7">安装过程中, 选择中文识别包 <img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png" class="" title="安装"></li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>安装完成之后, 可以使用如下命令进行本地 ocr:</p>
+<ol>
+<li class="lvl-7">
+<pre><code class="language-ts">tesseract &lt;需ocr的图像&gt; &lt;输出文件位置, 注意不需要写扩展名&gt; -c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    2. 其中`-c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim` 为识别参数, `preserve_interword_spaces=1`可以去掉多余的空格, `-l eng+chi_sim` 是指定识别语言</span><br><span class="line"></span><br><span class="line">3. 打开 Snipaste 的首选项-控制, 点击添加新命令</span><br><span class="line"></span><br><span class="line">    1. &#123;% asset_img 配置1.png 配置1 %&#125;</span><br><span class="line">    2. &#123;% asset_img 配置2.png 配置2 %&#125;</span><br><span class="line"></span><br><span class="line">4. 名称随意填写, 命令填写如下</span><br><span class="line"></span><br><span class="line">    1. ```ts</span><br><span class="line">       snip -o &quot;D:\Temp\source.png&quot;;exec(cmd /c &quot;C:\Program Files\Tesseract-OCR\tesseract.exe&quot;  &quot;D:\Temp\source.png&quot; &quot;D:\Temp\ocrRes&quot; -c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim &amp;&amp;  notepad &quot;D:\Temp\ocrRes.txt&quot;);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li class="lvl-7">这段命令的含义是首先调用 Snipaste 截图并存放于<code>D:\Temp\source.png</code>, 然后执行 cmd 命令, 调用<code>tesseract</code>进行 ocr 识别, 并将识别结果用记事本打开 其中, **<code>C:\Program Files\Tesseract-OCR\tesseract.exe</code>**为你的<code>tesseract</code>安装路径, <code>D:\Temp\ocrRes</code>为 ocr 结果的文件路径, 注意只需要写文件名, 不需要拓展名, 文件名和路径请根据自己需要修改</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>随后指定一个快捷键即可愉快的 OCR 啦 !! 😋😋😋😋😋</p>
+</li>
+</ol>
 
     </div>
 
@@ -278,22 +303,19 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/nginx/" rel="tag"># nginx</a>
-              <a href="/tags/openai/" rel="tag"># openai</a>
+              <a href="/tags/ocr/" rel="tag"># ocr</a>
+              <a href="/tags/snipaste/" rel="tag"># snipaste</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/20230306/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%98%9F%E5%88%97/" rel="prev" title="数据结构学习-队列">
-                  <i class="fa fa-chevron-left"></i> 数据结构学习-队列
+                <a href="/20230308/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%93%BE%E8%A1%A8/" rel="prev" title="数据结构学习-链表">
+                  <i class="fa fa-chevron-left"></i> 数据结构学习-链表
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="TS+ESM项目导入自定义模块不加扩展名就报错的问题">
-                  TS+ESM项目导入自定义模块不加扩展名就报错的问题 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
