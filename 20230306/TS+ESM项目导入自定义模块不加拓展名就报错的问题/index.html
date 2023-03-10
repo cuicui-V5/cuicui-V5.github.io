@@ -21,7 +21,7 @@
     <meta name="description" content="折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。 一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有扩展名。然而，TSC 编译出来的项目中导入模块是不带扩展名的，所以 Node.js 会报错。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TS+ESM项目导入自定义模块不加扩展名就报错的问题">
-<meta property="og:url" content="htttps://cuijunyu.win/20230306/TS+ESM项目导入自定义模块不加拓展名就报错的问题/index.html">
+<meta property="og:url" content="https://cuijunyu.win/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="cuicui&#39;Blog">
 <meta property="og:description" content="折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。 一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有扩展名。然而，TSC 编译出来的项目中导入模块是不带扩展名的，所以 Node.js 会报错。">
 <meta property="og:locale" content="zh_CN">
@@ -32,11 +32,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="htttps://cuijunyu.win/20230306/TS+ESM项目导入自定义模块不加拓展名就报错的问题/">
+<link rel="canonical" href="https://cuijunyu.win/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"htttps://cuijunyu.win/20230306/TS+ESM项目导入自定义模块不加拓展名就报错的问题/","path":"20230306/TS+ESM项目导入自定义模块不加拓展名就报错的问题/","title":"TS+ESM项目导入自定义模块不加扩展名就报错的问题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://cuijunyu.win/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/","path":"20230306/TS+ESM项目导入自定义模块不加拓展名就报错的问题/","title":"TS+ESM项目导入自定义模块不加扩展名就报错的问题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>TS+ESM项目导入自定义模块不加扩展名就报错的问题 | cuicui'Blog</title>
@@ -206,7 +206,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="htttps://cuijunyu.win/20230306/TS+ESM项目导入自定义模块不加拓展名就报错的问题/">
+    <link itemprop="mainEntityOfPage" href="https://cuijunyu.win/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.jpg">
@@ -252,14 +252,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>503</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 

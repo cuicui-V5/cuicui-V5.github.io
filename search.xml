@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CSS实现遮罩效果</title>
+    <url>/20221216/CSS%E5%AE%9E%E7%8E%B0%E9%81%AE%E7%BD%A9%E6%95%88%E6%9E%9C/</url>
+    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="attr">background</span>: <span class="title function_">url</span>(@/img/bg.<span class="property">jpg</span>) <span class="title function_">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.3</span>);</span><br><span class="line">background-<span class="attr">size</span>: cover;</span><br><span class="line">background-blend-<span class="attr">mode</span>: multiply;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TypeScript下给定时器标注类型</title>
+    <url>/20220720/TypeScript%E4%B8%8B%E7%BB%99%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">timer</span>: <span class="title class_">NodeJS</span>.<span class="property">Timeout</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;&#125;);</span><br><span class="line"><span class="built_in">clearTimeout</span>(timer);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>TypeScript</tag>
+        <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git批量修改已提交的邮箱信息</title>
+    <url>/20220511/Git%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%8F%90%E4%BA%A4%E7%9A%84%E9%82%AE%E7%AE%B1%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<p>新建 <code>rename.sh</code> 内容如下</p>
+<span id="more"></span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter <span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OLD_EMAIL=&quot;原邮箱地址&quot;</span></span><br><span class="line"><span class="string">CORRECT_NAME=&quot;新用户名&quot;</span></span><br><span class="line"><span class="string">CORRECT_EMAIL=&quot;新邮箱地址&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">&#x27;</span> --tag-name-filter <span class="built_in">cat</span> -- --branches --tags</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>使用 git bash 运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh rename.sh</span><br></pre></td></tr></table></figure>
+<p>强行提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --force --all</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue3中 v-model封装自定义组件实现数据双向绑定</title>
+    <url>/20230114/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
+    <content><![CDATA[<p>v-model 传进来的数据为<code>modelValue</code>, 要手动触发的事件为<code>update:modelValue</code></p>
+<span id="more"></span>
+<p>父组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">test</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>子组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    请输入</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">:value</span>=<span class="string">&quot;modelValue&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      @<span class="attr">input</span>=<span class="string">&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">props</span>: [<span class="string">&quot;modelValue&quot;</span>],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript使用WebSocket</title>
     <url>/20221123/JavaScript%E4%BD%BF%E7%94%A8WebSocket/</url>
     <content><![CDATA[<p>使用 WebSocket 可以实现点对点的全双工即时通信</p>
@@ -47,30 +95,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>WebSocket</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git批量修改已提交的邮箱信息</title>
-    <url>/20220511/Git%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%8F%90%E4%BA%A4%E7%9A%84%E9%82%AE%E7%AE%B1%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<p>新建 <code>rename.sh</code> 内容如下</p>
-<span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter <span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OLD_EMAIL=&quot;原邮箱地址&quot;</span></span><br><span class="line"><span class="string">CORRECT_NAME=&quot;新用户名&quot;</span></span><br><span class="line"><span class="string">CORRECT_EMAIL=&quot;新邮箱地址&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">&#x27;</span> --tag-name-filter <span class="built_in">cat</span> -- --branches --tags</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>使用 git bash 运行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh rename.sh</span><br></pre></td></tr></table></figure>
-<p>强行提交</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --force --all</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS实现遮罩效果</title>
-    <url>/20221216/CSS%E5%AE%9E%E7%8E%B0%E9%81%AE%E7%BD%A9%E6%95%88%E6%9E%9C/</url>
-    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="attr">background</span>: <span class="title function_">url</span>(@/img/bg.<span class="property">jpg</span>) <span class="title function_">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.3</span>);</span><br><span class="line">background-<span class="attr">size</span>: cover;</span><br><span class="line">background-blend-<span class="attr">mode</span>: multiply;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -206,99 +230,6 @@
       </tags>
   </entry>
   <entry>
-    <title>TypeScript下给定时器标注类型</title>
-    <url>/20220720/TypeScript%E4%B8%8B%E7%BB%99%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">timer</span>: <span class="title class_">NodeJS</span>.<span class="property">Timeout</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;&#125;);</span><br><span class="line"><span class="built_in">clearTimeout</span>(timer);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>TypeScript</tag>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue vee-validate 表单验证</title>
-    <url>/20230106/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/</url>
-    <content><![CDATA[<p>使用步骤</p>
-<ul class="lvl-0">
-<li class="lvl-4">使用第三包提供的<code>Form</code>标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给<code>Form</code>打<code>ref</code></li>
-<li class="lvl-4">使用第三方包提供的<code>Filed</code>标签将输入框的<code>input</code>替换掉</li>
-<li class="lvl-4">如果表单需要校验，那么必须有<code>name</code>属性</li>
-<li class="lvl-4">将校验规则通过<code>rules</code>绑定到需要校验的<code>Field</code>标签上</li>
-<li class="lvl-4">当用户输入的内容未通过验证规则时，错误信息是从<code>Form</code>标签上的插槽中解构出来的</li>
-</ul>
-<span id="more"></span>
-<p>引入组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Form</span>, <span class="title class_">Field</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vee-validate&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p>模板写法</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">Form</span></span><br><span class="line">    v-slot=<span class="string">&quot;&#123; errors &#125;&quot;</span></span><br><span class="line">    ref=<span class="string">&quot;fromValidate&quot;</span></span><br><span class="line">&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;邮箱/用户名/手机号&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;phone&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;account&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span>&#123;&#123; errors.account &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;&#123; errors.password &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        @<span class="attr">click.prevent</span>=<span class="string">&quot;login&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        登<span class="symbol">&amp;nbsp;</span><span class="symbol">&amp;nbsp;</span>录</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Form</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>书写验证规则</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkAccount</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="regexp">/^[\a-zA-Z0-9_]+$/</span>;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入账号&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.<span class="title function_">test</span>(val <span class="keyword">as</span> <span class="built_in">string</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;账号不合法 请输入6-16位数字字母下划线&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkPassword</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入密码&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>进行整体验证</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; valid &#125; = <span class="keyword">await</span> fromValidate.<span class="property">value</span>?.<span class="title function_">validate</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(valid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            <span class="comment">// 如果验证通过进行下一步</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue3中 v-model封装自定义组件实现数据双向绑定</title>
-    <url>/20230114/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
-    <content><![CDATA[<p>v-model 传进来的数据为<code>modelValue</code>, 要手动触发的事件为<code>update:modelValue</code></p>
-<span id="more"></span>
-<p>父组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">test</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
-<p>子组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    请输入</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">:value</span>=<span class="string">&quot;modelValue&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      @<span class="attr">input</span>=<span class="string">&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">props</span>: [<span class="string">&quot;modelValue&quot;</span>],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据结构学习-栈</title>
-    <url>/20221214/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%A0%88/</url>
-    <content><![CDATA[<p>栈结构遵循以下规则</p>
-<ul class="lvl-0">
-<li class="lvl-4">数据从栈顶 (又称为栈尾) 进入</li>
-<li class="lvl-4">从栈顶退出</li>
-<li class="lvl-4">遵循后进先出的 LIFO 原则</li>
-</ul>
-<p>一个栈应该有以下方法: push pop peek isEmpty size clear toString<br /></p>
-<span id="more"></span>
-<h2 id="封装一个栈">封装一个栈</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个栈应该有以下方法: push pop peek isEmpty size clear toString</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">stack</span>: <span class="built_in">unknown</span>[] = [];</span><br><span class="line"></span><br><span class="line">    <span class="title function_">push</span>(<span class="params">data: <span class="built_in">unknown</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">push</span>(data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pop</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回栈顶元素</span></span><br><span class="line">    <span class="title function_">peek</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>[<span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span> = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">debugger</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="应用-进制转换">应用: 进制转换</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Stack</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./stack&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 进制转换 利用辗转相除法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params">DecNumber: <span class="built_in">number</span>, base: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> remStack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line">    <span class="keyword">const</span> baseString = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title class_">DecNumber</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        remStack.<span class="title function_">push</span>(<span class="title class_">DecNumber</span> % base);</span><br><span class="line">        <span class="title class_">DecNumber</span> = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">DecNumber</span> / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!remStack.<span class="title function_">isEmpty</span>()) &#123;</span><br><span class="line">        res += baseString[remStack.<span class="title function_">pop</span>() <span class="keyword">as</span> <span class="built_in">number</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">convert</span>(<span class="number">1234</span>, <span class="number">16</span>));</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>纯CSS实现全屏滚动效果</title>
-    <url>/20230213/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%8F%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/</url>
-    <content><![CDATA[<p>实现全屏滚动可以不依赖 JS, 只使用纯 CSS 实现, 不过只有较新版本的浏览器支持这一特性</p>
-<p>主要使用了以下 CSS 属性</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p><code>scroll-snap-type: y mandatory;</code> 给父元素设置, 设置贴合类型</p>
-</li>
-<li class="lvl-4">
-<p><code>scroll-snap-align: start;</code> 给子元素设置, 设置贴合点</p>
-</li>
-</ul>
-<span id="more"></span>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;main&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/main&gt;</span><br></pre></td></tr></table></figure>
-<p>容器布局</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="selector-tag">main</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">        <span class="attribute">overflow</span>: scroll;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">main</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">border</span>: black <span class="number">2px</span> solid;</span><br><span class="line">        <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<p>样式设置</p>
-]]></content>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue封装一个分页器组件</title>
     <url>/20221204/Vue%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%88%86%E9%A1%B5%E5%99%A8%E7%BB%84%E4%BB%B6/</url>
     <content><![CDATA[<p>一个分页器组件最重要的四个参数(需要外界传入)</p>
@@ -359,6 +290,67 @@
       </tags>
   </entry>
   <entry>
+    <title>vue vee-validate 表单验证</title>
+    <url>/20230106/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/</url>
+    <content><![CDATA[<p>使用步骤</p>
+<ul class="lvl-0">
+<li class="lvl-4">使用第三包提供的<code>Form</code>标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给<code>Form</code>打<code>ref</code></li>
+<li class="lvl-4">使用第三方包提供的<code>Filed</code>标签将输入框的<code>input</code>替换掉</li>
+<li class="lvl-4">如果表单需要校验，那么必须有<code>name</code>属性</li>
+<li class="lvl-4">将校验规则通过<code>rules</code>绑定到需要校验的<code>Field</code>标签上</li>
+<li class="lvl-4">当用户输入的内容未通过验证规则时，错误信息是从<code>Form</code>标签上的插槽中解构出来的</li>
+</ul>
+<span id="more"></span>
+<p>引入组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Form</span>, <span class="title class_">Field</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vee-validate&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>模板写法</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">Form</span></span><br><span class="line">    v-slot=<span class="string">&quot;&#123; errors &#125;&quot;</span></span><br><span class="line">    ref=<span class="string">&quot;fromValidate&quot;</span></span><br><span class="line">&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;邮箱/用户名/手机号&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;phone&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;account&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span>&#123;&#123; errors.account &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;&#123; errors.password &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        @<span class="attr">click.prevent</span>=<span class="string">&quot;login&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        登<span class="symbol">&amp;nbsp;</span><span class="symbol">&amp;nbsp;</span>录</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Form</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>书写验证规则</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkAccount</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="regexp">/^[\a-zA-Z0-9_]+$/</span>;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入账号&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.<span class="title function_">test</span>(val <span class="keyword">as</span> <span class="built_in">string</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;账号不合法 请输入6-16位数字字母下划线&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkPassword</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入密码&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>进行整体验证</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; valid &#125; = <span class="keyword">await</span> fromValidate.<span class="property">value</span>?.<span class="title function_">validate</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(valid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            <span class="comment">// 如果验证通过进行下一步</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习-栈</title>
+    <url>/20221214/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%A0%88/</url>
+    <content><![CDATA[<p>栈结构遵循以下规则</p>
+<ul class="lvl-0">
+<li class="lvl-4">数据从栈顶 (又称为栈尾) 进入</li>
+<li class="lvl-4">从栈顶退出</li>
+<li class="lvl-4">遵循后进先出的 LIFO 原则</li>
+</ul>
+<p>一个栈应该有以下方法: push pop peek isEmpty size clear toString<br /></p>
+<span id="more"></span>
+<h2 id="封装一个栈">封装一个栈</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个栈应该有以下方法: push pop peek isEmpty size clear toString</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">stack</span>: <span class="built_in">unknown</span>[] = [];</span><br><span class="line"></span><br><span class="line">    <span class="title function_">push</span>(<span class="params">data: <span class="built_in">unknown</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">push</span>(data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pop</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回栈顶元素</span></span><br><span class="line">    <span class="title function_">peek</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>[<span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span> = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">debugger</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="应用-进制转换">应用: 进制转换</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Stack</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./stack&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 进制转换 利用辗转相除法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params">DecNumber: <span class="built_in">number</span>, base: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> remStack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line">    <span class="keyword">const</span> baseString = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title class_">DecNumber</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        remStack.<span class="title function_">push</span>(<span class="title class_">DecNumber</span> % base);</span><br><span class="line">        <span class="title class_">DecNumber</span> = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">DecNumber</span> / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!remStack.<span class="title function_">isEmpty</span>()) &#123;</span><br><span class="line">        res += baseString[remStack.<span class="title function_">pop</span>() <span class="keyword">as</span> <span class="built_in">number</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">convert</span>(<span class="number">1234</span>, <span class="number">16</span>));</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Chrome 单独清除某个网页的缓存</title>
+    <url>/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/</url>
+    <content><![CDATA[<img src="/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/%E6%B8%85%E9%99%A4%E7%BD%91%E9%A1%B5%E7%BC%93%E5%AD%98.png" class="" title="清除网页缓存">
+<ol>
+<li class="lvl-3">打开该网页</li>
+<li class="lvl-3">打开开发者工具</li>
+<li class="lvl-3">长按刷新按钮</li>
+<li class="lvl-3">选择 清空缓存并硬性重新加载</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Chrome</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript实现图片压缩</title>
     <url>/20230203/JavaScript%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/</url>
     <content><![CDATA[<h1>图片等比缩小的方法</h1>
@@ -388,30 +380,6 @@
 ]]></content>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript获取剪贴板文件</title>
-    <url>/20230113/JavaScript%E8%8E%B7%E5%8F%96%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;button&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;paste&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">clipboardData</span>.<span class="property">files</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Chrome 单独清除某个网页的缓存</title>
-    <url>/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/</url>
-    <content><![CDATA[<img src="/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/%E6%B8%85%E9%99%A4%E7%BD%91%E9%A1%B5%E7%BC%93%E5%AD%98.png" class="" title="清除网页缓存">
-<ol>
-<li class="lvl-3">打开该网页</li>
-<li class="lvl-3">打开开发者工具</li>
-<li class="lvl-3">长按刷新按钮</li>
-<li class="lvl-3">选择 清空缓存并硬性重新加载</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>Chrome</tag>
       </tags>
   </entry>
   <entry>
@@ -482,34 +450,12 @@
       </tags>
   </entry>
   <entry>
-    <title>TS+ESM项目导入自定义模块不加扩展名就报错的问题</title>
-    <url>/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。</p>
-<p>一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有扩展名。然而，TSC 编译出来的项目中导入模块是不带扩展名的，所以 Node.js 会报错。</p>
-<p>于是，我想当然地写了 <code>import router from &quot;./router.ts&quot;;</code>，认为 TypeScript 会自动处理扩展名。然而，并不是这样的。</p>
-<p>TypeScript 直接不允许导入 <code>.ts</code> 后缀的文件，要求启用 <code>allowImportingTsExtensions</code>。但是加了这个选项之后，出现了更多的错误：</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">error <span class="title class_">TS2691</span>: <span class="title class_">An</span> <span class="keyword">import</span> path cannot end <span class="keyword">with</span> a <span class="string">&#x27;.ts&#x27;</span> extension. <span class="title class_">Consider</span> importing <span class="string">&#x27;./router.js&#x27;</span> instead.</span><br><span class="line">error <span class="title class_">TS2835</span>: <span class="title class_">Relative</span> <span class="keyword">import</span> paths need explicit file extensions <span class="keyword">in</span> <span class="title class_">EcmaScript</span> imports when <span class="string">&#x27;--moduleResolution&#x27;</span> is <span class="string">&#x27;node16&#x27;</span> or <span class="string">&#x27;nodenext&#x27;</span>. <span class="title class_">Did</span> you mean <span class="string">&#x27;./event.js&#x27;</span>?</span><br></pre></td></tr></table></figure>
-<p>关于这个问题，在 GitHub 上有相关的讨论：<a href="https://github.com/microsoft/TypeScript/issues/16577">https://github.com/microsoft/TypeScript/issues/16577</a></p>
-<h1>解决方案</h1>
-<ol>
-<li class="lvl-3">
-<p>在 <code>tsconfig.json</code> 中将 <code>moduleResolution</code> 设置为 <code>nodenext</code>。设置之后，VS Code 导入模块时会自动加上 <code>.js</code> 后缀。</p>
-</li>
-<li class="lvl-3">
-<p>使用 <code>import router from &quot;./router.js&quot;;</code>，注意这里扩展名为 <code>.js</code>。</p>
-</li>
-</ol>
-<p>实际上，上面的报错也说明了问题：“An import path cannot end with a ‘.ts’ extension. Consider importing ‘./router.js’ instead.”（导入路径不能以 <code>.ts</code> 结尾，考虑导入 ‘./router.js’）</p>
-<p>非常坑啊有没有，明明是 TypeScript，为什么要导入 JavaScript 呢？</p>
-<p>ChatGPT 给出了解释：</p>
-<blockquote>
-<p>您在 TypeScript 中导入模块时，使用的是相对路径或绝对路径来引用另一个文件。这与 JavaScript 中的导入语句类似。</p>
-<p>当 TypeScript 编译器将 TypeScript 代码转换为 JavaScript 代码时，它会自动将 <code>.ts</code> 扩展名更改为 <code>.js</code> 扩展名，并生成一个新的 JavaScript 文件，其中包含编译后的 JavaScript 代码。</p>
-<p>因此，即使您在 TypeScript 代码中导入的是 <code>.ts</code> 文件，最终在运行时实际上会加载并执行 <code>.js</code> 文件，因此需要在导入语句中指定 <code>.js</code> 扩展名。</p>
-</blockquote>
+    <title>JavaScript获取剪贴板文件</title>
+    <url>/20230113/JavaScript%E8%8E%B7%E5%8F%96%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;button&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;paste&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">clipboardData</span>.<span class="property">files</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>typeScript</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -534,6 +480,29 @@
       <tags>
         <tag>小工具</tag>
         <tag>pandoc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>纯CSS实现全屏滚动效果</title>
+    <url>/20230213/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%8F%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/</url>
+    <content><![CDATA[<p>实现全屏滚动可以不依赖 JS, 只使用纯 CSS 实现, 不过只有较新版本的浏览器支持这一特性</p>
+<p>主要使用了以下 CSS 属性</p>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p><code>scroll-snap-type: y mandatory;</code> 给父元素设置, 设置贴合类型</p>
+</li>
+<li class="lvl-4">
+<p><code>scroll-snap-align: start;</code> 给子元素设置, 设置贴合点</p>
+</li>
+</ul>
+<span id="more"></span>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;main&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/main&gt;</span><br></pre></td></tr></table></figure>
+<p>容器布局</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="selector-tag">main</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">        <span class="attribute">overflow</span>: scroll;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">main</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">border</span>: black <span class="number">2px</span> solid;</span><br><span class="line">        <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>样式设置</p>
+]]></content>
+      <tags>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -622,6 +591,37 @@
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="variable constant_">PS</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend&gt; ts-node .\src\index.<span class="property">ts</span></span><br><span class="line"><span class="title class_">TypeError</span> [<span class="variable constant_">ERR_UNKNOWN_FILE_EXTENSION</span>]: <span class="title class_">Unknown</span> file extension <span class="string">&quot;.ts&quot;</span> <span class="keyword">for</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend\src\index.<span class="property">ts</span></span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">NodeError</span> (<span class="attr">node</span>:internal/<span class="attr">errors</span>:<span class="number">399</span>:<span class="number">5</span>)</span><br><span class="line">    at <span class="title class_">Object</span>.<span class="property">getFileProtocolModuleFormat</span> [<span class="keyword">as</span> <span class="attr">file</span>:] (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">79</span>:<span class="number">11</span>)</span><br><span class="line">    at defaultGetFormat (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">121</span>:<span class="number">38</span>)</span><br><span class="line">    at defaultLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">load</span>:<span class="number">81</span>:<span class="number">20</span>)</span><br><span class="line">    at nextLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">163</span>:<span class="number">28</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">load</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">605</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">moduleProvider</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">457</span>:<span class="number">22</span>)</span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">ModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">module_job</span>:<span class="number">64</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.#createModuleJob (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">480</span>:<span class="number">17</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">getModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">434</span>:<span class="number">34</span>) &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="string">&#x27;ERR_UNKNOWN_FILE_EXTENSION&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>解决方法: 将运行命令改为</p>
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">ts-node --esm .\src\index.<span class="property">ts</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>typeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TS+ESM项目导入自定义模块不加扩展名就报错的问题</title>
+    <url>/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。</p>
+<p>一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有扩展名。然而，TSC 编译出来的项目中导入模块是不带扩展名的，所以 Node.js 会报错。</p>
+<p>于是，我想当然地写了 <code>import router from &quot;./router.ts&quot;;</code>，认为 TypeScript 会自动处理扩展名。然而，并不是这样的。</p>
+<p>TypeScript 直接不允许导入 <code>.ts</code> 后缀的文件，要求启用 <code>allowImportingTsExtensions</code>。但是加了这个选项之后，出现了更多的错误：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">error <span class="title class_">TS2691</span>: <span class="title class_">An</span> <span class="keyword">import</span> path cannot end <span class="keyword">with</span> a <span class="string">&#x27;.ts&#x27;</span> extension. <span class="title class_">Consider</span> importing <span class="string">&#x27;./router.js&#x27;</span> instead.</span><br><span class="line">error <span class="title class_">TS2835</span>: <span class="title class_">Relative</span> <span class="keyword">import</span> paths need explicit file extensions <span class="keyword">in</span> <span class="title class_">EcmaScript</span> imports when <span class="string">&#x27;--moduleResolution&#x27;</span> is <span class="string">&#x27;node16&#x27;</span> or <span class="string">&#x27;nodenext&#x27;</span>. <span class="title class_">Did</span> you mean <span class="string">&#x27;./event.js&#x27;</span>?</span><br></pre></td></tr></table></figure>
+<p>关于这个问题，在 GitHub 上有相关的讨论：<a href="https://github.com/microsoft/TypeScript/issues/16577">https://github.com/microsoft/TypeScript/issues/16577</a></p>
+<h1>解决方案</h1>
+<ol>
+<li class="lvl-3">
+<p>在 <code>tsconfig.json</code> 中将 <code>moduleResolution</code> 设置为 <code>nodenext</code>。设置之后，VS Code 导入模块时会自动加上 <code>.js</code> 后缀。</p>
+</li>
+<li class="lvl-3">
+<p>使用 <code>import router from &quot;./router.js&quot;;</code>，注意这里扩展名为 <code>.js</code>。</p>
+</li>
+</ol>
+<p>实际上，上面的报错也说明了问题：“An import path cannot end with a ‘.ts’ extension. Consider importing ‘./router.js’ instead.”（导入路径不能以 <code>.ts</code> 结尾，考虑导入 ‘./router.js’）</p>
+<p>非常坑啊有没有，明明是 TypeScript，为什么要导入 JavaScript 呢？</p>
+<p>ChatGPT 给出了解释：</p>
+<blockquote>
+<p>您在 TypeScript 中导入模块时，使用的是相对路径或绝对路径来引用另一个文件。这与 JavaScript 中的导入语句类似。</p>
+<p>当 TypeScript 编译器将 TypeScript 代码转换为 JavaScript 代码时，它会自动将 <code>.ts</code> 扩展名更改为 <code>.js</code> 扩展名，并生成一个新的 JavaScript 文件，其中包含编译后的 JavaScript 代码。</p>
+<p>因此，即使您在 TypeScript 代码中导入的是 <code>.ts</code> 文件，最终在运行时实际上会加载并执行 <code>.js</code> 文件，因此需要在导入语句中指定 <code>.js</code> 扩展名。</p>
+</blockquote>
 ]]></content>
       <tags>
         <tag>typeScript</tag>
