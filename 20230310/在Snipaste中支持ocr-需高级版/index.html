@@ -20,32 +20,32 @@
 
     <meta name="description" content="Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr 在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 tesseract-ocr 实现 ocr 功能, 而且体验很好">
 <meta property="og:type" content="article">
-<meta property="og:title" content="让Snipaste中支持ocr[需高级版]">
-<meta property="og:url" content="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/index.html">
+<meta property="og:title" content="在Snipaste中支持ocr[需高级版]">
+<meta property="og:url" content="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/index.html">
 <meta property="og:site_name" content="cuicui&#39;Blog">
 <meta property="og:description" content="Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr 在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 tesseract-ocr 实现 ocr 功能, 而且体验很好">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif">
-<meta property="og:image" content="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png">
-<meta property="og:image" content="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png">
-<meta property="og:image" content="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png">
+<meta property="og:image" content="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif">
+<meta property="og:image" content="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png">
+<meta property="og:image" content="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png">
+<meta property="og:image" content="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png">
 <meta property="article:published_time" content="2023-03-10T07:59:08.000Z">
-<meta property="article:modified_time" content="2023-03-10T08:16:03.607Z">
+<meta property="article:modified_time" content="2023-03-11T01:07:24.783Z">
 <meta property="article:author" content="cuicui">
 <meta property="article:tag" content="ocr">
 <meta property="article:tag" content="snipaste">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif">
+<meta name="twitter:image" content="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif">
 
 
-<link rel="canonical" href="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">
+<link rel="canonical" href="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/","path":"20230310/让Snipaste中支持ocr-需高级版/","title":"让Snipaste中支持ocr[需高级版]"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/","path":"20230310/在Snipaste中支持ocr-需高级版/","title":"在Snipaste中支持ocr[需高级版]"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>让Snipaste中支持ocr[需高级版] | cuicui'Blog</title>
+<title>在Snipaste中支持ocr[需高级版] | cuicui'Blog</title>
   
 
 
@@ -212,7 +212,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cuijunyu.win/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">
+    <link itemprop="mainEntityOfPage" href="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.jpg">
@@ -225,12 +225,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="让Snipaste中支持ocr[需高级版] | cuicui'Blog">
+      <meta itemprop="name" content="在Snipaste中支持ocr[需高级版] | cuicui'Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          让Snipaste中支持ocr[需高级版]
+          在Snipaste中支持ocr[需高级版]
         </h1>
 
         <div class="post-meta-container">
@@ -240,9 +240,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-03-10 15:59:08 / 修改时间：16:16:03" itemprop="dateCreated datePublished" datetime="2023-03-10T15:59:08+08:00">2023-03-10</time>
+      <time title="创建时间：2023-03-10 15:59:08" itemprop="dateCreated datePublished" datetime="2023-03-10T15:59:08+08:00">2023-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-11 09:07:24" itemprop="dateModified" datetime="2023-03-11T09:07:24+08:00">2023-03-11</time>
     </span>
 
   
@@ -252,14 +258,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>425</span>
+      <span>987</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>1 分钟</span>
     </span>
 </div>
 
@@ -272,13 +278,13 @@
     <div class="post-body" itemprop="articleBody">
         <p>Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr</p>
 <p>在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 <code>tesseract-ocr</code> 实现 ocr 功能, 而且体验很好</p>
-<img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif" class="" title="演示ocr效果">
+<img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif" class="" title="演示ocr效果">
 <h1>配置过程</h1>
 <ol>
 <li class="lvl-4">
 <p>前往 <a target="_blank" rel="noopener" href="https://digi.bib.uni-mannheim.de/tesseract/">https://digi.bib.uni-mannheim.de/tesseract/</a> 下载安装最新版<code>​ tesseract-ocr</code>,</p>
 <ol>
-<li class="lvl-7">安装过程中, 选择中文识别包 <img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png" class="" title="安装"></li>
+<li class="lvl-7">安装过程中, 选择中文识别包 <img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png" class="" title="安装"></li>
 </ol>
 </li>
 <li class="lvl-4">
@@ -290,10 +296,10 @@
 <p>打开 Snipaste 的首选项-控制, 点击添加新命令</p>
 <ol>
 <li class="lvl-7">
-<img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png" class="" title="配置1">
+<img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png" class="" title="配置1">
 </li>
 <li class="lvl-7">
-<img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png" class="" title="配置2">
+<img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png" class="" title="配置2">
 </li>
 </ol>
 </li>

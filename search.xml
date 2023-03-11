@@ -686,17 +686,17 @@
       </tags>
   </entry>
   <entry>
-    <title>让Snipaste中支持ocr[需高级版]</title>
-    <url>/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/</url>
+    <title>在Snipaste中支持ocr[需高级版]</title>
+    <url>/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/</url>
     <content><![CDATA[<p>Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr</p>
 <p>在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 <code>tesseract-ocr</code> 实现 ocr 功能, 而且体验很好</p>
-<img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif" class="" title="演示ocr效果">
+<img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif" class="" title="演示ocr效果">
 <h1>配置过程</h1>
 <ol>
 <li class="lvl-4">
 <p>前往 <a href="https://digi.bib.uni-mannheim.de/tesseract/">https://digi.bib.uni-mannheim.de/tesseract/</a> 下载安装最新版<code>​ tesseract-ocr</code>,</p>
 <ol>
-<li class="lvl-7">安装过程中, 选择中文识别包 <img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png" class="" title="安装"></li>
+<li class="lvl-7">安装过程中, 选择中文识别包 <img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png" class="" title="安装"></li>
 </ol>
 </li>
 <li class="lvl-4">
@@ -708,10 +708,10 @@
 <p>打开 Snipaste 的首选项-控制, 点击添加新命令</p>
 <ol>
 <li class="lvl-7">
-<img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png" class="" title="配置1">
+<img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png" class="" title="配置1">
 </li>
 <li class="lvl-7">
-<img src="/20230310/%E8%AE%A9Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png" class="" title="配置2">
+<img src="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png" class="" title="配置2">
 </li>
 </ol>
 </li>
