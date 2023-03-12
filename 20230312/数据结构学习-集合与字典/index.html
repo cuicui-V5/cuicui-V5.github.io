@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.ic">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.ico">
+  <link rel="mask-icon" href="/img/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cuijunyu.win","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="集合 Set 是一种数据结构，用于存储唯一值的集合。它类似于数组，但不允许重复元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构学习-集合与字典">
+<meta property="og:url" content="https://cuijunyu.win/20230312/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/index.html">
+<meta property="og:site_name" content="cuicui&#39;Blog">
+<meta property="og:description" content="集合 Set 是一种数据结构，用于存储唯一值的集合。它类似于数组，但不允许重复元素。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-12T01:29:51.000Z">
+<meta property="article:modified_time" content="2023-03-12T01:30:25.911Z">
+<meta property="article:author" content="cuicui">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cuijunyu.win/20230312/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://cuijunyu.win/20230312/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/","path":"20230312/数据结构学习-集合与字典/","title":"数据结构学习-集合与字典"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据结构学习-集合与字典 | cuicui'Blog</title>
+  
+
+
+
+
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEM6KXGMX4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SEM6KXGMX4');
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6180734682067365"
+     crossorigin="anonymous"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">cuicui'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">弱小和无知从不是生存的障碍, 傲慢才是</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-%E7%9A%84-Set-%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">ES6 的 Set 结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-set-%E5%8F%96%E5%B9%B6%E9%9B%86-%E4%BA%A4%E9%9B%86-%E5%B7%AE%E9%9B%86"><span class="nav-number">1.3.</span> <span class="nav-text">利用 set 取并集, 交集, 差集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-2"><span class="nav-number">2.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">hashMap 散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.</span> <span class="nav-text">散列表的代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">ES6 的 Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">WeakMap 和 WeakSet</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="cuicui"
+      src="/img/avatar.jpg">
+  <p class="site-author-name" itemprop="name">cuicui</p>
+  <div class="site-description" itemprop="description">崔崔的博客网站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cuicui-V5" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cuicui-V5" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xrswyea@foxmail.com" title="E-Mail → mailto:xrswyea@foxmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cuijunyu.win/20230312/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.jpg">
+      <meta itemprop="name" content="cuicui">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cuicui'Blog">
+      <meta itemprop="description" content="崔崔的博客网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据结构学习-集合与字典 | cuicui'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构学习-集合与字典
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-12 09:29:51 / 修改时间：09:30:25" itemprop="dateCreated datePublished" datetime="2023-03-12T09:29:51+08:00">2023-03-12</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1>集合</h1>
+<p>Set 是一种数据结构，用于存储唯一值的集合。它类似于数组，但不允许重复元素。</p>
+<h2 id="代码实现">代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">mySet</span> &#123;</span><br><span class="line">    item = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">key</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="title function_">has</span>(element)) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">item</span>[element] = element;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">delete</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">has</span>(element)) &#123;</span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">this</span>.<span class="property">item</span>[element];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">has</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> element <span class="keyword">in</span> <span class="variable language_">this</span>.<span class="property">item</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">item</span> = &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>.<span class="property">item</span>).<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">values</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="variable language_">this</span>.<span class="property">item</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ES6-的-Set-结构">ES6 的 Set 结构</h2>
+<ol>
+<li class="lvl-3">
+<p>创建一个新的 Set 对象：可以通过以下任意一种方式创建一个 Set 对象：</p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>(); <span class="comment">// 空集合</span></span><br><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 包含了元素 1，2 和 3 的集合</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>添加元素到集合中：可以使用 add()方法向集合中添加元素：</p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">1</span>);</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">2</span>);</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>删除集合中的元素：可以使用 delete()方法删除集合中的元素：</p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="title function_">delete</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>检查集合中是否存在某个元素：可以使用 has()方法来检查集合中是否存在某个元素：</p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="title function_">has</span>(<span class="number">2</span>); <span class="comment">// 返回 true</span></span><br><span class="line">set.<span class="title function_">has</span>(<span class="number">4</span>); <span class="comment">// 返回 false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>获取集合的大小：可以使用 size 属性获取集合中元素的数量：</p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="property">size</span>; <span class="comment">// 返回 3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>迭代集合中的元素：可以使用 for…of 循环或者 forEach()方法来迭代 Set 中的所有元素：</p>
+ <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> set) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">set.<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="利用-set-取并集-交集-差集">利用 set 取并集, 交集, 差集</h2>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取交集并集差集</span></span><br><span class="line"><span class="keyword">const</span> setA = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"><span class="keyword">const</span> setB = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 并集</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA, ...setB]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交集</span></span><br><span class="line"><span class="keyword">const</span> d = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA].<span class="title function_">filter</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> setB.<span class="title function_">has</span>(item)));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 差集</span></span><br><span class="line"><span class="comment">// 给定两个集合A和B，它们的差集是指包含所有属于集合A但不属于集合B的元素所构成的集合</span></span><br><span class="line"><span class="comment">// setA的差集</span></span><br><span class="line"><span class="keyword">const</span> e = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA].<span class="title function_">filter</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> !setB.<span class="title function_">has</span>(item)));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br></pre></td></tr></table></figure>
+<h1>字典</h1>
+<p>字典和集合很类似, 集合以(值, 值)的形式存储数据, 字典则以(键, 值)</p>
+<p>的形式存储数据, 字典也成为映射, 符号表, 或关联数组</p>
+<p>ES6 中的 <code>Set</code> 和 <code>Map</code> 都是集合（collection）类型，但它们有一些区别：</p>
+<ol>
+<li class="lvl-3">
+<p><code>Set ​</code> 是一组有序且唯一的值的集合，而 <code>Map ​</code> 是一组键值对(key-value)的集合。</p>
+</li>
+<li class="lvl-3">
+<p>在 <code>Set ​</code> 中，每个元素只出现一次，可以用来去重；在 <code>Map ​</code> 中，每个键(<code>key</code>)只能对应一个值(<code>value</code>)，但同一个值可以被多个键所对应。</p>
+</li>
+<li class="lvl-3">
+<p><code>Set ​</code> 采用类似数组的方式来访问其成员，而 Map 则采用键来访问其成员。</p>
+</li>
+<li class="lvl-3">
+<p><code>Set ​</code> 的主要方法包括 <code>add</code>、<code>delete</code>、<code>has</code>、<code>clear ​</code> 等，而 <code>Map ​</code> 的主要方法包括 <code>set</code>、<code>get</code>、<code>has</code>、<code>delete</code>、<code>clear ​</code> 等。</p>
+</li>
+</ol>
+<p>因此，如果需要存储一组唯一的值或进行去重操作，可以使用 <code>Set</code>；如果需要存储键值对，并且需要通过键来访问其对应的值，则可以使用 <code>Map</code>。</p>
+<h2 id="代码实现-2">代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dictionary</span> &#123;</span><br><span class="line">    table = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">k</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="title function_">toStr</span>(<span class="params">item: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="string">&quot;undefined&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">&quot;string&quot;</span> || item <span class="keyword">instanceof</span> <span class="title class_">String</span>)</span><br><span class="line">            <span class="keyword">return</span> item <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">set</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key !== <span class="literal">null</span> &amp;&amp; value !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)] = <span class="keyword">new</span> <span class="title function_">keyPair</span>(key, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)]?.<span class="property">value</span>;</span><br><span class="line">        <span class="keyword">if</span> (value) &#123;</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">hasKey</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)] != <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">keys</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">keyValues</span>().<span class="title function_">map</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item.<span class="property">key</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">values</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">keyValues</span>().<span class="title function_">map</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item.<span class="property">value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">keyValues</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="variable language_">this</span>.<span class="property">table</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="variable language_">this</span>.<span class="property">table</span>).<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">size</span>() === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">table</span> = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">foreach</span>(<span class="params">cb: <span class="built_in">Function</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> pair = <span class="variable language_">this</span>.<span class="title function_">keyValues</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="title function_">size</span>(); i++) &#123;</span><br><span class="line">            <span class="title function_">cb</span>(pair[i].<span class="property">key</span>, pair[i].<span class="property">value</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">keyPair</span> &#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="built_in">any</span>;</span><br><span class="line">    <span class="attr">value</span>: <span class="built_in">any</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">key</span> = key;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dir = <span class="keyword">new</span> <span class="title class_">Dictionary</span>();</span><br></pre></td></tr></table></figure>
+<h1>hashMap 散列表</h1>
+<p>散列表将 key 通过一个散列函数转化为固定长度, 解决了字典结构如果 key 过长会造成查找时间过长的问题</p>
+<h2 id="散列表的代码实现">散列表的代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; keyPair &#125; <span class="keyword">from</span> <span class="string">&quot;./map&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">hashMap</span> &#123;</span><br><span class="line">    table = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">k</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="title function_">toStr</span>(<span class="params">item: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="string">&quot;undefined&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">&quot;string&quot;</span> || item <span class="keyword">instanceof</span> <span class="title class_">String</span>)</span><br><span class="line">            <span class="keyword">return</span> item <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">hashCode</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="comment">// 将对象转换为字符串, 然后将字符串的ascii码值相加, 最后取余</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> key === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> key;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> tableKey = <span class="variable language_">this</span>.<span class="title function_">toStr</span>(key);</span><br><span class="line">        <span class="keyword">let</span> hash = <span class="number">5381</span>;</span><br><span class="line">        [...tableKey].<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">            hash = hash * <span class="number">33</span> + item.<span class="title function_">charCodeAt</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> hash % <span class="number">1013</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key &amp;&amp; value) &#123;</span><br><span class="line">            <span class="keyword">const</span> position = <span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">table</span>[position] = <span class="keyword">new</span> <span class="title function_">keyPair</span>(key, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key)];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">remove</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> hash = <span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">table</span>[hash]) &#123;</span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">this</span>.<span class="property">table</span>[hash];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>ES6 的 Map</h1>
+<p>ES6 中的 Map 结构可以用来存储键值对，其使用方法如下：</p>
+<ol>
+<li class="lvl-3">
+<p>创建一个空的 Map 对象</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myMap = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>添加键值对到 Map 中</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myMap.<span class="title function_">set</span>(key, value);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li class="lvl-3">
+<p>从 Map 中获取某个键对应的值</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = myMap.<span class="title function_">get</span>(key);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li class="lvl-3">
+<p>检查 Map 中是否存在指定的键</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hasKey = myMap.<span class="title function_">has</span>(key);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li class="lvl-3">
+<p>获取 Map 中所有的键或值</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> keys = myMap.<span class="title function_">keys</span>();</span><br><span class="line"><span class="keyword">const</span> values = myMap.<span class="title function_">values</span>();</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li class="lvl-3">
+<p>获取 Map 中键值对的数量</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> size = myMap.<span class="property">size</span>;</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li class="lvl-3">
+<p>遍历 Map 中的所有键值对</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myMap.<span class="title function_">forEach</span>(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理每个键值对</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，Map 中的键可以是任何类型的值，而不仅限于字符串和数字。此外，Map 也提供了其他一些有用的方法，比如删除特定键的值，清空 Map 等。</p>
+<h1>WeakMap 和 WeakSet</h1>
+<p>WeakMap 和 WeakSet 是 ES6 中新增的两种集合类型，它们都具有以下特点：</p>
+<ol>
+<li class="lvl-3">
+<p>只能存储对象作为键，不能使用原始值类型（如字符串、数字等）作为键。</p>
+</li>
+<li class="lvl-3">
+<p>对于存储在集合中的对象，当没有其他对象引用它们时，它们会被自动回收。</p>
+</li>
+</ol>
+<p>其中，WeakMap 是一种以弱引用方式存储键值对的类似 Map 的数据结构。与 Map 不同的是，WeakMap 中的键只能是对象，而且这些对象都是弱引用的。也就是说，当某个对象作为 WeakMap 的键时，如果没有其他对象引用该键所对应的对象，则这个键值对会被自动从 WeakMap 中删除，以释放其占用的内存。</p>
+<p>以下是一个使用 WeakMap 的示例：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myWeakMap = <span class="keyword">new</span> <span class="title class_">WeakMap</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> key = &#123;&#125;; <span class="comment">// 创建一个新对象</span></span><br><span class="line"></span><br><span class="line">myWeakMap.<span class="title function_">set</span>(key, <span class="string">&quot;value&quot;</span>); <span class="comment">// 将这个对象作为键存储到 WeakMap 中</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myWeakMap.<span class="title function_">get</span>(key)); <span class="comment">// 输出 &quot;value&quot;</span></span><br><span class="line"></span><br><span class="line">key = <span class="literal">null</span>; <span class="comment">// 将原来的键对象置为 null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于没有任何其他对象引用这个键所对应的值，因此这个键值对会被自动删除</span></span><br></pre></td></tr></table></figure>
+<p>另一方面，WeakSet 是一种以弱引用方式存储对象的类似 Set 的数据结构。与 Set 不同的是，WeakSet 中的元素只能是对象，而且这些对象都是弱引用的。也就是说，当某个对象作为 WeakSet 的元素时，如果没有其他对象引用该元素，则这个元素会被自动从 WeakSet 中删除，以释放其占用的内存。</p>
+<p>以下是一个使用 WeakSet 的示例：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myWeakSet = <span class="keyword">new</span> <span class="title class_">WeakSet</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123;&#125;; <span class="comment">// 创建两个新对象</span></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">myWeakSet.<span class="title function_">add</span>(obj1); <span class="comment">// 将这两个对象添加到 WeakSet 中</span></span><br><span class="line">myWeakSet.<span class="title function_">add</span>(obj2);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myWeakSet.<span class="title function_">has</span>(obj1)); <span class="comment">// 输出 true</span></span><br><span class="line"></span><br><span class="line">obj1 = <span class="literal">null</span>; <span class="comment">// 将 obj1 置为 null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于没有任何其他对象引用 obj1，因此它会被自动从 WeakSet 中删除</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/" rel="prev" title="在Snipaste中支持ocr[需高级版]">
+                  <i class="fa fa-chevron-left"></i> 在Snipaste中支持ocr[需高级版]
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuicui</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
