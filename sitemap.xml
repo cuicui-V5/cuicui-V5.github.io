@@ -266,13 +266,6 @@
   </url>
   
   <url>
-    <loc>https://cuijunyu.win/tags/WebSocket/</loc>
-    <lastmod>2023-03-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://cuijunyu.win/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2023-03-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -280,7 +273,7 @@
   </url>
   
   <url>
-    <loc>https://cuijunyu.win/tags/vue/</loc>
+    <loc>https://cuijunyu.win/tags/WebSocket/</loc>
     <lastmod>2023-03-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -295,6 +288,13 @@
   
   <url>
     <loc>https://cuijunyu.win/tags/test/</loc>
+    <lastmod>2023-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://cuijunyu.win/tags/vue/</loc>
     <lastmod>2023-03-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -322,21 +322,14 @@
   </url>
   
   <url>
-    <loc>https://cuijunyu.win/tags/typeScript/</loc>
+    <loc>https://cuijunyu.win/tags/javaScript/</loc>
     <lastmod>2023-03-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://cuijunyu.win/tags/nginx/</loc>
-    <lastmod>2023-03-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://cuijunyu.win/tags/openai/</loc>
+    <loc>https://cuijunyu.win/tags/CloudFlare/</loc>
     <lastmod>2023-03-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -357,14 +350,21 @@
   </url>
   
   <url>
-    <loc>https://cuijunyu.win/tags/javaScript/</loc>
+    <loc>https://cuijunyu.win/tags/typeScript/</loc>
     <lastmod>2023-03-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://cuijunyu.win/tags/CloudFlare/</loc>
+    <loc>https://cuijunyu.win/tags/nginx/</loc>
+    <lastmod>2023-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://cuijunyu.win/tags/openai/</loc>
     <lastmod>2023-03-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
