@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>FlexBox总结 - cuicui&#039;Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="cuicui&#039;Blog"><meta name="msapplication-TileImage" content="/img/favicon.ico"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="cuicui&#039;Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Flex 布局有两种属性: 容器属性&amp;#x2F;项目属性 容器属性"><meta property="og:type" content="blog"><meta property="og:title" content="FlexBox总结"><meta property="og:url" content="https://cuijunyu.win/20230419/FlexBox%E6%80%BB%E7%BB%93/"><meta property="og:site_name" content="cuicui&#039;Blog"><meta property="og:description" content="Flex 布局有两种属性: 容器属性&amp;#x2F;项目属性 容器属性"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cuijunyu.win/img/og_image.png"><meta property="article:published_time" content="2023-04-19T12:02:44.000Z"><meta property="article:modified_time" content="2023-04-20T01:06:40.333Z"><meta property="article:author" content="cuicui"><meta property="article:tag" content="cuicuiv5 blog"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cuijunyu.win/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cuijunyu.win/20230419/FlexBox%E6%80%BB%E7%BB%93/"},"headline":"FlexBox总结","image":["https://cuijunyu.win/img/og_image.png"],"datePublished":"2023-04-19T12:02:44.000Z","dateModified":"2023-04-20T01:06:40.333Z","author":{"@type":"Person","name":"cuicui"},"publisher":{"@type":"Organization","name":"cuicui'Blog","logo":{"@type":"ImageObject","url":"https://cuijunyu.win/20230419/FlexBox%E6%80%BB%E7%BB%93/img/avatar.png"}},"description":"Flex 布局有两种属性: 容器属性&#x2F;项目属性 容器属性"}</script><link rel="canonical" href="https://cuijunyu.win/20230419/FlexBox%E6%80%BB%E7%BB%93/"><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>使用win10自带本地ocr让Snipaste实现快速识别文字 [需高级版] - cuicui&#039;Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="cuicui&#039;Blog"><meta name="msapplication-TileImage" content="/img/favicon.ico"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="cuicui&#039;Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="这是上篇文章搭配 tesseract-ocr 在 Snipaste 中支持 ocr[需高级版]的第二种解决方案 上一篇文章介绍了使用 tesseract-ocr 实现的方法, 他的识别速度略慢, 而且需要安装第三方软件, 这里介绍一种使用 windows 自带的 ocr 实现的方法, 而且速度 非! 常! 快!"><meta property="og:type" content="blog"><meta property="og:title" content="使用win10自带本地ocr让Snipaste实现快速识别文字 [需高级版]"><meta property="og:url" content="https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/"><meta property="og:site_name" content="cuicui&#039;Blog"><meta property="og:description" content="这是上篇文章搭配 tesseract-ocr 在 Snipaste 中支持 ocr[需高级版]的第二种解决方案 上一篇文章介绍了使用 tesseract-ocr 实现的方法, 他的识别速度略慢, 而且需要安装第三方软件, 这里介绍一种使用 windows 自带的 ocr 实现的方法, 而且速度 非! 常! 快!"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png"><meta property="og:image" content="https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png"><meta property="article:published_time" content="2023-04-21T09:02:55.000Z"><meta property="article:modified_time" content="2023-04-21T09:37:03.739Z"><meta property="article:author" content="cuicui"><meta property="article:tag" content="cuicuiv5 blog"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/"},"headline":"使用win10自带本地ocr让Snipaste实现快速识别文字 [需高级版]","image":["https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png","https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png"],"datePublished":"2023-04-21T09:02:55.000Z","dateModified":"2023-04-21T09:37:03.739Z","author":{"@type":"Person","name":"cuicui"},"publisher":{"@type":"Organization","name":"cuicui'Blog","logo":{"@type":"ImageObject","url":"https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/img/avatar.png"}},"description":"这是上篇文章搭配 tesseract-ocr 在 Snipaste 中支持 ocr[需高级版]的第二种解决方案 上一篇文章介绍了使用 tesseract-ocr 实现的方法, 他的识别速度略慢, 而且需要安装第三方软件, 这里介绍一种使用 windows 自带的 ocr 实现的方法, 而且速度 非! 常! 快!"}</script><link rel="canonical" href="https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/"><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -29,141 +29,40 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.png" alt="cuicui&#039;Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/cuicui-V5"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-04-19T12:02:44.000Z" title="2023/4/19 20:02:44">2023-04-19</time>发表</span><span class="level-item"><time dateTime="2023-04-20T01:06:40.333Z" title="2023/4/20 09:06:40">2023-04-20</time>更新</span><span class="level-item">4 分钟读完 (大约586个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">FlexBox总结</h1><div class="content"><p>Flex 布局有两种属性: 容器属性/项目属性</p>
-<h1>容器属性</h1>
-<h2 id="flex-direction-主轴方向"><code>flex-direction</code> 主轴方向</h2>
-<p>取值:</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>row: 水平, 默认</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.png" alt="cuicui&#039;Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/cuicui-V5"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-04-21T09:02:55.000Z" title="2023/4/21 17:02:55">2023-04-21</time>发表</span><span class="level-item"><time dateTime="2023-04-21T09:37:03.739Z" title="2023/4/21 17:37:03">2023-04-21</time>更新</span><span class="level-item">4 分钟读完 (大约531个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">使用win10自带本地ocr让Snipaste实现快速识别文字 [需高级版]</h1><div class="content"><p>这是上篇文章<a href="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">搭配 tesseract-ocr 在 Snipaste 中支持 ocr[需高级版]</a>的第二种解决方案</p>
+<p>上一篇文章介绍了使用 tesseract-ocr 实现的方法, 他的识别速度略慢, 而且需要安装第三方软件, 这里介绍一种使用 windows 自带的 ocr 实现的方法, 而且速度 非! 常! 快!</p>
+<blockquote>
+<p>windows.media.ocr 是 Windows 10 操作系统提供的 OCR（光学字符识别）引擎。它使用图像处理算法来识别文本和数字，可用于将印刷或手写文本转换为可编辑的电子文件。该 API 支持多种语言和字体类型，并能够在不同分辨率的图像上工作。在开发应用程序时，开发人员可使用 windows.media.ocr 实现自动识别文本信息的功能。</p>
+</blockquote>
+<p>由于使用到了自定义命令, 因此同样需要高级版这种方法只支持 win10 以上系统, 速度飞快. 俺基于<a target="_blank" rel="noopener" href="https://github.com/zh-h/Windows.Media.Ocr.Cli">Windows.Media.Ocr.Cli</a>二次开发了一个命令行 ocr 程序, <a href="/download/Windows.Media.Ocr.Cli.exe">直接下载</a> github 地址: <a target="_blank" rel="noopener" href="https://github.com/cuicui-V5/Windows.Media.Ocr.Cli">link</a></p>
+<h2 id="食用方法">食用方法</h2>
+<ol>
+<li class="lvl-3">
+<p>将 <code>Windows.Media.Ocr.Cli.exe</code> 放置到一个你认为能找到的目录, 例如<code>D\temp</code>,</p>
 </li>
-<li class="lvl-4">
-<p>row-reverse: 水平, 从右往左</p>
+<li class="lvl-3">
+<p>打开 Snipaste 的首选项-控制, 点击添加新命令</p>
+<ol>
+<li class="lvl-7">
+<img src="/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png" class="" title="配置1">
 </li>
-<li class="lvl-4">
-<p>column: 垂直</p>
+<li class="lvl-7">
+<img src="/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png" class="" title="配置2">
 </li>
-<li class="lvl-4">
-<p>column: 垂直, 从下往上</p>
+</ol>
 </li>
-</ul>
-<h2 id="flex-wrap-项目换行"><code>flex-wrap</code> 项目换行</h2>
-<p>取值</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>nowrap: 不换行, 默认</p>
+<li class="lvl-3">
+<p>名称随意填写, 命令填写如下</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snip -o &quot;D:\Temp\source.png&quot;;exec(cmd /c &quot;D:\Temp\Windows.Media.Ocr.Cli.exe&quot; -o  &quot;D:\Temp\ocrRes.txt&quot; &quot;D:\Temp\source.png&quot; &amp;&amp;  notepad &quot;D:\Temp\ocrRes.txt&quot;);</span><br></pre></td></tr></table></figure>
+<p>这段命令的含义是首先调用 Snipaste 截图并存放于<code>D:\Temp\source.png</code>, 然后执行 cmd 命令, 调用<code>Windows.Media.Ocr.Cli.exe</code>进行 ocr 识别, 并将识别结果用记事本打开, 文件名和路径请根据自己需要修改</p>
 </li>
-<li class="lvl-4">
-<p>wrap: 换行</p>
+<li class="lvl-3">
+<p>随后指定一个快捷键即可体验飞快的 OCR 啦 !! 🤔🤔🤔🤔🤔🤔🤔🤔</p>
 </li>
-<li class="lvl-4">
-<p>wrap-reverse: 反向换行, 表现得与<code>align-items</code>设置为<code>flex-end</code>类似</p>
-</li>
-</ul>
-<p>当启用换行时, 每一行都有一个主轴</p>
-<h3 id="flex-flow-主轴方向和项目换行的简写"><code>flex-flow</code> 主轴方向和项目换行的简写</h3>
-<p><code>flex-flow: &lt;flex-direction&gt; &lt;flex-wrap&gt;;</code></p>
-<h2 id="justify-content-主轴对齐方式"><code>justify-content</code> 主轴对齐方式</h2>
-<p>取值</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>flex-start: 主轴开头, 默认</p>
-</li>
-<li class="lvl-4">
-<p>flex-end: 主轴末尾</p>
-</li>
-<li class="lvl-4">
-<p>center: 主轴中心</p>
-</li>
-<li class="lvl-4">
-<p>space-between: 两侧无间距, 项目之间间距相同</p>
-</li>
-<li class="lvl-4">
-<p>space-around: 两侧间距较小, 项目之间间距相同</p>
-</li>
-</ul>
-<h2 id="align-items-交叉轴对齐方式"><code>align-items</code> 交叉轴对齐方式</h2>
-<p>取值</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>flex-start: 交叉轴开头, 默认</p>
-</li>
-<li class="lvl-4">
-<p>flex-end: 交叉轴末尾</p>
-</li>
-<li class="lvl-4">
-<p>center: 交叉轴中心</p>
-</li>
-<li class="lvl-4">
-<p>stretch: 拉伸到可用宽度</p>
-</li>
-<li class="lvl-4">
-<p>baseline: 基线对齐</p>
-</li>
-</ul>
-<h2 id="align-content-多行交叉轴对齐方式"><code>align-content</code> 多行交叉轴对齐方式</h2>
-<p>取值</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>flex-start: 交叉轴开头, 默认</p>
-</li>
-<li class="lvl-4">
-<p>flex-end: 交叉轴末尾</p>
-</li>
-<li class="lvl-4">
-<p>center: 交叉轴中心</p>
-</li>
-<li class="lvl-4">
-<p>stretch: 拉伸到可用宽度</p>
-</li>
-<li class="lvl-4">
-<p>space-between: 两侧无间距, 项目之间间距相同</p>
-</li>
-<li class="lvl-4">
-<p>space-around: 两侧间距较小, 项目之间间距相同</p>
-</li>
-</ul>
-<h2 id="注意点">注意点:</h2>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>如果启用换行, 那么<code>align-content</code>生效, 否则无效</p>
-</li>
-<li class="lvl-4">
-<p>如果启用换行, 只有<code>align-content</code>为<code>stretch</code>时, <code>align-items</code>才会生效</p>
-</li>
-</ul>
-<h1>项目属性</h1>
-<h2 id="order-项目顺序">order 项目顺序</h2>
-<h2 id="order-项目排列顺序">order 项目排列顺序</h2>
-<p>取值：整数，越小越靠前，默认为 0。</p>
-<h2 id="flex-grow-项目放大比例">flex-grow 项目放大比例</h2>
-<p>取值：数字，默认为 0。</p>
-<h2 id="flex-shrink-项目收缩比例">flex-shrink 项目收缩比例</h2>
-<p>取值：数字，默认为 1。</p>
-<h2 id="flex-basis-项目占据主轴的空间大小">flex-basis 项目占据主轴的空间大小</h2>
-<p>取值：</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>默认值: 自适应空间</p>
-</li>
-<li class="lvl-4">
-<p>固定尺寸(如 100px)</p>
-</li>
-</ul>
-<h2 id="flex-简写属性">flex 简写属性</h2>
-<p>设置<code>flex-grow</code>、<code>flex-shrink</code>和<code>flex-basis</code>三个属性的值。默认值为<code>0 1 auto</code>。</p>
-<h2 id="align-self-指定单个项目在交叉轴上的对齐方式">align-self 指定单个项目在交叉轴上的对齐方式</h2>
-<p>取值：与<code>align-items</code>取值相同（但会覆盖其），也包括其余有效的 CSS 属性值（justify-content, align-content 等）</p>
-<p>取值: 数字, 默认为 0</p>
-<p>项目按照数字从小到大排序</p>
-<h2 id="flex-grow-项目的增长比例">flex-grow 项目的增长比例</h2>
-<p>取值: 数字, 默认为 0</p>
-<p>项目如何占据剩余可用空间, 设置为 0 不占用</p>
-<h2 id="flex-shrink-项目的缩小比例">flex-shrink 项目的缩小比例</h2>
-<p>取值: 数字, 默认为 1</p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>FlexBox总结</p><p><a href="https://cuijunyu.win/20230419/FlexBox总结/">https://cuijunyu.win/20230419/FlexBox总结/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>cuicui</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-04-19</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-04-20</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="sharethis-inline-share-buttons"></div><script src="https://cuijunyu.win" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">使用win10自带本地ocr让Snipaste实现快速识别文字 [需高级版]</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/20230312/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/"><span class="level-item">数据结构学习-集合与字典</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'https://cuijunyu.win/20230419/FlexBox%E6%80%BB%E7%BB%93/';
-            this.page.identifier = '20230419/FlexBox总结/';
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>使用win10自带本地ocr让Snipaste实现快速识别文字 [需高级版]</p><p><a href="https://cuijunyu.win/20230421/使用win10自带本地ocr-api让Snipaste支持ocr-需高级版/">https://cuijunyu.win/20230421/使用win10自带本地ocr-api让Snipaste支持ocr-需高级版/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>cuicui</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-04-21</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-04-21</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="sharethis-inline-share-buttons"></div><script src="https://cuijunyu.win" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/20230419/FlexBox%E6%80%BB%E7%BB%93/"><span class="level-item">FlexBox总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/';
+            this.page.identifier = '20230421/使用win10自带本地ocr-api让Snipaste支持ocr-需高级版/';
         };
         (function() {
             var d = document, s = d.createElement('script');  
