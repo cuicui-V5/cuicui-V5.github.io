@@ -10,52 +10,18 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript使用WebSocket</title>
-    <url>/20221123/JavaScript%E4%BD%BF%E7%94%A8WebSocket/</url>
-    <content><![CDATA[<p>使用 WebSocket 可以实现点对点的全双工即时通信</p>
+    <title>Git批量修改已提交的邮箱信息</title>
+    <url>/20220511/Git%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%8F%90%E4%BA%A4%E7%9A%84%E9%82%AE%E7%AE%B1%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<p>新建 <code>rename.sh</code> 内容如下</p>
 <span id="more"></span>
-<h1>ws 客户端的基本使用</h1>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;wss://echo.websocket.org&quot;</span>);</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onopen</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Connection open ...&quot;</span>);</span><br><span class="line">    ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSockets!&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Received Message: &quot;</span> + evt.<span class="property">data</span>);</span><br><span class="line">    ws.<span class="title function_">close</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onclose</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Connection closed.&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="新建实例">新建实例</h2>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>注意:</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>不能 catch 住 websocket 的超时 error 的</p>
-</li>
-</ul>
-<h3 id="webSocket-readyState">webSocket.readyState</h3>
-<p>返回实例的当前状态</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable constant_">CONNECTING</span>：值为<span class="number">0</span>，表示正在连接。</span><br><span class="line"><span class="variable constant_">OPEN</span>：值为<span class="number">1</span>，表示连接成功，可以通信了。</span><br><span class="line"><span class="variable constant_">CLOSING</span>：值为<span class="number">2</span>，表示连接正在关闭。</span><br><span class="line"><span class="variable constant_">CLOSED</span>：值为<span class="number">3</span>，表示连接已经关闭，或者打开连接失败。</span><br></pre></td></tr></table></figure>
-<h3 id="webSocket-onopen">webSocket.onopen</h3>
-<p>实例对象的<code>onopen</code>属性，用于指定连接成功后的回调函数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&quot;open&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    ws.<span class="title function_">send</span>(<span class="string">&quot;Hello Server!&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="webSocket-onclose">webSocket.onclose</h3>
-<p>实例对象的<code>onclose</code>属性，用于指定连接关闭后的回调函数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&quot;close&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> code = event.<span class="property">code</span>;</span><br><span class="line">    <span class="keyword">var</span> reason = event.<span class="property">reason</span>;</span><br><span class="line">    <span class="keyword">var</span> wasClean = event.<span class="property">wasClean</span>;</span><br><span class="line">    <span class="comment">// handle close event</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="webSocket-onmessage">webSocket.onmessage</h3>
-<p>实例对象的<code>onmessage</code>属性，用于指定收到服务器数据后的回调函数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&quot;message&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> data = event.<span class="property">data</span>;</span><br><span class="line">    <span class="comment">// 处理数据</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="webSocket-send">webSocket.send()</h3>
-<p>实例对象的<code>send()</code>方法用于向服务器发送数据。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;your message&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="webSocket-onerror">webSocket.onerror</h2>
-<p>实例对象的<code>onerror</code>属性，用于指定报错时的回调函数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">socket.<span class="title function_">addEventListener</span>(<span class="string">&quot;error&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="comment">// handle error event</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h1>ws 服务器端</h1>
-<p>首先引入<code>ws</code>模块, 然后与客户端类似, 新建 socket 实例</p>
-<p>使用<code>socket.send()</code>发送数据</p>
-<p>使用 <code>socket.addEventListener(&quot;message&quot;, (&#123;data&#125;) =&gt; &#123;&#125;)</code>或<code>socket.on(&quot;messgae&quot;,()=&gt;&#123;&#125;)</code> 接收数据</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">WebSocketServer</span> &#125; <span class="keyword">from</span> <span class="string">&quot;ws&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> server = <span class="keyword">new</span> <span class="title class_">WebSocketServer</span>(&#123; <span class="attr">port</span>: <span class="number">1234</span> &#125;);</span><br><span class="line"></span><br><span class="line">server.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 向客户端发送消息</span></span><br><span class="line">    socket.<span class="title function_">send</span>(</span><br><span class="line">        <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">            <span class="attr">msg</span>: <span class="string">&quot;hello from server&quot;</span>,</span><br><span class="line">            <span class="attr">code</span>: <span class="string">&quot;200&quot;</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从客户端接收消息</span></span><br><span class="line">    socket.<span class="title function_">on</span>(<span class="string">&quot;message&quot;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">        <span class="keyword">const</span> packet = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(data);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(packet);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    socket.<span class="title function_">addEventListener</span>(<span class="string">&quot;message&quot;</span>, <span class="function">(<span class="params">&#123; data &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="获取所有连接">获取所有连接</h2>
-<p>每个 ws 连接都为一个独立的<code>socket</code>实例</p>
-<p>使用<code>server.clients</code>列出所有连接</p>
-<p>向每个连接广播消息:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">boardCast</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    dataObj.<span class="property">onlineUser</span> = ws.<span class="property">clients</span>.<span class="property">size</span>;</span><br><span class="line">    ws.<span class="property">clients</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">client</span>) =&gt;</span> &#123;</span><br><span class="line">        client.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(dataObj));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter <span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OLD_EMAIL=&quot;原邮箱地址&quot;</span></span><br><span class="line"><span class="string">CORRECT_NAME=&quot;新用户名&quot;</span></span><br><span class="line"><span class="string">CORRECT_EMAIL=&quot;新邮箱地址&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">&#x27;</span> --tag-name-filter <span class="built_in">cat</span> -- --branches --tags</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>使用 git bash 运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh rename.sh</span><br></pre></td></tr></table></figure>
+<p>强行提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --force --all</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>JavaScript</tag>
-        <tag>WebSocket</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -191,6 +157,30 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue3中 v-model封装自定义组件实现数据双向绑定</title>
+    <url>/20230114/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
+    <content><![CDATA[<p>v-model 传进来的数据为<code>modelValue</code>, 要手动触发的事件为<code>update:modelValue</code></p>
+<span id="more"></span>
+<p>父组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">test</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>子组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    请输入</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">:value</span>=<span class="string">&quot;modelValue&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      @<span class="attr">input</span>=<span class="string">&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">props</span>: [<span class="string">&quot;modelValue&quot;</span>],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TypeScript下给定时器标注类型</title>
+    <url>/20220720/TypeScript%E4%B8%8B%E7%BB%99%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">timer</span>: <span class="title class_">NodeJS</span>.<span class="property">Timeout</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;&#125;);</span><br><span class="line"><span class="built_in">clearTimeout</span>(timer);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>TypeScript</tag>
+        <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue封装一个分页器组件</title>
     <url>/20221204/Vue%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%88%86%E9%A1%B5%E5%99%A8%E7%BB%84%E4%BB%B6/</url>
     <content><![CDATA[<p>一个分页器组件最重要的四个参数(需要外界传入)</p>
@@ -251,24 +241,25 @@
       </tags>
   </entry>
   <entry>
-    <title>TypeScript下给定时器标注类型</title>
-    <url>/20220720/TypeScript%E4%B8%8B%E7%BB%99%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A0%87%E6%B3%A8%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">timer</span>: <span class="title class_">NodeJS</span>.<span class="property">Timeout</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;&#125;);</span><br><span class="line"><span class="built_in">clearTimeout</span>(timer);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>TypeScript</tag>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue3中 v-model封装自定义组件实现数据双向绑定</title>
-    <url>/20230114/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
-    <content><![CDATA[<p>v-model 传进来的数据为<code>modelValue</code>, 要手动触发的事件为<code>update:modelValue</code></p>
+    <title>vue vee-validate 表单验证</title>
+    <url>/20230106/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/</url>
+    <content><![CDATA[<p>使用步骤</p>
+<ul class="lvl-0">
+<li class="lvl-4">使用第三包提供的<code>Form</code>标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给<code>Form</code>打<code>ref</code></li>
+<li class="lvl-4">使用第三方包提供的<code>Filed</code>标签将输入框的<code>input</code>替换掉</li>
+<li class="lvl-4">如果表单需要校验，那么必须有<code>name</code>属性</li>
+<li class="lvl-4">将校验规则通过<code>rules</code>绑定到需要校验的<code>Field</code>标签上</li>
+<li class="lvl-4">当用户输入的内容未通过验证规则时，错误信息是从<code>Form</code>标签上的插槽中解构出来的</li>
+</ul>
 <span id="more"></span>
-<p>父组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">test</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
-<p>子组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    请输入</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">:value</span>=<span class="string">&quot;modelValue&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      @<span class="attr">input</span>=<span class="string">&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">props</span>: [<span class="string">&quot;modelValue&quot;</span>],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>引入组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Form</span>, <span class="title class_">Field</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vee-validate&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>模板写法</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">Form</span></span><br><span class="line">    v-slot=<span class="string">&quot;&#123; errors &#125;&quot;</span></span><br><span class="line">    ref=<span class="string">&quot;fromValidate&quot;</span></span><br><span class="line">&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;邮箱/用户名/手机号&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;phone&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;account&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span>&#123;&#123; errors.account &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;&#123; errors.password &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        @<span class="attr">click.prevent</span>=<span class="string">&quot;login&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        登<span class="symbol">&amp;nbsp;</span><span class="symbol">&amp;nbsp;</span>录</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Form</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>书写验证规则</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkAccount</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="regexp">/^[\a-zA-Z0-9_]+$/</span>;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入账号&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.<span class="title function_">test</span>(val <span class="keyword">as</span> <span class="built_in">string</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;账号不合法 请输入6-16位数字字母下划线&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkPassword</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入密码&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>进行整体验证</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; valid &#125; = <span class="keyword">await</span> fromValidate.<span class="property">value</span>?.<span class="title function_">validate</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(valid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            <span class="comment">// 如果验证通过进行下一步</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>vue</tag>
@@ -296,43 +287,61 @@
       </tags>
   </entry>
   <entry>
-    <title>vue vee-validate 表单验证</title>
-    <url>/20230106/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/</url>
-    <content><![CDATA[<p>使用步骤</p>
-<ul class="lvl-0">
-<li class="lvl-4">使用第三包提供的<code>Form</code>标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给<code>Form</code>打<code>ref</code></li>
-<li class="lvl-4">使用第三方包提供的<code>Filed</code>标签将输入框的<code>input</code>替换掉</li>
-<li class="lvl-4">如果表单需要校验，那么必须有<code>name</code>属性</li>
-<li class="lvl-4">将校验规则通过<code>rules</code>绑定到需要校验的<code>Field</code>标签上</li>
-<li class="lvl-4">当用户输入的内容未通过验证规则时，错误信息是从<code>Form</code>标签上的插槽中解构出来的</li>
-</ul>
+    <title>JavaScript使用WebSocket</title>
+    <url>/20221123/JavaScript%E4%BD%BF%E7%94%A8WebSocket/</url>
+    <content><![CDATA[<p>使用 WebSocket 可以实现点对点的全双工即时通信</p>
 <span id="more"></span>
-<p>引入组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Form</span>, <span class="title class_">Field</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vee-validate&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p>模板写法</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">Form</span></span><br><span class="line">    v-slot=<span class="string">&quot;&#123; errors &#125;&quot;</span></span><br><span class="line">    ref=<span class="string">&quot;fromValidate&quot;</span></span><br><span class="line">&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;邮箱/用户名/手机号&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;phone&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;account&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span>&#123;&#123; errors.account &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;&#123; errors.password &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        @<span class="attr">click.prevent</span>=<span class="string">&quot;login&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        登<span class="symbol">&amp;nbsp;</span><span class="symbol">&amp;nbsp;</span>录</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Form</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>书写验证规则</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkAccount</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="regexp">/^[\a-zA-Z0-9_]+$/</span>;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入账号&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.<span class="title function_">test</span>(val <span class="keyword">as</span> <span class="built_in">string</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;账号不合法 请输入6-16位数字字母下划线&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkPassword</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入密码&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>进行整体验证</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; valid &#125; = <span class="keyword">await</span> fromValidate.<span class="property">value</span>?.<span class="title function_">validate</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(valid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            <span class="comment">// 如果验证通过进行下一步</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1>ws 客户端的基本使用</h1>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;wss://echo.websocket.org&quot;</span>);</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onopen</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Connection open ...&quot;</span>);</span><br><span class="line">    ws.<span class="title function_">send</span>(<span class="string">&quot;Hello WebSockets!&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Received Message: &quot;</span> + evt.<span class="property">data</span>);</span><br><span class="line">    ws.<span class="title function_">close</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onclose</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Connection closed.&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="新建实例">新建实例</h2>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8080&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>注意:</p>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p>不能 catch 住 websocket 的超时 error 的</p>
+</li>
+</ul>
+<h3 id="webSocket-readyState">webSocket.readyState</h3>
+<p>返回实例的当前状态</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable constant_">CONNECTING</span>：值为<span class="number">0</span>，表示正在连接。</span><br><span class="line"><span class="variable constant_">OPEN</span>：值为<span class="number">1</span>，表示连接成功，可以通信了。</span><br><span class="line"><span class="variable constant_">CLOSING</span>：值为<span class="number">2</span>，表示连接正在关闭。</span><br><span class="line"><span class="variable constant_">CLOSED</span>：值为<span class="number">3</span>，表示连接已经关闭，或者打开连接失败。</span><br></pre></td></tr></table></figure>
+<h3 id="webSocket-onopen">webSocket.onopen</h3>
+<p>实例对象的<code>onopen</code>属性，用于指定连接成功后的回调函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&quot;open&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    ws.<span class="title function_">send</span>(<span class="string">&quot;Hello Server!&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="webSocket-onclose">webSocket.onclose</h3>
+<p>实例对象的<code>onclose</code>属性，用于指定连接关闭后的回调函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&quot;close&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> code = event.<span class="property">code</span>;</span><br><span class="line">    <span class="keyword">var</span> reason = event.<span class="property">reason</span>;</span><br><span class="line">    <span class="keyword">var</span> wasClean = event.<span class="property">wasClean</span>;</span><br><span class="line">    <span class="comment">// handle close event</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="webSocket-onmessage">webSocket.onmessage</h3>
+<p>实例对象的<code>onmessage</code>属性，用于指定收到服务器数据后的回调函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&quot;message&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> data = event.<span class="property">data</span>;</span><br><span class="line">    <span class="comment">// 处理数据</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="webSocket-send">webSocket.send()</h3>
+<p>实例对象的<code>send()</code>方法用于向服务器发送数据。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ws.<span class="title function_">send</span>(<span class="string">&quot;your message&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="webSocket-onerror">webSocket.onerror</h2>
+<p>实例对象的<code>onerror</code>属性，用于指定报错时的回调函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">socket.<span class="title function_">addEventListener</span>(<span class="string">&quot;error&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">    <span class="comment">// handle error event</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1>ws 服务器端</h1>
+<p>首先引入<code>ws</code>模块, 然后与客户端类似, 新建 socket 实例</p>
+<p>使用<code>socket.send()</code>发送数据</p>
+<p>使用 <code>socket.addEventListener(&quot;message&quot;, (&#123;data&#125;) =&gt; &#123;&#125;)</code>或<code>socket.on(&quot;messgae&quot;,()=&gt;&#123;&#125;)</code> 接收数据</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">WebSocketServer</span> &#125; <span class="keyword">from</span> <span class="string">&quot;ws&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> server = <span class="keyword">new</span> <span class="title class_">WebSocketServer</span>(&#123; <span class="attr">port</span>: <span class="number">1234</span> &#125;);</span><br><span class="line"></span><br><span class="line">server.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 向客户端发送消息</span></span><br><span class="line">    socket.<span class="title function_">send</span>(</span><br><span class="line">        <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">            <span class="attr">msg</span>: <span class="string">&quot;hello from server&quot;</span>,</span><br><span class="line">            <span class="attr">code</span>: <span class="string">&quot;200&quot;</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从客户端接收消息</span></span><br><span class="line">    socket.<span class="title function_">on</span>(<span class="string">&quot;message&quot;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">        <span class="keyword">const</span> packet = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(data);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(packet);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    socket.<span class="title function_">addEventListener</span>(<span class="string">&quot;message&quot;</span>, <span class="function">(<span class="params">&#123; data &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="获取所有连接">获取所有连接</h2>
+<p>每个 ws 连接都为一个独立的<code>socket</code>实例</p>
+<p>使用<code>server.clients</code>列出所有连接</p>
+<p>向每个连接广播消息:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">boardCast</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    dataObj.<span class="property">onlineUser</span> = ws.<span class="property">clients</span>.<span class="property">size</span>;</span><br><span class="line">    ws.<span class="property">clients</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">client</span>) =&gt;</span> &#123;</span><br><span class="line">        client.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(dataObj));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>vue</tag>
+        <tag>JavaScript</tag>
+        <tag>WebSocket</tag>
       </tags>
   </entry>
   <entry>
-    <title>Git批量修改已提交的邮箱信息</title>
-    <url>/20220511/Git%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%8F%90%E4%BA%A4%E7%9A%84%E9%82%AE%E7%AE%B1%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<p>新建 <code>rename.sh</code> 内容如下</p>
-<span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter <span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OLD_EMAIL=&quot;原邮箱地址&quot;</span></span><br><span class="line"><span class="string">CORRECT_NAME=&quot;新用户名&quot;</span></span><br><span class="line"><span class="string">CORRECT_EMAIL=&quot;新邮箱地址&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">&#x27;</span> --tag-name-filter <span class="built_in">cat</span> -- --branches --tags</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>使用 git bash 运行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh rename.sh</span><br></pre></td></tr></table></figure>
-<p>强行提交</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push origin --force --all</span><br></pre></td></tr></table></figure>
+    <title>JavaScript获取剪贴板文件</title>
+    <url>/20230113/JavaScript%E8%8E%B7%E5%8F%96%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;button&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;paste&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">clipboardData</span>.<span class="property">files</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
-        <tag>git</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -406,15 +415,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript获取剪贴板文件</title>
-    <url>/20230113/JavaScript%E8%8E%B7%E5%8F%96%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;button&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;paste&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">clipboardData</span>.<span class="property">files</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>为 Vue 项目开启 PWA</title>
     <url>/20230220/%E4%B8%BA-Vue-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%90%AF-PWA/</url>
     <content><![CDATA[<img src="/20230220/%E4%B8%BA-Vue-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%90%AF-PWA/pwa%E6%95%88%E6%9E%9C.png" class="" title="pwa效果">
@@ -482,30 +482,6 @@
       </tags>
   </entry>
   <entry>
-    <title>利用pandoc合并markdown及转换为docx</title>
-    <url>/20230120/%E5%88%A9%E7%94%A8pandoc%E5%90%88%E5%B9%B6markdown%E5%8F%8A%E8%BD%AC%E6%8D%A2%E4%B8%BAdocx/</url>
-    <content><![CDATA[<p>最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器</p>
-<span id="more"></span>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>批量合并 markdown<br>
-小 tips: 如果需要大批量文件, 可以在资源管理器中全选, 然后拖到终端窗口中, 自动填充路径及文件名</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pandoc -s file1.md file2.md -o AllJavaScript.md</span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>markdown 转 doc</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pandoc -o output.docx -f markdown -t docx .\AllInOne.md</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>小工具</tag>
-        <tag>pandoc</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>TS+ESM项目导入自定义模块不加扩展名就报错的问题</title>
     <url>/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。</p>
@@ -564,6 +540,32 @@
       </tags>
   </entry>
   <entry>
+    <title>ts-node调试ESM项目提示[ERR_UNKNOWN_FILE_EXTENSION]</title>
+    <url>/20230307/ts-node%E8%B0%83%E8%AF%95ESM%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<p>如果直接使用 ts-node 运行开启了 ESM 的项目, 会提示未知扩展名</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="variable constant_">PS</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend&gt; ts-node .\src\index.<span class="property">ts</span></span><br><span class="line"><span class="title class_">TypeError</span> [<span class="variable constant_">ERR_UNKNOWN_FILE_EXTENSION</span>]: <span class="title class_">Unknown</span> file extension <span class="string">&quot;.ts&quot;</span> <span class="keyword">for</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend\src\index.<span class="property">ts</span></span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">NodeError</span> (<span class="attr">node</span>:internal/<span class="attr">errors</span>:<span class="number">399</span>:<span class="number">5</span>)</span><br><span class="line">    at <span class="title class_">Object</span>.<span class="property">getFileProtocolModuleFormat</span> [<span class="keyword">as</span> <span class="attr">file</span>:] (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">79</span>:<span class="number">11</span>)</span><br><span class="line">    at defaultGetFormat (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">121</span>:<span class="number">38</span>)</span><br><span class="line">    at defaultLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">load</span>:<span class="number">81</span>:<span class="number">20</span>)</span><br><span class="line">    at nextLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">163</span>:<span class="number">28</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">load</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">605</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">moduleProvider</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">457</span>:<span class="number">22</span>)</span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">ModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">module_job</span>:<span class="number">64</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.#createModuleJob (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">480</span>:<span class="number">17</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">getModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">434</span>:<span class="number">34</span>) &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="string">&#x27;ERR_UNKNOWN_FILE_EXTENSION&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决方法: 将运行命令改为</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">ts-node --esm .\src\index.<span class="property">ts</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>typeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过nginx反代openai api</title>
+    <url>/20230306/%E9%80%9A%E8%BF%87nginx%E5%8F%8D%E4%BB%A3openai-api/</url>
+    <content><![CDATA[<p>最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…</p>
+<span id="more"></span>
+<p>那么解决方案也很简单, 首先你需要一台安装了 nginx 境外服务器, 然后配置如下即可使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 8443 ssl;</span><br><span class="line">	server_name openai.example.com;</span><br><span class="line">	ssl_certificate /etc/nginx/ssl/cuijunyu.pem;</span><br><span class="line">	ssl_certificate_key /etc/nginx/ssl/cuijunyu.key;</span><br><span class="line">        ssl_protocols TLSv1.2 TLSv1.3;</span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass https://api.openai.com/;</span><br><span class="line">		proxy_set_header Host api.openai.com;</span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>请求 api 的时候, 你只需要把 URL 换成 <a href="http://openai.example.com">openai.example.com</a> 就可以了</p>
+]]></content>
+      <tags>
+        <tag>nginx</tag>
+        <tag>openai</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>通过Acme.sh + CloudFlare Dns认证申请泛域名证书</title>
     <url>/20230120/%E9%80%9A%E8%BF%87Acme-sh-CloudFlare-Dns%E8%AE%A4%E8%AF%81%E7%94%B3%E8%AF%B7%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/</url>
     <content><![CDATA[<p>使用 <a href="http://acme.sh">acme.sh</a> 这个神器, 可以快速的申请泛域名证书, 省去繁琐的手动申请的步骤</p>
@@ -599,32 +601,6 @@
 ]]></content>
       <tags>
         <tag>CloudFlare</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ts-node调试ESM项目提示[ERR_UNKNOWN_FILE_EXTENSION]</title>
-    <url>/20230307/ts-node%E8%B0%83%E8%AF%95ESM%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<p>如果直接使用 ts-node 运行开启了 ESM 的项目, 会提示未知扩展名</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="variable constant_">PS</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend&gt; ts-node .\src\index.<span class="property">ts</span></span><br><span class="line"><span class="title class_">TypeError</span> [<span class="variable constant_">ERR_UNKNOWN_FILE_EXTENSION</span>]: <span class="title class_">Unknown</span> file extension <span class="string">&quot;.ts&quot;</span> <span class="keyword">for</span> <span class="attr">C</span>:\学习\前端\<span class="title class_">VoiceGPT</span>\voiceGPT-backend\src\index.<span class="property">ts</span></span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">NodeError</span> (<span class="attr">node</span>:internal/<span class="attr">errors</span>:<span class="number">399</span>:<span class="number">5</span>)</span><br><span class="line">    at <span class="title class_">Object</span>.<span class="property">getFileProtocolModuleFormat</span> [<span class="keyword">as</span> <span class="attr">file</span>:] (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">79</span>:<span class="number">11</span>)</span><br><span class="line">    at defaultGetFormat (<span class="attr">node</span>:internal/modules/esm/<span class="attr">get_format</span>:<span class="number">121</span>:<span class="number">38</span>)</span><br><span class="line">    at defaultLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">load</span>:<span class="number">81</span>:<span class="number">20</span>)</span><br><span class="line">    at nextLoad (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">163</span>:<span class="number">28</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">load</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">605</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">moduleProvider</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">457</span>:<span class="number">22</span>)</span><br><span class="line">    at <span class="keyword">new</span> <span class="title class_">ModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">module_job</span>:<span class="number">64</span>:<span class="number">26</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.#createModuleJob (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">480</span>:<span class="number">17</span>)</span><br><span class="line">    at <span class="title class_">ESMLoader</span>.<span class="property">getModuleJob</span> (<span class="attr">node</span>:internal/modules/esm/<span class="attr">loader</span>:<span class="number">434</span>:<span class="number">34</span>) &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="string">&#x27;ERR_UNKNOWN_FILE_EXTENSION&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解决方法: 将运行命令改为</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">ts-node --esm .\src\index.<span class="property">ts</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>typeScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过nginx反代openai api</title>
-    <url>/20230306/%E9%80%9A%E8%BF%87nginx%E5%8F%8D%E4%BB%A3openai-api/</url>
-    <content><![CDATA[<p>最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…</p>
-<span id="more"></span>
-<p>那么解决方案也很简单, 首先你需要一台安装了 nginx 境外服务器, 然后配置如下即可使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 8443 ssl;</span><br><span class="line">	server_name openai.example.com;</span><br><span class="line">	ssl_certificate /etc/nginx/ssl/cuijunyu.pem;</span><br><span class="line">	ssl_certificate_key /etc/nginx/ssl/cuijunyu.key;</span><br><span class="line">        ssl_protocols TLSv1.2 TLSv1.3;</span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass https://api.openai.com/;</span><br><span class="line">		proxy_set_header Host api.openai.com;</span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>请求 api 的时候, 你只需要把 URL 换成 <a href="http://openai.example.com">openai.example.com</a> 就可以了</p>
-]]></content>
-      <tags>
-        <tag>nginx</tag>
-        <tag>openai</tag>
       </tags>
   </entry>
   <entry>
@@ -683,53 +659,6 @@
 ]]></content>
       <tags>
         <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭配tesseract-ocr在Snipaste中支持ocr[需高级版]</title>
-    <url>/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/</url>
-    <content><![CDATA[<p>Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr</p>
-<p>在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 <code>tesseract-ocr</code> 实现 ocr 功能, 而且体验很好</p>
-<img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif" class="" title="演示ocr效果">
-<h4 id="此种方案速度略慢而且需要安装第三方软件-如不想安装请使用请参考下面文章">此种方案速度略慢而且需要安装第三方软件, 如不想安装请使用请参考下面文章</h4>
-<p>()[]</p>
-<h1>配置过程</h1>
-<ol>
-<li class="lvl-4">
-<p>前往 <a href="https://digi.bib.uni-mannheim.de/tesseract/">https://digi.bib.uni-mannheim.de/tesseract/</a> 下载安装最新版<code>​ tesseract-ocr</code>,</p>
-<ol>
-<li class="lvl-7">安装过程中, 选择中文识别包 <img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png" class="" title="安装"></li>
-</ol>
-</li>
-<li class="lvl-4">
-<p>安装完成之后, 可以使用如下命令进行本地 ocr:</p>
-<p>1.<code> tesseract &lt;需 ocr 的图像&gt; &lt;输出文件位置, 注意不需要写扩展名&gt; -c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim</code></p>
-<p>其中<code>-c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim</code> 为识别参数, <code>preserve_interword_spaces=1</code>可以去掉多余的空格, <code>-l eng+chi_sim</code> 是指定识别语言</p>
-</li>
-<li class="lvl-4">
-<p>打开 Snipaste 的首选项-控制, 点击添加新命令</p>
-<ol>
-<li class="lvl-7">
-<img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png" class="" title="配置1">
-</li>
-<li class="lvl-7">
-<img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png" class="" title="配置2">
-</li>
-</ol>
-</li>
-<li class="lvl-4">
-<p>名称随意填写, 命令填写如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">snip -o &quot;D:\Temp\source.png&quot;;exec(cmd /c &quot;C:\Program Files\Tesseract-OCR\tesseract.exe&quot;  &quot;D:\Temp\source.png&quot; &quot;D:\Temp\ocrRes&quot; -c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim &amp;&amp;  notepad &quot;D:\Temp\ocrRes.txt&quot;);</span><br></pre></td></tr></table></figure>
-<p>这段命令的含义是首先调用 Snipaste 截图并存放于<code>D:\Temp\source.png</code>, 然后执行 cmd 命令, 调用<code>tesseract</code>进行 ocr 识别, 并将识别结果用记事本打开 其中, **<code>C:\Program Files\Tesseract-OCR\tesseract.exe</code>**为你的<code>tesseract</code>安装路径, <code>D:\Temp\ocrRes</code>为 ocr 结果的文件路径, 注意只需要写文件名, 不需要拓展名, 文件名和路径请根据自己需要修改</p>
-</li>
-<li class="lvl-4">
-<p>随后指定一个快捷键即可愉快的 OCR 啦 !! 😋😋😋😋😋</p>
-</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>ocr</tag>
-        <tag>snipaste</tag>
       </tags>
   </entry>
   <entry>
@@ -857,6 +786,77 @@
 ]]></content>
       <tags>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用pandoc合并markdown及转换为docx</title>
+    <url>/20230120/%E5%88%A9%E7%94%A8pandoc%E5%90%88%E5%B9%B6markdown%E5%8F%8A%E8%BD%AC%E6%8D%A2%E4%B8%BAdocx/</url>
+    <content><![CDATA[<p>最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器</p>
+<span id="more"></span>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p>批量合并 markdown<br>
+小 tips: 如果需要大批量文件, 可以在资源管理器中全选, 然后拖到终端窗口中, 自动填充路径及文件名</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pandoc -s file1.md file2.md -o AllJavaScript.md</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p>markdown 转 doc</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pandoc -o output.docx -f markdown -t docx .\AllInOne.md</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>小工具</tag>
+        <tag>pandoc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭配tesseract-ocr在Snipaste中支持ocr[需高级版]</title>
+    <url>/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/</url>
+    <content><![CDATA[<p>Snipaste 是一款非常好用的截图软件, 但是却缺少了一个非常重要的功能–ocr</p>
+<p>在作者帮助下, 我成功的让 Snipaste 支持了 ocr 功能, 此功能需要高级版的 [自定义命令] 功能搭配 <code>tesseract-ocr</code> 实现 ocr 功能, 而且体验很好</p>
+<img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E6%BC%94%E7%A4%BAocr%E6%95%88%E6%9E%9C.gif" class="" title="演示ocr效果">
+<h3 id="此方案速度略慢而且需要安装第三方软件-如不想安装请参考下面文章">此方案速度略慢而且需要安装第三方软件, 如不想安装请参考下面文章</h3>
+<p>(使用 win10 自带本地 ocr 让 Snipaste 实现快速识别文字 [需高级版])[<a href="https://cuijunyu.win/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">https://cuijunyu.win/20230421/使用win10自带本地ocr-api让Snipaste支持ocr-需高级版/</a>]</p>
+<h1>配置过程</h1>
+<ol>
+<li class="lvl-4">
+<p>前往 <a href="https://digi.bib.uni-mannheim.de/tesseract/">https://digi.bib.uni-mannheim.de/tesseract/</a> 下载安装最新版<code>​ tesseract-ocr</code>,</p>
+<ol>
+<li class="lvl-7">安装过程中, 选择中文识别包 <img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E5%AE%89%E8%A3%85.png" class="" title="安装"></li>
+</ol>
+</li>
+<li class="lvl-4">
+<p>安装完成之后, 可以使用如下命令进行本地 ocr:</p>
+<p>1.<code> tesseract &lt;需 ocr 的图像&gt; &lt;输出文件位置, 注意不需要写扩展名&gt; -c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim</code></p>
+<p>其中<code>-c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim</code> 为识别参数, <code>preserve_interword_spaces=1</code>可以去掉多余的空格, <code>-l eng+chi_sim</code> 是指定识别语言</p>
+</li>
+<li class="lvl-4">
+<p>打开 Snipaste 的首选项-控制, 点击添加新命令</p>
+<ol>
+<li class="lvl-7">
+<img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE1.png" class="" title="配置1">
+</li>
+<li class="lvl-7">
+<img src="/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/%E9%85%8D%E7%BD%AE2.png" class="" title="配置2">
+</li>
+</ol>
+</li>
+<li class="lvl-4">
+<p>名称随意填写, 命令填写如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">snip -o &quot;D:\Temp\source.png&quot;;exec(cmd /c &quot;C:\Program Files\Tesseract-OCR\tesseract.exe&quot;  &quot;D:\Temp\source.png&quot; &quot;D:\Temp\ocrRes&quot; -c preserve_interword_spaces=1 --oem 1 --psm 1 -l eng+chi_sim &amp;&amp;  notepad &quot;D:\Temp\ocrRes.txt&quot;);</span><br></pre></td></tr></table></figure>
+<p>这段命令的含义是首先调用 Snipaste 截图并存放于<code>D:\Temp\source.png</code>, 然后执行 cmd 命令, 调用<code>tesseract</code>进行 ocr 识别, 并将识别结果用记事本打开 其中, **<code>C:\Program Files\Tesseract-OCR\tesseract.exe</code>**为你的<code>tesseract</code>安装路径, <code>D:\Temp\ocrRes</code>为 ocr 结果的文件路径, 注意只需要写文件名, 不需要拓展名, 文件名和路径请根据自己需要修改</p>
+</li>
+<li class="lvl-4">
+<p>随后指定一个快捷键即可愉快的 OCR 啦 !! 😋😋😋😋😋</p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>ocr</tag>
+        <tag>snipaste</tag>
       </tags>
   </entry>
   <entry>
@@ -999,12 +999,13 @@
   <entry>
     <title>使用win10自带本地ocr让Snipaste实现快速识别文字 [需高级版]</title>
     <url>/20230421/%E4%BD%BF%E7%94%A8win10%E8%87%AA%E5%B8%A6%E6%9C%AC%E5%9C%B0ocr-api%E8%AE%A9Snipaste%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/</url>
-    <content><![CDATA[<p>这是上篇文章<a href="https://cuijunyu.win/20230310/%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">搭配 tesseract-ocr 在 Snipaste 中支持 ocr[需高级版]</a>的第二种解决方案</p>
+    <content><![CDATA[<p>这是上篇文章<a href="https://cuijunyu.win/20230310/%E6%90%AD%E9%85%8Dtesseract-ocr%E5%9C%A8Snipaste%E4%B8%AD%E6%94%AF%E6%8C%81ocr-%E9%9C%80%E9%AB%98%E7%BA%A7%E7%89%88/">搭配 tesseract-ocr 在 Snipaste 中支持 ocr[需高级版]</a>的第二种解决方案</p>
 <p>上一篇文章介绍了使用 tesseract-ocr 实现的方法, 他的识别速度略慢, 而且需要安装第三方软件, 这里介绍一种使用 windows 自带的 ocr 实现的方法, 而且速度 非! 常! 快!</p>
 <blockquote>
 <p>windows.media.ocr 是 Windows 10 操作系统提供的 OCR（光学字符识别）引擎。它使用图像处理算法来识别文本和数字，可用于将印刷或手写文本转换为可编辑的电子文件。该 API 支持多种语言和字体类型，并能够在不同分辨率的图像上工作。在开发应用程序时，开发人员可使用 windows.media.ocr 实现自动识别文本信息的功能。</p>
 </blockquote>
-<p>由于使用到了自定义命令, 因此同样需要高级版这种方法只支持 win10 以上系统, 速度飞快. 俺基于<a href="https://github.com/zh-h/Windows.Media.Ocr.Cli">Windows.Media.Ocr.Cli</a>二次开发了一个命令行 ocr 程序, <a href="/download/Windows.Media.Ocr.Cli.exe">直接下载</a> github 地址: <a href="https://github.com/cuicui-V5/Windows.Media.Ocr.Cli">link</a></p>
+<p>由于使用到了自定义命令, 因此同样需要高级版</p>
+<p>这种方法只支持 win10 以上系统, 速度飞快. 俺基于<a href="https://github.com/zh-h/Windows.Media.Ocr.Cli">Windows.Media.Ocr.Cli</a>二次开发了一个命令行 ocr 程序, <a href="/download/Windows.Media.Ocr.Cli.exe">直接下载</a> github 地址: <a href="https://github.com/cuicui-V5/Windows.Media.Ocr.Cli">link</a></p>
 <h2 id="食用方法">食用方法</h2>
 <ol>
 <li class="lvl-3">
