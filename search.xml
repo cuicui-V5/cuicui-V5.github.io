@@ -1276,4 +1276,54 @@
         <tag>vue-router</tag>
       </tags>
   </entry>
+  <entry>
+    <title>JavaScript Iterator 与 Generator</title>
+    <url>/20230427/JavaScript-Iterator-%E4%B8%8E-Generator/</url>
+    <content><![CDATA[<h1>Iterator 迭代器</h1>
+<p>为各种数据结构提供一个统一的迭代方法, Iterator 迭代器主要使用 for…of 迭代</p>
+<p>ES6 规定，默认的 Iterator 接口部署在数据结构的 Symbol…iterator 属性，或者说，一个数据结构只要具有 Symbol.iterator()属性，就可以认为是&quot;可遍历的”(iterable)。Symbol…iterator 属性本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器。</p>
+<p>原生默认具备 Iterator 接口的数据结构如下。</p>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p>Array</p>
+</li>
+<li class="lvl-4">
+<p>Set</p>
+</li>
+<li class="lvl-4">
+<p>Map</p>
+</li>
+<li class="lvl-4">
+<p>String</p>
+</li>
+<li class="lvl-4">
+<p>arguments 对象</p>
+</li>
+<li class="lvl-4">
+<p>NodeList 对象</p>
+</li>
+</ul>
+<p>如果一个对象具有<code>[Symbol.Iterator]</code> 方法, 那么我们可以说它实现了迭代器, 是一个可迭代对象</p>
+<p>迭代器需要返回一个函数, 此函数的返回值包含一个 next 函数, next 函数返回值有两个属性, 分别为 value 和 done</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;tim&quot;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="attr">habits</span>: [<span class="string">&quot;sing&quot;</span>, <span class="string">&quot;jump&quot;</span>, <span class="string">&quot;rap&quot;</span>, <span class="string">&quot;basketball&quot;</span>],</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">next</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">habits</span>[index++],</span><br><span class="line">                    <span class="attr">done</span>: index &gt;= <span class="variable language_">this</span>.<span class="property">habits</span>.<span class="property">length</span> + <span class="number">1</span>,</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// const iter = obj[Symbol.iterator]();</span></span><br><span class="line"><span class="comment">// console.log(iter.next());</span></span><br><span class="line"><span class="comment">// console.log(iter.next());</span></span><br><span class="line"><span class="comment">// console.log(iter.next());</span></span><br><span class="line"><span class="comment">// console.log(iter.next());</span></span><br><span class="line"><span class="comment">// console.log(iter.next());</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现了<code>[Symbol.Iterator]</code> 方法的对象就可以使用<code>for...of</code>循环了</p>
+<h2 id="Generator-生成器函数">Generator 生成器函数</h2>
+<p>Generator 函数是 ES6 提供的一种异步编程解决方案<br>
+Generator 函数是一个状态机，封装了多个内部状态。执行 Generator 函数会返回一个迭代器对象，也就是说，Generator 函数除了状态机，还是一个迭代器对象生成函数。返回的迭代器对象，可以依次遍历 Generator 函数内部的每一个状态。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">gen</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> res1 = <span class="keyword">yield</span> <span class="string">&quot;你好&quot;</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res1);</span><br><span class="line">    <span class="keyword">const</span> res2 = <span class="keyword">yield</span> <span class="string">&quot;世界&quot;</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res2);</span><br><span class="line">    <span class="keyword">const</span> res3 = <span class="keyword">yield</span> <span class="string">&quot;!&quot;</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = <span class="title function_">gen</span>();</span><br><span class="line"><span class="comment">// for (const i of g) &#123;</span></span><br><span class="line"><span class="comment">//     console.log(i);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(g.<span class="title function_">next</span>(<span class="number">1</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(g.<span class="title function_">next</span>(<span class="number">2</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(g.<span class="title function_">next</span>(<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+<p><code>yield</code> 表达式的作用是暂停生成器函数的执行，并在该位置上将控制权交回给调用方，等到再次调用该生成器对象的 <code>next()</code> 方法时继续执行。</p>
+<p><mark>!!!</mark> <code>yield</code> 表达式返回值取决于下一个 <code>next()</code> 方法中传入的参数。</p>
+<p>在执行 <code>g.next(1)</code> 时，生成器函数会一直执行到第一个 <code>yield</code> 表达式处，然后暂停，将&quot;你好&quot;返回给调用者，并在等待下一次 <code>next()</code> 方法的执行。由于第一个 <code>yield</code> 表达式的返回值并不需要接收外部传递进来的任何值，因此 <code>res1</code> 变量就没有被赋值，也就是被忽略了。</p>
+<h2 id="配合-promise-实现异步操作">配合 promise 实现异步操作</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">pro</span> = num =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(num * <span class="number">10</span>);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">function</span>* <span class="title function_">gen</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;gen执行了&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> res1 = <span class="keyword">yield</span> <span class="title function_">pro</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res1);</span><br><span class="line">    <span class="keyword">const</span> res2 = <span class="keyword">yield</span> <span class="title function_">pro</span>(res1);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res2);</span><br><span class="line">    <span class="keyword">const</span> res3 = <span class="keyword">yield</span> <span class="title function_">pro</span>(res2);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = <span class="title function_">gen</span>();</span><br><span class="line"></span><br><span class="line">g.<span class="title function_">next</span>().<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">    g.<span class="title function_">next</span>(res).<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">        g.<span class="title function_">next</span>(res).<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">            g.<span class="title function_">next</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>async/await 只是这种操作的语法糖</p>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
 </search>
