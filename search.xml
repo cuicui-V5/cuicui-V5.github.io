@@ -96,23 +96,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue3中 v-model封装自定义组件实现数据双向绑定</title>
-    <url>/20230114/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
-    <content><![CDATA[<p>v-model 传进来的数据为<code>modelValue</code>, 要手动触发的事件为<code>update:modelValue</code></p>
-<span id="more"></span>
-<p>父组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">test</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
-<p>子组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    请输入</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">:value</span>=<span class="string">&quot;modelValue&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      @<span class="attr">input</span>=<span class="string">&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">props</span>: [<span class="string">&quot;modelValue&quot;</span>],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript数组总结</title>
     <url>/20221205/JavaScript%E6%95%B0%E7%BB%84%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>js 中的数组拥有众多方法, 在这里我加以总结便于复习</p>
@@ -248,6 +231,75 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue3中 v-model封装自定义组件实现数据双向绑定</title>
+    <url>/20230114/Vue3%E4%B8%AD-v-model%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/</url>
+    <content><![CDATA[<p>v-model 传进来的数据为<code>modelValue</code>, 要手动触发的事件为<code>update:modelValue</code></p>
+<span id="more"></span>
+<p>父组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">test</span> <span class="attr">v-model</span>=<span class="string">&quot;msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">test</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>子组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    请输入</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">:value</span>=<span class="string">&quot;modelValue&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      @<span class="attr">input</span>=<span class="string">&quot;$emit(&#x27;update:modelValue&#x27;, $event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">props</span>: [<span class="string">&quot;modelValue&quot;</span>],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue vee-validate 表单验证</title>
+    <url>/20230106/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/</url>
+    <content><![CDATA[<p>使用步骤</p>
+<ul class="lvl-0">
+<li class="lvl-4">使用第三包提供的<code>Form</code>标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给<code>Form</code>打<code>ref</code></li>
+<li class="lvl-4">使用第三方包提供的<code>Filed</code>标签将输入框的<code>input</code>替换掉</li>
+<li class="lvl-4">如果表单需要校验，那么必须有<code>name</code>属性</li>
+<li class="lvl-4">将校验规则通过<code>rules</code>绑定到需要校验的<code>Field</code>标签上</li>
+<li class="lvl-4">当用户输入的内容未通过验证规则时，错误信息是从<code>Form</code>标签上的插槽中解构出来的</li>
+</ul>
+<span id="more"></span>
+<p>引入组件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Form</span>, <span class="title class_">Field</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vee-validate&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>模板写法</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">Form</span></span><br><span class="line">    v-slot=<span class="string">&quot;&#123; errors &#125;&quot;</span></span><br><span class="line">    ref=<span class="string">&quot;fromValidate&quot;</span></span><br><span class="line">&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;邮箱/用户名/手机号&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;phone&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;account&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span>&#123;&#123; errors.account &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;&#123; errors.password &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        @<span class="attr">click.prevent</span>=<span class="string">&quot;login&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        登<span class="symbol">&amp;nbsp;</span><span class="symbol">&amp;nbsp;</span>录</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Form</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>书写验证规则</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkAccount</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="regexp">/^[\a-zA-Z0-9_]+$/</span>;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入账号&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.<span class="title function_">test</span>(val <span class="keyword">as</span> <span class="built_in">string</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;账号不合法 请输入6-16位数字字母下划线&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkPassword</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入密码&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>进行整体验证</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; valid &#125; = <span class="keyword">await</span> fromValidate.<span class="property">value</span>?.<span class="title function_">validate</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(valid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            <span class="comment">// 如果验证通过进行下一步</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习-栈</title>
+    <url>/20221214/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%A0%88/</url>
+    <content><![CDATA[<p>栈结构遵循以下规则</p>
+<ul class="lvl-0">
+<li class="lvl-4">数据从栈顶 (又称为栈尾) 进入</li>
+<li class="lvl-4">从栈顶退出</li>
+<li class="lvl-4">遵循后进先出的 LIFO 原则</li>
+</ul>
+<p>一个栈应该有以下方法: push pop peek isEmpty size clear toString<br /></p>
+<span id="more"></span>
+<h2 id="封装一个栈">封装一个栈</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个栈应该有以下方法: push pop peek isEmpty size clear toString</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">stack</span>: <span class="built_in">unknown</span>[] = [];</span><br><span class="line"></span><br><span class="line">    <span class="title function_">push</span>(<span class="params">data: <span class="built_in">unknown</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">push</span>(data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pop</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回栈顶元素</span></span><br><span class="line">    <span class="title function_">peek</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>[<span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span> = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">debugger</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="应用-进制转换">应用: 进制转换</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Stack</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./stack&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 进制转换 利用辗转相除法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params">DecNumber: <span class="built_in">number</span>, base: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> remStack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line">    <span class="keyword">const</span> baseString = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title class_">DecNumber</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        remStack.<span class="title function_">push</span>(<span class="title class_">DecNumber</span> % base);</span><br><span class="line">        <span class="title class_">DecNumber</span> = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">DecNumber</span> / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!remStack.<span class="title function_">isEmpty</span>()) &#123;</span><br><span class="line">        res += baseString[remStack.<span class="title function_">pop</span>() <span class="keyword">as</span> <span class="built_in">number</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">convert</span>(<span class="number">1234</span>, <span class="number">16</span>));</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue封装一个分页器组件</title>
     <url>/20221204/Vue%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%88%86%E9%A1%B5%E5%99%A8%E7%BB%84%E4%BB%B6/</url>
     <content><![CDATA[<p>一个分页器组件最重要的四个参数(需要外界传入)</p>
@@ -311,84 +363,6 @@
       </tags>
   </entry>
   <entry>
-    <title>vue vee-validate 表单验证</title>
-    <url>/20230106/vue-vee-validate-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81/</url>
-    <content><![CDATA[<p>使用步骤</p>
-<ul class="lvl-0">
-<li class="lvl-4">使用第三包提供的<code>Form</code>标签将表单整个区域包裹起来, 如果要进行整体验证, 需要给<code>Form</code>打<code>ref</code></li>
-<li class="lvl-4">使用第三方包提供的<code>Filed</code>标签将输入框的<code>input</code>替换掉</li>
-<li class="lvl-4">如果表单需要校验，那么必须有<code>name</code>属性</li>
-<li class="lvl-4">将校验规则通过<code>rules</code>绑定到需要校验的<code>Field</code>标签上</li>
-<li class="lvl-4">当用户输入的内容未通过验证规则时，错误信息是从<code>Form</code>标签上的插槽中解构出来的</li>
-</ul>
-<span id="more"></span>
-<p>引入组件</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Form</span>, <span class="title class_">Field</span> &#125; <span class="keyword">from</span> <span class="string">&quot;vee-validate&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p>模板写法</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">Form</span></span><br><span class="line">    v-slot=<span class="string">&quot;&#123; errors &#125;&quot;</span></span><br><span class="line">    ref=<span class="string">&quot;fromValidate&quot;</span></span><br><span class="line">&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;邮箱/用户名/手机号&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;phone&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;account&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkAccount&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span>&#123;&#123; errors.account &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-text clearFix&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Field</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">type</span>=<span class="string">&quot;text&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">name</span>=<span class="string">&quot;password&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">:rules</span>=<span class="string">&quot;checkPassword&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;color: red&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;&#123; errors.password &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        @<span class="attr">click.prevent</span>=<span class="string">&quot;login&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    &gt;</span></span></span><br><span class="line"><span class="language-xml">        登<span class="symbol">&amp;nbsp;</span><span class="symbol">&amp;nbsp;</span>录</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">Form</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>书写验证规则</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义验证规则</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkAccount</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> reg = <span class="regexp">/^[\a-zA-Z0-9_]+$/</span>;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入账号&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.<span class="title function_">test</span>(val <span class="keyword">as</span> <span class="built_in">string</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;账号不合法 请输入6-16位数字字母下划线&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkPassword</span> = (<span class="params">val: <span class="built_in">unknown</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;请输入密码&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>进行整体验证</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; valid &#125; = <span class="keyword">await</span> fromValidate.<span class="property">value</span>?.<span class="title function_">validate</span>();</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(valid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            <span class="comment">// 如果验证通过进行下一步</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据结构学习-栈</title>
-    <url>/20221214/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E6%A0%88/</url>
-    <content><![CDATA[<p>栈结构遵循以下规则</p>
-<ul class="lvl-0">
-<li class="lvl-4">数据从栈顶 (又称为栈尾) 进入</li>
-<li class="lvl-4">从栈顶退出</li>
-<li class="lvl-4">遵循后进先出的 LIFO 原则</li>
-</ul>
-<p>一个栈应该有以下方法: push pop peek isEmpty size clear toString<br /></p>
-<span id="more"></span>
-<h2 id="封装一个栈">封装一个栈</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个栈应该有以下方法: push pop peek isEmpty size clear toString</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">stack</span>: <span class="built_in">unknown</span>[] = [];</span><br><span class="line"></span><br><span class="line">    <span class="title function_">push</span>(<span class="params">data: <span class="built_in">unknown</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">push</span>(data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">pop</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回栈顶元素</span></span><br><span class="line">    <span class="title function_">peek</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>[<span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span> === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">stack</span> = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">stack</span>.<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">debugger</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="应用-进制转换">应用: 进制转换</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Stack</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./stack&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 进制转换 利用辗转相除法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params">DecNumber: <span class="built_in">number</span>, base: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> remStack = <span class="keyword">new</span> <span class="title class_">Stack</span>();</span><br><span class="line">    <span class="keyword">const</span> baseString = <span class="string">&quot;0123456789ABCDEF&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="title class_">DecNumber</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        remStack.<span class="title function_">push</span>(<span class="title class_">DecNumber</span> % base);</span><br><span class="line">        <span class="title class_">DecNumber</span> = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">DecNumber</span> / base);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!remStack.<span class="title function_">isEmpty</span>()) &#123;</span><br><span class="line">        res += baseString[remStack.<span class="title function_">pop</span>() <span class="keyword">as</span> <span class="built_in">number</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">convert</span>(<span class="number">1234</span>, <span class="number">16</span>));</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>纯CSS实现全屏滚动效果</title>
-    <url>/20230213/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%8F%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/</url>
-    <content><![CDATA[<p>实现全屏滚动可以不依赖 JS, 只使用纯 CSS 实现, 不过只有较新版本的浏览器支持这一特性</p>
-<p>主要使用了以下 CSS 属性</p>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p><code>scroll-snap-type: y mandatory;</code> 给父元素设置, 设置贴合类型</p>
-</li>
-<li class="lvl-4">
-<p><code>scroll-snap-align: start;</code> 给子元素设置, 设置贴合点</p>
-</li>
-</ul>
-<span id="more"></span>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;main&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/main&gt;</span><br></pre></td></tr></table></figure>
-<p>容器布局</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="selector-tag">main</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">        <span class="attribute">overflow</span>: scroll;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">main</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">border</span>: black <span class="number">2px</span> solid;</span><br><span class="line">        <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<p>样式设置</p>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript实现图片压缩</title>
     <url>/20230203/JavaScript%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/</url>
     <content><![CDATA[<h1>图片等比缩小的方法</h1>
@@ -424,15 +398,21 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript获取剪贴板文件</title>
-    <url>/20230113/JavaScript%E8%8E%B7%E5%8F%96%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;button&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;paste&quot;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">clipboardData</span>.<span class="property">files</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+    <title>Chrome 单独清除某个网页的缓存</title>
+    <url>/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/</url>
+    <content><![CDATA[<img src="/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/%E6%B8%85%E9%99%A4%E7%BD%91%E9%A1%B5%E7%BC%93%E5%AD%98.png" class="" title="清除网页缓存">
+<ol>
+<li class="lvl-3">打开该网页</li>
+<li class="lvl-3">打开开发者工具</li>
+<li class="lvl-3">长按刷新按钮</li>
+<li class="lvl-3">选择 清空缓存并硬性重新加载</li>
+</ol>
 ]]></content>
       <categories>
-        <category>Web前端</category>
+        <category>软件技巧</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>Chrome</tag>
       </tags>
   </entry>
   <entry>
@@ -506,21 +486,15 @@
       </tags>
   </entry>
   <entry>
-    <title>Chrome 单独清除某个网页的缓存</title>
-    <url>/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/</url>
-    <content><![CDATA[<img src="/20230216/Chrome-%E5%8D%95%E7%8B%AC%E6%B8%85%E9%99%A4%E6%9F%90%E4%B8%AA%E7%BD%91%E9%A1%B5%E7%9A%84%E7%BC%93%E5%AD%98/%E6%B8%85%E9%99%A4%E7%BD%91%E9%A1%B5%E7%BC%93%E5%AD%98.png" class="" title="清除网页缓存">
-<ol>
-<li class="lvl-3">打开该网页</li>
-<li class="lvl-3">打开开发者工具</li>
-<li class="lvl-3">长按刷新按钮</li>
-<li class="lvl-3">选择 清空缓存并硬性重新加载</li>
-</ol>
+    <title>JavaScript获取剪贴板文件</title>
+    <url>/20230113/JavaScript%E8%8E%B7%E5%8F%96%E5%89%AA%E8%B4%B4%E6%9D%BF%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;button&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;paste&quot;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">clipboardData</span>.<span class="property">files</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>软件技巧</category>
+        <category>Web前端</category>
       </categories>
       <tags>
-        <tag>Chrome</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -548,6 +522,40 @@
       <tags>
         <tag>小工具</tag>
         <tag>pandoc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TS+ESM项目导入自定义模块不加扩展名就报错的问题</title>
+    <url>/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。</p>
+<p>一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有扩展名。然而，TSC 编译出来的项目中导入模块是不带扩展名的，所以 Node.js 会报错。</p>
+<p>于是，我想当然地写了 <code>import router from &quot;./router.ts&quot;;</code>，认为 TypeScript 会自动处理扩展名。然而，并不是这样的。</p>
+<p>TypeScript 直接不允许导入 <code>.ts</code> 后缀的文件，要求启用 <code>allowImportingTsExtensions</code>。但是加了这个选项之后，出现了更多的错误：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">error <span class="title class_">TS2691</span>: <span class="title class_">An</span> <span class="keyword">import</span> path cannot end <span class="keyword">with</span> a <span class="string">&#x27;.ts&#x27;</span> extension. <span class="title class_">Consider</span> importing <span class="string">&#x27;./router.js&#x27;</span> instead.</span><br><span class="line">error <span class="title class_">TS2835</span>: <span class="title class_">Relative</span> <span class="keyword">import</span> paths need explicit file extensions <span class="keyword">in</span> <span class="title class_">EcmaScript</span> imports when <span class="string">&#x27;--moduleResolution&#x27;</span> is <span class="string">&#x27;node16&#x27;</span> or <span class="string">&#x27;nodenext&#x27;</span>. <span class="title class_">Did</span> you mean <span class="string">&#x27;./event.js&#x27;</span>?</span><br></pre></td></tr></table></figure>
+<p>关于这个问题，在 GitHub 上有相关的讨论：<a href="https://github.com/microsoft/TypeScript/issues/16577">https://github.com/microsoft/TypeScript/issues/16577</a></p>
+<h1>解决方案</h1>
+<ol>
+<li class="lvl-3">
+<p>在 <code>tsconfig.json</code> 中将 <code>moduleResolution</code> 设置为 <code>nodenext</code>。设置之后，VS Code 导入模块时会自动加上 <code>.js</code> 后缀。</p>
+</li>
+<li class="lvl-3">
+<p>使用 <code>import router from &quot;./router.js&quot;;</code>，注意这里扩展名为 <code>.js</code>。</p>
+</li>
+</ol>
+<p>实际上，上面的报错也说明了问题：“An import path cannot end with a ‘.ts’ extension. Consider importing ‘./router.js’ instead.”（导入路径不能以 <code>.ts</code> 结尾，考虑导入 ‘./router.js’）</p>
+<p>非常坑啊有没有，明明是 TypeScript，为什么要导入 JavaScript 呢？</p>
+<p>ChatGPT 给出了解释：</p>
+<blockquote>
+<p>您在 TypeScript 中导入模块时，使用的是相对路径或绝对路径来引用另一个文件。这与 JavaScript 中的导入语句类似。</p>
+<p>当 TypeScript 编译器将 TypeScript 代码转换为 JavaScript 代码时，它会自动将 <code>.ts</code> 扩展名更改为 <code>.js</code> 扩展名，并生成一个新的 JavaScript 文件，其中包含编译后的 JavaScript 代码。</p>
+<p>因此，即使您在 TypeScript 代码中导入的是 <code>.ts</code> 文件，最终在运行时实际上会加载并执行 <code>.js</code> 文件，因此需要在导入语句中指定 <code>.js</code> 扩展名。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>typeScript</tag>
       </tags>
   </entry>
   <entry>
@@ -592,57 +600,6 @@
       </tags>
   </entry>
   <entry>
-    <title>TS+ESM项目导入自定义模块不加扩展名就报错的问题</title>
-    <url>/20230306/TS+ESM%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E4%B8%8D%E5%8A%A0%E6%8B%93%E5%B1%95%E5%90%8D%E5%B0%B1%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>折腾了两个小时，我基本弄明白了如何在 TypeScript 中使用自定义的 ESM 模块。</p>
-<p>一开始以为直接导入文件名就行，不需要扩展名。但是，这样使用 TSC 编译出来之后运行报错，因为 ESM 规范要求导入自定义模块必须带有扩展名。然而，TSC 编译出来的项目中导入模块是不带扩展名的，所以 Node.js 会报错。</p>
-<p>于是，我想当然地写了 <code>import router from &quot;./router.ts&quot;;</code>，认为 TypeScript 会自动处理扩展名。然而，并不是这样的。</p>
-<p>TypeScript 直接不允许导入 <code>.ts</code> 后缀的文件，要求启用 <code>allowImportingTsExtensions</code>。但是加了这个选项之后，出现了更多的错误：</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">error <span class="title class_">TS2691</span>: <span class="title class_">An</span> <span class="keyword">import</span> path cannot end <span class="keyword">with</span> a <span class="string">&#x27;.ts&#x27;</span> extension. <span class="title class_">Consider</span> importing <span class="string">&#x27;./router.js&#x27;</span> instead.</span><br><span class="line">error <span class="title class_">TS2835</span>: <span class="title class_">Relative</span> <span class="keyword">import</span> paths need explicit file extensions <span class="keyword">in</span> <span class="title class_">EcmaScript</span> imports when <span class="string">&#x27;--moduleResolution&#x27;</span> is <span class="string">&#x27;node16&#x27;</span> or <span class="string">&#x27;nodenext&#x27;</span>. <span class="title class_">Did</span> you mean <span class="string">&#x27;./event.js&#x27;</span>?</span><br></pre></td></tr></table></figure>
-<p>关于这个问题，在 GitHub 上有相关的讨论：<a href="https://github.com/microsoft/TypeScript/issues/16577">https://github.com/microsoft/TypeScript/issues/16577</a></p>
-<h1>解决方案</h1>
-<ol>
-<li class="lvl-3">
-<p>在 <code>tsconfig.json</code> 中将 <code>moduleResolution</code> 设置为 <code>nodenext</code>。设置之后，VS Code 导入模块时会自动加上 <code>.js</code> 后缀。</p>
-</li>
-<li class="lvl-3">
-<p>使用 <code>import router from &quot;./router.js&quot;;</code>，注意这里扩展名为 <code>.js</code>。</p>
-</li>
-</ol>
-<p>实际上，上面的报错也说明了问题：“An import path cannot end with a ‘.ts’ extension. Consider importing ‘./router.js’ instead.”（导入路径不能以 <code>.ts</code> 结尾，考虑导入 ‘./router.js’）</p>
-<p>非常坑啊有没有，明明是 TypeScript，为什么要导入 JavaScript 呢？</p>
-<p>ChatGPT 给出了解释：</p>
-<blockquote>
-<p>您在 TypeScript 中导入模块时，使用的是相对路径或绝对路径来引用另一个文件。这与 JavaScript 中的导入语句类似。</p>
-<p>当 TypeScript 编译器将 TypeScript 代码转换为 JavaScript 代码时，它会自动将 <code>.ts</code> 扩展名更改为 <code>.js</code> 扩展名，并生成一个新的 JavaScript 文件，其中包含编译后的 JavaScript 代码。</p>
-<p>因此，即使您在 TypeScript 代码中导入的是 <code>.ts</code> 文件，最终在运行时实际上会加载并执行 <code>.js</code> 文件，因此需要在导入语句中指定 <code>.js</code> 扩展名。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>typeScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过nginx反代openai api</title>
-    <url>/20230306/%E9%80%9A%E8%BF%87nginx%E5%8F%8D%E4%BB%A3openai-api/</url>
-    <content><![CDATA[<p>最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…</p>
-<span id="more"></span>
-<p>那么解决方案也很简单, 首先你需要一台安装了 nginx 境外服务器, 然后配置如下即可使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 8443 ssl;</span><br><span class="line">	server_name openai.example.com;</span><br><span class="line">	ssl_certificate /etc/nginx/ssl/cuijunyu.pem;</span><br><span class="line">	ssl_certificate_key /etc/nginx/ssl/cuijunyu.key;</span><br><span class="line">        ssl_protocols TLSv1.2 TLSv1.3;</span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass https://api.openai.com/;</span><br><span class="line">		proxy_set_header Host api.openai.com;</span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>请求 api 的时候, 你只需要把 URL 换成 <a href="http://openai.example.com">openai.example.com</a> 就可以了</p>
-]]></content>
-      <categories>
-        <category>技术分享</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-        <tag>openai</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据结构学习-队列</title>
     <url>/20230306/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%98%9F%E5%88%97/</url>
     <content><![CDATA[<h1>队列是什么</h1>
@@ -670,6 +627,23 @@
       <tags>
         <tag>数据结构</tag>
         <tag>javaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过nginx反代openai api</title>
+    <url>/20230306/%E9%80%9A%E8%BF%87nginx%E5%8F%8D%E4%BB%A3openai-api/</url>
+    <content><![CDATA[<p>最近 openai 发布了 chatGPT 同款的 GPT-3.5 trubo API, 并且价格十分低廉, 正当大家跃跃欲试的时候却发现 GFW 却已经先我们一步了…</p>
+<span id="more"></span>
+<p>那么解决方案也很简单, 首先你需要一台安装了 nginx 境外服务器, 然后配置如下即可使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 8443 ssl;</span><br><span class="line">	server_name openai.example.com;</span><br><span class="line">	ssl_certificate /etc/nginx/ssl/cuijunyu.pem;</span><br><span class="line">	ssl_certificate_key /etc/nginx/ssl/cuijunyu.key;</span><br><span class="line">        ssl_protocols TLSv1.2 TLSv1.3;</span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass https://api.openai.com/;</span><br><span class="line">		proxy_set_header Host api.openai.com;</span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>请求 api 的时候, 你只需要把 URL 换成 <a href="http://openai.example.com">openai.example.com</a> 就可以了</p>
+]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>openai</tag>
       </tags>
   </entry>
   <entry>
@@ -825,136 +799,6 @@
       <tags>
         <tag>ocr</tag>
         <tag>snipaste</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据结构学习-集合与字典</title>
-    <url>/20230312/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/</url>
-    <content><![CDATA[<h1>集合</h1>
-<p>Set 是一种数据结构，用于存储唯一值的集合。它类似于数组，但不允许重复元素。</p>
-<h2 id="代码实现">代码实现</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">mySet</span> &#123;</span><br><span class="line">    item = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">key</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="title function_">has</span>(element)) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">item</span>[element] = element;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">delete</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">has</span>(element)) &#123;</span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">this</span>.<span class="property">item</span>[element];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">has</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> element <span class="keyword">in</span> <span class="variable language_">this</span>.<span class="property">item</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">item</span> = &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>.<span class="property">item</span>).<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">values</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="variable language_">this</span>.<span class="property">item</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="ES6-的-Set-结构">ES6 的 Set 结构</h2>
-<ol>
-<li class="lvl-3">
-<p>创建一个新的 Set 对象：可以通过以下任意一种方式创建一个 Set 对象：</p>
- <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>(); <span class="comment">// 空集合</span></span><br><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 包含了元素 1，2 和 3 的集合</span></span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>添加元素到集合中：可以使用 add()方法向集合中添加元素：</p>
- <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">1</span>);</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">2</span>);</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>删除集合中的元素：可以使用 delete()方法删除集合中的元素：</p>
- <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="title function_">delete</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>检查集合中是否存在某个元素：可以使用 has()方法来检查集合中是否存在某个元素：</p>
- <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="title function_">has</span>(<span class="number">2</span>); <span class="comment">// 返回 true</span></span><br><span class="line">set.<span class="title function_">has</span>(<span class="number">4</span>); <span class="comment">// 返回 false</span></span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>获取集合的大小：可以使用 size 属性获取集合中元素的数量：</p>
- <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="property">size</span>; <span class="comment">// 返回 3</span></span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>迭代集合中的元素：可以使用 for…of 循环或者 forEach()方法来迭代 Set 中的所有元素：</p>
- <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> set) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">set.<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="利用-set-取并集-交集-差集">利用 set 取并集, 交集, 差集</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 取交集并集差集</span></span><br><span class="line"><span class="keyword">const</span> setA = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"><span class="keyword">const</span> setB = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 并集</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA, ...setB]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交集</span></span><br><span class="line"><span class="keyword">const</span> d = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA].<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> setB.<span class="title function_">has</span>(item)));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 差集</span></span><br><span class="line"><span class="comment">// 给定两个集合A和B，它们的差集是指包含所有属于集合A但不属于集合B的元素所构成的集合</span></span><br><span class="line"><span class="comment">// setA的差集</span></span><br><span class="line"><span class="keyword">const</span> e = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA].<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> !setB.<span class="title function_">has</span>(item)));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br></pre></td></tr></table></figure>
-<h1>字典</h1>
-<p>字典和集合很类似, 集合以(值, 值)的形式存储数据, 字典则以(键, 值)</p>
-<p>的形式存储数据, 字典也成为映射, 符号表, 或关联数组</p>
-<p>ES6 中的 <code>Set</code> 和 <code>Map</code> 都是集合（collection）类型，但它们有一些区别：</p>
-<ol>
-<li class="lvl-3">
-<p><code>Set ​</code> 是一组有序且唯一的值的集合，而 <code>Map ​</code> 是一组键值对(key-value)的集合。</p>
-</li>
-<li class="lvl-3">
-<p>在 <code>Set ​</code> 中，每个元素只出现一次，可以用来去重；在 <code>Map ​</code> 中，每个键(<code>key</code>)只能对应一个值(<code>value</code>)，但同一个值可以被多个键所对应。</p>
-</li>
-<li class="lvl-3">
-<p><code>Set ​</code> 采用类似数组的方式来访问其成员，而 Map 则采用键来访问其成员。</p>
-</li>
-<li class="lvl-3">
-<p><code>Set ​</code> 的主要方法包括 <code>add</code>、<code>delete</code>、<code>has</code>、<code>clear ​</code> 等，而 <code>Map ​</code> 的主要方法包括 <code>set</code>、<code>get</code>、<code>has</code>、<code>delete</code>、<code>clear ​</code> 等。</p>
-</li>
-</ol>
-<p>因此，如果需要存储一组唯一的值或进行去重操作，可以使用 <code>Set</code>；如果需要存储键值对，并且需要通过键来访问其对应的值，则可以使用 <code>Map</code>。</p>
-<h2 id="代码实现-2">代码实现</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dictionary</span> &#123;</span><br><span class="line">    table = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">k</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="title function_">toStr</span>(<span class="params">item: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="string">&quot;undefined&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">&quot;string&quot;</span> || item <span class="keyword">instanceof</span> <span class="title class_">String</span>)</span><br><span class="line">            <span class="keyword">return</span> item <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">set</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key !== <span class="literal">null</span> &amp;&amp; value !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)] = <span class="keyword">new</span> <span class="title function_">keyPair</span>(key, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)]?.<span class="property">value</span>;</span><br><span class="line">        <span class="keyword">if</span> (value) &#123;</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">hasKey</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)] != <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">keys</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">keyValues</span>().<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">key</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">values</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">keyValues</span>().<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">keyValues</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="variable language_">this</span>.<span class="property">table</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="variable language_">this</span>.<span class="property">table</span>).<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">size</span>() === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">table</span> = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">foreach</span>(<span class="params">cb: <span class="built_in">Function</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> pair = <span class="variable language_">this</span>.<span class="title function_">keyValues</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="title function_">size</span>(); i++) &#123;</span><br><span class="line">            <span class="title function_">cb</span>(pair[i].<span class="property">key</span>, pair[i].<span class="property">value</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">keyPair</span> &#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="built_in">any</span>;</span><br><span class="line">    <span class="attr">value</span>: <span class="built_in">any</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">key</span> = key;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dir = <span class="keyword">new</span> <span class="title class_">Dictionary</span>();</span><br></pre></td></tr></table></figure>
-<h1>hashMap 散列表</h1>
-<p>散列表将 key 通过一个散列函数转化为固定长度, 解决了字典结构如果 key 过长会造成查找时间过长的问题</p>
-<h2 id="散列表的代码实现">散列表的代码实现</h2>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; keyPair &#125; <span class="keyword">from</span> <span class="string">&quot;./map&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">hashMap</span> &#123;</span><br><span class="line">    table = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">k</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="title function_">toStr</span>(<span class="params">item: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="string">&quot;undefined&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">&quot;string&quot;</span> || item <span class="keyword">instanceof</span> <span class="title class_">String</span>)</span><br><span class="line">            <span class="keyword">return</span> item <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">hashCode</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="comment">// 将对象转换为字符串, 然后将字符串的ascii码值相加, 最后取余</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> key === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> key;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> tableKey = <span class="variable language_">this</span>.<span class="title function_">toStr</span>(key);</span><br><span class="line">        <span class="keyword">let</span> hash = <span class="number">5381</span>;</span><br><span class="line">        [...tableKey].<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            hash = hash * <span class="number">33</span> + item.<span class="title function_">charCodeAt</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> hash % <span class="number">1013</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key &amp;&amp; value) &#123;</span><br><span class="line">            <span class="keyword">const</span> position = <span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">table</span>[position] = <span class="keyword">new</span> <span class="title function_">keyPair</span>(key, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key)];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">remove</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> hash = <span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">table</span>[hash]) &#123;</span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">this</span>.<span class="property">table</span>[hash];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1>ES6 的 Map</h1>
-<p>ES6 中的 Map 结构可以用来存储键值对，其使用方法如下：</p>
-<ol>
-<li class="lvl-3">
-<p>创建一个空的 Map 对象</p>
-</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myMap = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li class="lvl-3">
-<p>添加键值对到 Map 中</p>
-</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">myMap.<span class="title function_">set</span>(key, value);</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li class="lvl-3">
-<p>从 Map 中获取某个键对应的值</p>
-</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> value = myMap.<span class="title function_">get</span>(key);</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li class="lvl-3">
-<p>检查 Map 中是否存在指定的键</p>
-</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> hasKey = myMap.<span class="title function_">has</span>(key);</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li class="lvl-3">
-<p>获取 Map 中所有的键或值</p>
-</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> keys = myMap.<span class="title function_">keys</span>();</span><br><span class="line"><span class="keyword">const</span> values = myMap.<span class="title function_">values</span>();</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li class="lvl-3">
-<p>获取 Map 中键值对的数量</p>
-</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> size = myMap.<span class="property">size</span>;</span><br></pre></td></tr></table></figure>
-<ol start="7">
-<li class="lvl-3">
-<p>遍历 Map 中的所有键值对</p>
-</li>
-</ol>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">myMap.<span class="title function_">forEach</span>(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理每个键值对</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>需要注意的是，Map 中的键可以是任何类型的值，而不仅限于字符串和数字。此外，Map 也提供了其他一些有用的方法，比如删除特定键的值，清空 Map 等。</p>
-<h1>WeakMap 和 WeakSet</h1>
-<p>WeakMap 和 WeakSet 是 ES6 中新增的两种集合类型，它们都具有以下特点：</p>
-<ol>
-<li class="lvl-3">
-<p>只能存储对象作为键，不能使用原始值类型（如字符串、数字等）作为键。</p>
-</li>
-<li class="lvl-3">
-<p>对于存储在集合中的对象，当没有其他对象引用它们时，它们会被自动回收。</p>
-</li>
-</ol>
-<p>其中，WeakMap 是一种以弱引用方式存储键值对的类似 Map 的数据结构。与 Map 不同的是，WeakMap 中的键只能是对象，而且这些对象都是弱引用的。也就是说，当某个对象作为 WeakMap 的键时，如果没有其他对象引用该键所对应的对象，则这个键值对会被自动从 WeakMap 中删除，以释放其占用的内存。</p>
-<p>以下是一个使用 WeakMap 的示例：</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myWeakMap = <span class="keyword">new</span> <span class="title class_">WeakMap</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> key = &#123;&#125;; <span class="comment">// 创建一个新对象</span></span><br><span class="line"></span><br><span class="line">myWeakMap.<span class="title function_">set</span>(key, <span class="string">&quot;value&quot;</span>); <span class="comment">// 将这个对象作为键存储到 WeakMap 中</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myWeakMap.<span class="title function_">get</span>(key)); <span class="comment">// 输出 &quot;value&quot;</span></span><br><span class="line"></span><br><span class="line">key = <span class="literal">null</span>; <span class="comment">// 将原来的键对象置为 null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于没有任何其他对象引用这个键所对应的值，因此这个键值对会被自动删除</span></span><br></pre></td></tr></table></figure>
-<p>另一方面，WeakSet 是一种以弱引用方式存储对象的类似 Set 的数据结构。与 Set 不同的是，WeakSet 中的元素只能是对象，而且这些对象都是弱引用的。也就是说，当某个对象作为 WeakSet 的元素时，如果没有其他对象引用该元素，则这个元素会被自动从 WeakSet 中删除，以释放其占用的内存。</p>
-<p>以下是一个使用 WeakSet 的示例：</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myWeakSet = <span class="keyword">new</span> <span class="title class_">WeakSet</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123;&#125;; <span class="comment">// 创建两个新对象</span></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">myWeakSet.<span class="title function_">add</span>(obj1); <span class="comment">// 将这两个对象添加到 WeakSet 中</span></span><br><span class="line">myWeakSet.<span class="title function_">add</span>(obj2);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myWeakSet.<span class="title function_">has</span>(obj1)); <span class="comment">// 输出 true</span></span><br><span class="line"></span><br><span class="line">obj1 = <span class="literal">null</span>; <span class="comment">// 将 obj1 置为 null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于没有任何其他对象引用 obj1，因此它会被自动从 WeakSet 中删除</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -1332,6 +1176,162 @@ Generator 函数是一个状态机，封装了多个内部状态。执行 Genera
       <tags>
         <tag>JavaScript</tag>
         <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构学习-集合与字典</title>
+    <url>/20230312/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0-%E9%9B%86%E5%90%88%E4%B8%8E%E5%AD%97%E5%85%B8/</url>
+    <content><![CDATA[<h1>集合</h1>
+<p>Set 是一种数据结构，用于存储唯一值的集合。它类似于数组，但不允许重复元素。</p>
+<h2 id="代码实现">代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">mySet</span> &#123;</span><br><span class="line">    item = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">key</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">add</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="title function_">has</span>(element)) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">item</span>[element] = element;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">delete</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">has</span>(element)) &#123;</span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">this</span>.<span class="property">item</span>[element];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">has</span>(<span class="params">element: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> element <span class="keyword">in</span> <span class="variable language_">this</span>.<span class="property">item</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">item</span> = &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>.<span class="property">item</span>).<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">values</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="variable language_">this</span>.<span class="property">item</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ES6-的-Set-结构">ES6 的 Set 结构</h2>
+<ol>
+<li class="lvl-3">
+<p>创建一个新的 Set 对象：可以通过以下任意一种方式创建一个 Set 对象：</p>
+ <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>(); <span class="comment">// 空集合</span></span><br><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// 包含了元素 1，2 和 3 的集合</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>添加元素到集合中：可以使用 add()方法向集合中添加元素：</p>
+ <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">1</span>);</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">2</span>);</span><br><span class="line">set.<span class="title function_">add</span>(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>删除集合中的元素：可以使用 delete()方法删除集合中的元素：</p>
+ <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="title function_">delete</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>检查集合中是否存在某个元素：可以使用 has()方法来检查集合中是否存在某个元素：</p>
+ <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="title function_">has</span>(<span class="number">2</span>); <span class="comment">// 返回 true</span></span><br><span class="line">set.<span class="title function_">has</span>(<span class="number">4</span>); <span class="comment">// 返回 false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>获取集合的大小：可以使用 size 属性获取集合中元素的数量：</p>
+ <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line">set.<span class="property">size</span>; <span class="comment">// 返回 3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>迭代集合中的元素：可以使用 for…of 循环或者 forEach()方法来迭代 Set 中的所有元素：</p>
+ <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> set) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">set.<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="利用-set-取并集-交集-差集">利用 set 取并集, 交集, 差集</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 取交集并集差集</span></span><br><span class="line"><span class="keyword">const</span> setA = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"><span class="keyword">const</span> setB = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 并集</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA, ...setB]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交集</span></span><br><span class="line"><span class="keyword">const</span> d = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA].<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> setB.<span class="title function_">has</span>(item)));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 差集</span></span><br><span class="line"><span class="comment">// 给定两个集合A和B，它们的差集是指包含所有属于集合A但不属于集合B的元素所构成的集合</span></span><br><span class="line"><span class="comment">// setA的差集</span></span><br><span class="line"><span class="keyword">const</span> e = <span class="keyword">new</span> <span class="title class_">Set</span>([...setA].<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> !setB.<span class="title function_">has</span>(item)));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br></pre></td></tr></table></figure>
+<h1>字典</h1>
+<p>字典和集合很类似, 集合以(值, 值)的形式存储数据, 字典则以(键, 值)</p>
+<p>的形式存储数据, 字典也成为映射, 符号表, 或关联数组</p>
+<p>ES6 中的 <code>Set</code> 和 <code>Map</code> 都是集合（collection）类型，但它们有一些区别：</p>
+<ol>
+<li class="lvl-3">
+<p><code>Set ​</code> 是一组有序且唯一的值的集合，而 <code>Map ​</code> 是一组键值对(key-value)的集合。</p>
+</li>
+<li class="lvl-3">
+<p>在 <code>Set ​</code> 中，每个元素只出现一次，可以用来去重；在 <code>Map ​</code> 中，每个键(<code>key</code>)只能对应一个值(<code>value</code>)，但同一个值可以被多个键所对应。</p>
+</li>
+<li class="lvl-3">
+<p><code>Set ​</code> 采用类似数组的方式来访问其成员，而 Map 则采用键来访问其成员。</p>
+</li>
+<li class="lvl-3">
+<p><code>Set ​</code> 的主要方法包括 <code>add</code>、<code>delete</code>、<code>has</code>、<code>clear ​</code> 等，而 <code>Map ​</code> 的主要方法包括 <code>set</code>、<code>get</code>、<code>has</code>、<code>delete</code>、<code>clear ​</code> 等。</p>
+</li>
+</ol>
+<p>因此，如果需要存储一组唯一的值或进行去重操作，可以使用 <code>Set</code>；如果需要存储键值对，并且需要通过键来访问其对应的值，则可以使用 <code>Map</code>。</p>
+<h2 id="代码实现-2">代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dictionary</span> &#123;</span><br><span class="line">    table = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">k</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="title function_">toStr</span>(<span class="params">item: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="string">&quot;undefined&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">&quot;string&quot;</span> || item <span class="keyword">instanceof</span> <span class="title class_">String</span>)</span><br><span class="line">            <span class="keyword">return</span> item <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">set</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key !== <span class="literal">null</span> &amp;&amp; value !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)] = <span class="keyword">new</span> <span class="title function_">keyPair</span>(key, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)]?.<span class="property">value</span>;</span><br><span class="line">        <span class="keyword">if</span> (value) &#123;</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">hasKey</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">toStr</span>(key)] != <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">keys</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">keyValues</span>().<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">key</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">values</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">keyValues</span>().<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">keyValues</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">values</span>(<span class="variable language_">this</span>.<span class="property">table</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">size</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="variable language_">this</span>.<span class="property">table</span>).<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">isEmpty</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">size</span>() === <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">clear</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">table</span> = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">foreach</span>(<span class="params">cb: <span class="built_in">Function</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> pair = <span class="variable language_">this</span>.<span class="title function_">keyValues</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="title function_">size</span>(); i++) &#123;</span><br><span class="line">            <span class="title function_">cb</span>(pair[i].<span class="property">key</span>, pair[i].<span class="property">value</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">keyPair</span> &#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="built_in">any</span>;</span><br><span class="line">    <span class="attr">value</span>: <span class="built_in">any</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">key</span> = key;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dir = <span class="keyword">new</span> <span class="title class_">Dictionary</span>();</span><br></pre></td></tr></table></figure>
+<h1>hashMap 散列表</h1>
+<p>散列表将 key 通过一个散列函数转化为固定长度, 解决了字典结构如果 key 过长会造成查找时间过长的问题</p>
+<h2 id="散列表的代码实现">散列表的代码实现</h2>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; keyPair &#125; <span class="keyword">from</span> <span class="string">&quot;./map&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">hashMap</span> &#123;</span><br><span class="line">    table = &#123;&#125; <span class="keyword">as</span> &#123;</span><br><span class="line">        [<span class="attr">k</span>: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="title function_">toStr</span>(<span class="params">item: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (item === <span class="literal">undefined</span>) <span class="keyword">return</span> <span class="string">&quot;undefined&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item === <span class="string">&quot;string&quot;</span> || item <span class="keyword">instanceof</span> <span class="title class_">String</span>)</span><br><span class="line">            <span class="keyword">return</span> item <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">hashCode</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="comment">// 将对象转换为字符串, 然后将字符串的ascii码值相加, 最后取余</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> key === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> key;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> tableKey = <span class="variable language_">this</span>.<span class="title function_">toStr</span>(key);</span><br><span class="line">        <span class="keyword">let</span> hash = <span class="number">5381</span>;</span><br><span class="line">        [...tableKey].<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            hash = hash * <span class="number">33</span> + item.<span class="title function_">charCodeAt</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> hash % <span class="number">1013</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">key: <span class="built_in">any</span>, value: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key &amp;&amp; value) &#123;</span><br><span class="line">            <span class="keyword">const</span> position = <span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">table</span>[position] = <span class="keyword">new</span> <span class="title function_">keyPair</span>(key, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">table</span>[<span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key)];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">remove</span>(<span class="params">key: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> hash = <span class="variable language_">this</span>.<span class="title function_">hashCode</span>(key);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">table</span>[hash]) &#123;</span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">this</span>.<span class="property">table</span>[hash];</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>ES6 的 Map</h1>
+<p>ES6 中的 Map 结构可以用来存储键值对，其使用方法如下：</p>
+<ol>
+<li class="lvl-3">
+<p>创建一个空的 Map 对象</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myMap = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>添加键值对到 Map 中</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">myMap.<span class="title function_">set</span>(key, value);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li class="lvl-3">
+<p>从 Map 中获取某个键对应的值</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> value = myMap.<span class="title function_">get</span>(key);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li class="lvl-3">
+<p>检查 Map 中是否存在指定的键</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> hasKey = myMap.<span class="title function_">has</span>(key);</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li class="lvl-3">
+<p>获取 Map 中所有的键或值</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> keys = myMap.<span class="title function_">keys</span>();</span><br><span class="line"><span class="keyword">const</span> values = myMap.<span class="title function_">values</span>();</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li class="lvl-3">
+<p>获取 Map 中键值对的数量</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> size = myMap.<span class="property">size</span>;</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li class="lvl-3">
+<p>遍历 Map 中的所有键值对</p>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">myMap.<span class="title function_">forEach</span>(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理每个键值对</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，Map 中的键可以是任何类型的值，而不仅限于字符串和数字。此外，Map 也提供了其他一些有用的方法，比如删除特定键的值，清空 Map 等。</p>
+<h1>WeakMap 和 WeakSet</h1>
+<p>WeakMap 和 WeakSet 是 ES6 中新增的两种集合类型，它们都具有以下特点：</p>
+<ol>
+<li class="lvl-3">
+<p>只能存储对象作为键，不能使用原始值类型（如字符串、数字等）作为键。</p>
+</li>
+<li class="lvl-3">
+<p>对于存储在集合中的对象，当没有其他对象引用它们时，它们会被自动回收。</p>
+</li>
+</ol>
+<p>其中，WeakMap 是一种以弱引用方式存储键值对的类似 Map 的数据结构。与 Map 不同的是，WeakMap 中的键只能是对象，而且这些对象都是弱引用的。也就是说，当某个对象作为 WeakMap 的键时，如果没有其他对象引用该键所对应的对象，则这个键值对会被自动从 WeakMap 中删除，以释放其占用的内存。</p>
+<p>以下是一个使用 WeakMap 的示例：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myWeakMap = <span class="keyword">new</span> <span class="title class_">WeakMap</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> key = &#123;&#125;; <span class="comment">// 创建一个新对象</span></span><br><span class="line"></span><br><span class="line">myWeakMap.<span class="title function_">set</span>(key, <span class="string">&quot;value&quot;</span>); <span class="comment">// 将这个对象作为键存储到 WeakMap 中</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myWeakMap.<span class="title function_">get</span>(key)); <span class="comment">// 输出 &quot;value&quot;</span></span><br><span class="line"></span><br><span class="line">key = <span class="literal">null</span>; <span class="comment">// 将原来的键对象置为 null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于没有任何其他对象引用这个键所对应的值，因此这个键值对会被自动删除</span></span><br></pre></td></tr></table></figure>
+<p>另一方面，WeakSet 是一种以弱引用方式存储对象的类似 Set 的数据结构。与 Set 不同的是，WeakSet 中的元素只能是对象，而且这些对象都是弱引用的。也就是说，当某个对象作为 WeakSet 的元素时，如果没有其他对象引用该元素，则这个元素会被自动从 WeakSet 中删除，以释放其占用的内存。</p>
+<p>以下是一个使用 WeakSet 的示例：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myWeakSet = <span class="keyword">new</span> <span class="title class_">WeakSet</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123;&#125;; <span class="comment">// 创建两个新对象</span></span><br><span class="line"><span class="keyword">const</span> obj2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">myWeakSet.<span class="title function_">add</span>(obj1); <span class="comment">// 将这两个对象添加到 WeakSet 中</span></span><br><span class="line">myWeakSet.<span class="title function_">add</span>(obj2);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myWeakSet.<span class="title function_">has</span>(obj1)); <span class="comment">// 输出 true</span></span><br><span class="line"></span><br><span class="line">obj1 = <span class="literal">null</span>; <span class="comment">// 将 obj1 置为 null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于没有任何其他对象引用 obj1，因此它会被自动从 WeakSet 中删除</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>纯CSS实现全屏滚动效果</title>
+    <url>/20230213/%E7%BA%AFCSS%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%8F%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/</url>
+    <content><![CDATA[<p>实现全屏滚动可以不依赖 JS, 只使用纯 CSS 实现, 不过只有较新版本的浏览器支持这一特性</p>
+<p>主要使用了以下 CSS 属性</p>
+<ul class="lvl-0">
+<li class="lvl-4">
+<p><code>scroll-snap-type: y mandatory;</code> 给父元素设置, 设置贴合类型</p>
+</li>
+<li class="lvl-4">
+<p><code>scroll-snap-align: start;</code> 给子元素设置, 设置贴合点</p>
+</li>
+</ul>
+<span id="more"></span>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;main&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/main&gt;</span><br></pre></td></tr></table></figure>
+<p>容器布局</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="selector-tag">main</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">        <span class="attribute">overflow</span>: scroll;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">main</span> <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">border</span>: black <span class="number">2px</span> solid;</span><br><span class="line">        <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>样式设置</p>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
       </tags>
   </entry>
 </search>
