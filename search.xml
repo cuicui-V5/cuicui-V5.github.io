@@ -1334,4 +1334,32 @@ Generator 函数是一个状态机，封装了多个内部状态。执行 Genera
         <tag>CSS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>word 快速给选中内容添加引号</title>
+    <url>/20230429/word-%E5%BF%AB%E9%80%9F%E7%BB%99%E9%80%89%E4%B8%AD%E5%86%85%E5%AE%B9%E6%B7%BB%E5%8A%A0%E5%BC%95%E5%8F%B7/</url>
+    <content><![CDATA[<p>最近改论文的时候, 经常需要给特定的内容添加引号. vscode 等编辑器使用多了就很希望 word 也能有给选中内容快速添加引号的功能这个需求我们可以使用宏快速实现</p>
+<h2 id="步骤">步骤</h2>
+<ol>
+<li class="lvl-3">
+<p>打开 word =&gt; 点击视图 =&gt; 宏 =&gt; 创建</p>
+</li>
+<li class="lvl-3">
+<p>在编辑器中输入以下内容</p>
+ <figure class="highlight vb"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">Sub</span> AddQuotes()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Dim</span> sBegQ <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">    <span class="keyword">Dim</span> sEndQ <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"></span><br><span class="line">    sBegQ = <span class="string">&quot;“&quot;</span></span><br><span class="line">    sEndQ = <span class="string">&quot;”&quot;</span></span><br><span class="line"></span><br><span class="line">    Selection.InsertBefore sBegQ</span><br><span class="line">    Selection.InsertAfter sEndQ</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>在<code>文件</code> =&gt; <code>选项</code> =&gt; <code>自定义工作区</code> =&gt; <code>键盘快捷方式-自定义</code> 中 , <code>类别</code>选择<code>宏</code>, <code>宏</code>选择刚刚添加的<code>宏</code>,然后在<code>请按新快捷键</code>中绑定一个快捷键, 点击指定后跟他比页面即可.<img src="2023-04-29T212823.png" alt="2023-04-29T212823"></p>
+</li>
+<li class="lvl-3">
+<p>然后即可选中文字按快捷键插入引号了.🎉🎉🎉</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>软件技巧</category>
+      </categories>
+      <tags>
+        <tag>word</tag>
+      </tags>
+  </entry>
 </search>
