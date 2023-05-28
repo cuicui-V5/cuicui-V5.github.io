@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>利用pandoc合并markdown及转换为docx - cuicui&#039;Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="cuicui&#039;Blog"><meta name="msapplication-TileImage" content="/img/favicon.ico"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="cuicui&#039;Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器"><meta property="og:type" content="blog"><meta property="og:title" content="利用pandoc合并markdown及转换为docx"><meta property="og:url" content="https://cuijunyu.win/20230120/%E5%88%A9%E7%94%A8pandoc%E5%90%88%E5%B9%B6markdown%E5%8F%8A%E8%BD%AC%E6%8D%A2%E4%B8%BAdocx/"><meta property="og:site_name" content="cuicui&#039;Blog"><meta property="og:description" content="最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cuijunyu.win/img/og_image.png"><meta property="article:published_time" content="2023-01-19T16:35:43.000Z"><meta property="article:modified_time" content="2023-04-23T02:28:48.565Z"><meta property="article:author" content="cuicui"><meta property="article:tag" content="小工具"><meta property="article:tag" content="pandoc"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cuijunyu.win/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cuijunyu.win/20230120/%E5%88%A9%E7%94%A8pandoc%E5%90%88%E5%B9%B6markdown%E5%8F%8A%E8%BD%AC%E6%8D%A2%E4%B8%BAdocx/"},"headline":"利用pandoc合并markdown及转换为docx","image":["https://cuijunyu.win/img/og_image.png"],"datePublished":"2023-01-19T16:35:43.000Z","dateModified":"2023-04-23T02:28:48.565Z","author":{"@type":"Person","name":"cuicui"},"publisher":{"@type":"Organization","name":"cuicui'Blog","logo":{"@type":"ImageObject","url":"https://cuijunyu.win/20230120/%E5%88%A9%E7%94%A8pandoc%E5%90%88%E5%B9%B6markdown%E5%8F%8A%E8%BD%AC%E6%8D%A2%E4%B8%BAdocx/img/avatar.png"}},"description":"最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器"}</script><link rel="canonical" href="https://cuijunyu.win/20230120/%E5%88%A9%E7%94%A8pandoc%E5%90%88%E5%B9%B6markdown%E5%8F%8A%E8%BD%AC%E6%8D%A2%E4%B8%BAdocx/"><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>OneUI免Root配置Mipush教程 - cuicui&#039;Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="cuicui&#039;Blog"><meta name="msapplication-TileImage" content="/img/favicon.ico"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="cuicui&#039;Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="众所周知, 三星的推送只是用来推送广告的(逃 所以通过配置 Mipush 就可以带来体验不错的正常通知体验, 而且不需要 Root, 缺点就是升级应用需要重新打补丁"><meta property="og:type" content="blog"><meta property="og:title" content="OneUI免Root配置Mipush教程"><meta property="og:url" content="https://cuijunyu.win/20230528/OneUI%E5%85%8DRoot%E9%85%8D%E7%BD%AEMipush%E6%95%99%E7%A8%8B/"><meta property="og:site_name" content="cuicui&#039;Blog"><meta property="og:description" content="众所周知, 三星的推送只是用来推送广告的(逃 所以通过配置 Mipush 就可以带来体验不错的正常通知体验, 而且不需要 Root, 缺点就是升级应用需要重新打补丁"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cuijunyu.win/img/og_image.png"><meta property="article:published_time" content="2023-05-28T14:28:50.000Z"><meta property="article:modified_time" content="2023-05-28T14:30:58.212Z"><meta property="article:author" content="cuicui"><meta property="article:tag" content="Mipush"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cuijunyu.win/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cuijunyu.win/20230528/OneUI%E5%85%8DRoot%E9%85%8D%E7%BD%AEMipush%E6%95%99%E7%A8%8B/"},"headline":"OneUI免Root配置Mipush教程","image":["https://cuijunyu.win/img/og_image.png"],"datePublished":"2023-05-28T14:28:50.000Z","dateModified":"2023-05-28T14:30:58.212Z","author":{"@type":"Person","name":"cuicui"},"publisher":{"@type":"Organization","name":"cuicui'Blog","logo":{"@type":"ImageObject","url":"https://cuijunyu.win/20230528/OneUI%E5%85%8DRoot%E9%85%8D%E7%BD%AEMipush%E6%95%99%E7%A8%8B/img/avatar.png"}},"description":"众所周知, 三星的推送只是用来推送广告的(逃 所以通过配置 Mipush 就可以带来体验不错的正常通知体验, 而且不需要 Root, 缺点就是升级应用需要重新打补丁"}</script><link rel="canonical" href="https://cuijunyu.win/20230528/OneUI%E5%85%8DRoot%E9%85%8D%E7%BD%AEMipush%E6%95%99%E7%A8%8B/"><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -29,24 +29,153 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.png" alt="cuicui&#039;Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/cuicui-V5"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-01-19T16:35:43.000Z" title="2023/1/20 00:35:43">2023-01-20</time>发表</span><span class="level-item"><time dateTime="2023-04-23T02:28:48.565Z" title="2023/4/23 10:28:48">2023-04-23</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/">软件技巧</a></span><span class="level-item">1 分钟读完 (大约116个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">利用pandoc合并markdown及转换为docx</h1><div class="content"><p>最近有需求把 markdown 文档合并起来然后转换为 word 文档以供打印的需求, 所以了解到了 pandoc 这一款命令行文本处理神器</p>
-<span id="more"></span>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>批量合并 markdown<br>
-小 tips: 如果需要大批量文件, 可以在资源管理器中全选, 然后拖到终端窗口中, 自动填充路径及文件名</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.png" alt="cuicui&#039;Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/cuicui-V5"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-05-28T14:28:50.000Z" title="2023/5/28 22:28:50">2023-05-28</time>发表</span><span class="level-item"><time dateTime="2023-05-28T14:30:58.212Z" title="2023/5/28 22:30:58">2023-05-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E5%B7%A7/">软件技巧</a></span><span class="level-item">4 分钟读完 (大约545个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">OneUI免Root配置Mipush教程</h1><div class="content"><p>众所周知, 三星的推送只是用来推送广告的(逃</p>
+<p>所以通过配置 Mipush 就可以带来体验不错的正常通知体验, 而且不需要 Root, 缺点就是升级应用需要重新打补丁</p>
+<p>此方法不仅限于 OneUI, 其他系统也通用</p>
+<p>相关链接:</p>
+<ol>
+<li class="lvl-3">
+<p><a target="_blank" rel="noopener" href="https://bzmshang.top/MiPush-Framework_User-Guide">https://bzmshang.top/MiPush-Framework_User-Guide</a></p>
 </li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandoc -s file1.md file2.md -o AllJavaScript.md</span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-4">
-<p>markdown 转 doc</p>
+<li class="lvl-3">
+<p><a target="_blank" rel="noopener" href="https://github.com/NihilityT/MiPushConfigurations/tree/main">https://github.com/NihilityT/MiPushConfigurations/tree/main</a></p>
 </li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandoc -o output.docx -f markdown -t docx .\AllInOne.md</span><br></pre></td></tr></table></figure>
-</div><div class="article-licensing box"><div class="licensing-title"><p>利用pandoc合并markdown及转换为docx</p><p><a href="https://cuijunyu.win/20230120/利用pandoc合并markdown及转换为docx/">https://cuijunyu.win/20230120/利用pandoc合并markdown及转换为docx/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>cuicui</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-01-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-04-23</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/">小工具</a><a class="link-muted mr-2" rel="tag" href="/tags/pandoc/">pandoc</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://cuijunyu.win" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/20230120/%E9%80%9A%E8%BF%87Acme-sh-CloudFlare-Dns%E8%AE%A4%E8%AF%81%E7%94%B3%E8%AF%B7%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">通过Acme.sh + CloudFlare Dns认证申请泛域名证书</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/20230114/Vue3%E4%B8%AD%20v-model%20%E5%AE%9E%E7%8E%B0%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/"><span class="level-item">Vue3中 v-model 实现父子组件数据通信双向绑定</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'https://cuijunyu.win/20230120/%E5%88%A9%E7%94%A8pandoc%E5%90%88%E5%B9%B6markdown%E5%8F%8A%E8%BD%AC%E6%8D%A2%E4%B8%BAdocx/';
-            this.page.identifier = '20230120/利用pandoc合并markdown及转换为docx/';
+<li class="lvl-3">
+<p><a target="_blank" rel="noopener" href="https://github.com/NihilityT/MiPushFramework">https://github.com/NihilityT/MiPushFramework</a></p>
+</li>
+<li class="lvl-3">
+<p><a target="_blank" rel="noopener" href="https://github.com/LSPosed/LSPatch">https://github.com/LSPosed/LSPatch</a></p>
+</li>
+<li class="lvl-3">
+<p><a target="_blank" rel="noopener" href="https://github.com/NihilityT/MiPush">https://github.com/NihilityT/MiPush</a></p>
+</li>
+</ol>
+<h2 id="安装步骤">安装步骤:</h2>
+<ol>
+<li class="lvl-3">
+<p>安装<code>LSPatch</code> (<code>链接4</code></p>
+</li>
+<li class="lvl-3">
+<p>安装<code>推送服务</code>App (<code>链接3</code></p>
+</li>
+<li class="lvl-3">
+<p>安装 push 模块(各个模块对应用的支持情况都不同, 支持情况见下表, 这里推荐 Mipush 模块, 官方实现 (链接 5</p>
+<ol>
+<li class="lvl-7">
+<table>
+<thead>
+<tr>
+<th>MiPush</th>
+<th>MiPush<br />Faker</th>
+<th>MiPush<br />DeviceFake</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QQ</td>
+<td>QQ</td>
+<td>B 站</td>
+</tr>
+<tr>
+<td>QQ<br />邮箱</td>
+<td>QQ<br />邮箱</td>
+<td>酷安</td>
+</tr>
+<tr>
+<td>淘宝</td>
+<td>淘宝</td>
+<td>百度</td>
+</tr>
+<tr>
+<td>闲鱼</td>
+<td>闲鱼</td>
+<td>微博</td>
+</tr>
+<tr>
+<td>抖音</td>
+<td>菜鸟</td>
+<td>支付宝</td>
+</tr>
+<tr>
+<td>京东</td>
+<td>米游社</td>
+<td>拼多多</td>
+</tr>
+<tr>
+<td>今日<br />头条</td>
+<td>APP<br />分享</td>
+<td>高德<br />地图</td>
+</tr>
+<tr>
+<td>哈啰</td>
+<td>哔哩哔哩<br />漫画</td>
+<td></td>
+</tr>
+<tr>
+<td>小红书</td>
+<td>小宇宙</td>
+<td></td>
+</tr>
+<tr>
+<td>Boss<br />直聘</td>
+<td>支付宝</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>浙政钉</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>饿了么</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>美团</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>安装<code>Shizuku</code>, 给<code>LSPatch</code>授权</p>
+</li>
+<li class="lvl-3">
+<p>使用<code>LSPatch</code>给需要通知的应用打补丁, 模式选择<code>Intergrated</code>, 然后点击嵌入模块, 选择第三步安装的某个 push 模块, 打完补丁后安装即可</p>
+</li>
+<li class="lvl-3">
+<p>打开软件, 正常登录即可</p>
+</li>
+<li class="lvl-3">
+<p>在<code>推送服务</code>App 中检查应用状态, 如果还是未注册, 那么强制停止应用后重试</p>
+</li>
+<li class="lvl-3">
+<p>在<code>推送服务</code>App 中设置通知配置文件: 为了支持某些高级功能, 比如支持 qq 显示多条消息, 需要设置配置文件</p>
+<ol>
+<li class="lvl-7">在<code>推送服务</code>App 中点击设置, 然后将<code>设置配置目录</code>设置为某个目录, 然后将需要设置的配置文件放置其中, 作者提供的配置文件见<code>链接2</code></li>
+<li class="lvl-7">比如 qq 的配置文件, 需要放置以下三个文件 <code>0_基础配置（必需品）</code>+<code>com.tencent.mobileqq_QQ</code>＋<code>com.tencent.mobileqq_QQ_MessagingStyle</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="应用后续升级方法">应用后续升级方法</h2>
+<ol>
+<li class="lvl-3">
+<p>获取应用 apk</p>
+</li>
+<li class="lvl-3">
+<p>使用 LSPatch 打补丁</p>
+</li>
+<li class="lvl-3">
+<p>覆盖安装即可, 应用数据不会丢失</p>
+</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>OneUI免Root配置Mipush教程</p><p><a href="https://cuijunyu.win/20230528/OneUI免Root配置Mipush教程/">https://cuijunyu.win/20230528/OneUI免Root配置Mipush教程/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>cuicui</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-05-28</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-05-28</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Mipush/">Mipush</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://cuijunyu.win" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/20230503/Promise-%E6%80%BB%E7%BB%93/"><span class="level-item">Promise 总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cuijunyu.win/20230528/OneUI%E5%85%8DRoot%E9%85%8D%E7%BD%AEMipush%E6%95%99%E7%A8%8B/';
+            this.page.identifier = '20230528/OneUI免Root配置Mipush教程/';
         };
         (function() {
             var d = document, s = d.createElement('script');  
