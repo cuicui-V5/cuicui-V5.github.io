@@ -1,0 +1,166 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { formatDate, getPostReadingTime } from '../utils/posts';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  headings: MarkdownHeading[];
+  prevPost?: CollectionEntry<'blog'>;
+  nextPost?: CollectionEntry<'blog'>;
+}
+
+const { post, headings, prevPost, nextPost } = Astro.props;
+const formattedDate = formatDate(post.data.date);
+const stats = getPostReadingTime(post.body);
+---
+
+<BaseLayout title={`${post.data.title} - cuicui'Blog`} description={post.data.description}>
+  <!-- Top Reading Progress Indicator -->
+  <div id="reading-progress" class="fixed top-0 left-0 h-[2.5px] bg-blue-500 z-50 transition-all duration-75" style="width: 0%"></div>
+
+  <article class="relative">
+    <!-- Back Link -->
+    <a
+      href="/posts"
+      class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 mb-8 transition-colors"
+    >
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      返回所有文章
+    </a>
+
+    <!-- Header Section -->
+    <header class="mb-10 pb-8 border-b border-zinc-200 dark:border-zinc-800">
+      <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-zinc-400 dark:text-zinc-500 mb-3">
+        <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+        <span>•</span>
+        <span>约 {stats.words} 字</span>
+        <span>•</span>
+        <span>阅读时长 {stats.minutes} 分钟</span>
+        {post.data.categories && post.data.categories.length > 0 && (
+          <>
+            <span>•</span>
+            <span class="text-zinc-600 dark:text-zinc-300 font-sans">{post.data.categories.join(' / ')}</span>
+          </>
+        )}
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 leading-tight">
+        {post.data.title}
+      </h1>
+
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {post.data.tags.map((tag) => (
+            <a
+              href={`/tags/${encodeURIComponent(tag)}`}
+              class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Main Content & Sidebar Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+      <!-- Article Body -->
+      <div class="lg:col-span-3 min-w-0">
+        <div class="prose prose-zinc dark:prose-invert max-w-none text-zinc-800 dark:text-zinc-200 leading-relaxed break-words">
+          <slot />
+        </div>
+
+        <!-- Prev / Next Navigation -->
+        <nav class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {prevPost ? (
+            <a
+              href={`/posts/${prevPost.slug}`}
+              class="group p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+            >
+              <div class="text-[11px] font-mono text-zinc-400 mb-1 flex items-center gap-1">
+                <span>← 上一篇</span>
+              </div>
+              <div class="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-blue-500 transition-colors line-clamp-1">
+                {prevPost.data.title}
+              </div>
+            </a>
+          ) : <div />}
+
+          {nextPost ? (
+            <a
+              href={`/posts/${nextPost.slug}`}
+              class="group p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors text-right"
+            >
+              <div class="text-[11px] font-mono text-zinc-400 mb-1 flex items-center justify-end gap-1">
+                <span>下一篇 →</span>
+              </div>
+              <div class="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-blue-500 transition-colors line-clamp-1">
+                {nextPost.data.title}
+              </div>
+            </a>
+          ) : <div />}
+        </nav>
+      </div>
+
+      <!-- Desktop Sticky TOC -->
+      <aside class="hidden lg:block lg:col-span-1">
+        <div class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+          <TableOfContents headings={headings} />
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<script is:inline>
+  // Setup Reading Progress & Copy Buttons
+  function initPostFeatures() {
+    // 1. Reading Progress
+    const progressBar = document.getElementById('reading-progress');
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / docHeight) * 100;
+      if (progressBar) {
+        progressBar.style.width = Math.min(100, Math.max(0, scrolled)) + '%';
+      }
+    });
+
+    // 2. Code Block Copy Buttons
+    document.querySelectorAll('pre.astro-code').forEach((pre) => {
+      if (pre.querySelector('.copy-code-btn')) return;
+
+      const button = document.createElement('button');
+      button.className = 'copy-code-btn';
+      button.textContent = '复制';
+      button.setAttribute('aria-label', '复制代码');
+
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.innerText || pre.innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = '已复制!';
+          button.classList.add('text-green-400');
+          setTimeout(() => {
+            button.textContent = '复制';
+            button.classList.remove('text-green-400');
+          }, 2000);
+        } catch (err) {
+          button.textContent = '失败';
+          setTimeout(() => {
+            button.textContent = '复制';
+          }, 2000);
+        }
+      });
+
+      pre.appendChild(button);
+    });
+  }
+
+  initPostFeatures();
+  document.addEventListener('astro:after-swap', initPostFeatures);
+</script>

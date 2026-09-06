@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllTags } from '../../utils/posts';
+
+const allPosts = await getCollection('blog');
+const tags = getAllTags(allPosts);
+---
+
+<BaseLayout title="所有标签 - cuicui'Blog" description="cuicui'Blog 的文章标签索引">
+  <div class="mb-10 pb-6 border-b border-zinc-200 dark:border-zinc-800">
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
+      标签 / Tags
+    </h1>
+    <p class="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-mono">
+      共有 {tags.length} 个技术与生活主题标签
+    </p>
+  </div>
+
+  <div class="flex flex-wrap gap-3">
+    {tags.map(({ tag, count }) => (
+      <a
+        href={`/tags/${encodeURIComponent(tag)}`}
+        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors shadow-sm"
+      >
+        <span>#{tag}</span>
+        <span class="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">({count})</span>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

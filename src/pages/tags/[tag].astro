@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { sortPostsByDate, getAllTags } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const tags = getAllTags(allPosts);
+
+  return tags.map(({ tag }) => {
+    const filteredPosts = sortPostsByDate(
+      allPosts.filter((post) => post.data.tags && post.data.tags.includes(tag))
+    );
+    return {
+      params: { tag },
+      props: { tag, posts: filteredPosts },
+    };
+  });
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`#${tag} - cuicui'Blog`} description={`包含标签 #${tag} 的所有文章`}>
+  <div class="mb-10 pb-6 border-b border-zinc-200 dark:border-zinc-800">
+    <a
+      href="/tags"
+      class="inline-flex items-center gap-1 text-xs font-mono text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 mb-4 transition-colors"
+    >
+      ← 返回所有标签
+    </a>
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
+      #{tag}
+    </h1>
+    <p class="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-mono">
+      该标签下共找到 {posts.length} 篇相关记录
+    </p>
+  </div>
+
+  <div class="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+    {posts.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+</BaseLayout>

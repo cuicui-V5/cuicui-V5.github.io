@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于 - cuicui'Blog" description="关于 cuicui 与这个自留地">
+  <div class="max-w-2xl">
+    <!-- Header -->
+    <div class="flex items-center gap-6 mb-10 pb-8 border-b border-zinc-200 dark:border-zinc-800">
+      <img
+        src="/avatar.jpg"
+        alt="cuicui"
+        class="w-20 h-20 rounded-2xl object-cover border-2 border-zinc-200 dark:border-zinc-800 shadow-sm"
+      />
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
+          cuicui
+        </h1>
+        <p class="text-sm font-mono text-zinc-400 dark:text-zinc-500 mt-1">
+          探寻技术与秩序的平衡点
+        </p>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="space-y-8 text-sm sm:text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
+      <blockquote class="border-l-2 border-zinc-300 dark:border-zinc-700 pl-4 py-1 text-sm italic text-zinc-500 dark:text-zinc-400">
+        “弱小和无知从不是生存的障碍，傲慢才是。” —— 《三体》
+      </blockquote>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 font-mono">
+          关于这里
+        </h2>
+        <p>
+          这是我的个人博客与数字花园。早年在这里记录过一些探索网络与代码的笔记，如今它依然是我整理思路、沉淀实践经验与记录思考的自留地。
+        </p>
+        <p>
+          我相信工具应当简洁实用，认知应当保持开放，面对复杂的世界，保持好奇心与独立思考永远是最重要的能力。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 font-mono">
+          博客演进
+        </h2>
+        <p class="text-zinc-600 dark:text-zinc-400">
+          本站从最初基于 Hexo 构建的静态页面，平滑演进到了现代化的 Astro 架构。去除了繁杂的视觉噪音，回归阅读与排版的纯粹本真，拥有 100% 静态零运行时开销。
+        </p>
+      </section>
+
+      <section class="space-y-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+        <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 font-mono">
+          连接与订阅
+        </h2>
+        <ul class="space-y-2 text-sm font-mono">
+          <li class="flex items-center gap-2">
+            <span class="text-zinc-400">GitHub:</span>
+            <a
+              href="https://github.com/cuicui-V5"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              @cuicui-V5
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-zinc-400">RSS 订阅:</span>
+            <a
+              href="/rss.xml"
+              class="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              /rss.xml
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

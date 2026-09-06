@@ -1,0 +1,68 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
+---
+
+{filteredHeadings.length > 0 && (
+  <nav class="toc-container text-xs text-zinc-500 dark:text-zinc-400">
+    <div class="font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-200 mb-3 text-[11px] flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h7" />
+      </svg>
+      目录
+    </div>
+    <ul class="space-y-2 border-l border-zinc-200 dark:border-zinc-800">
+      {filteredHeadings.map((heading) => {
+        const indentClass = heading.depth === 3 ? 'pl-6' : heading.depth === 2 ? 'pl-4' : 'pl-2';
+        return (
+          <li>
+            <a
+              href={`#${heading.slug}`}
+              class={`toc-link block -ml-px border-l-2 border-transparent ${indentClass} py-0.5 hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors line-clamp-1`}
+              data-slug={heading.slug}
+            >
+              {heading.text}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+)}
+
+<script is:inline>
+  function setupTocHighlight() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            document.querySelectorAll('.toc-link').forEach((link) => {
+              if (link.getAttribute('data-slug') === id) {
+                link.classList.add('border-blue-500', 'text-blue-600', 'dark:text-blue-400', 'font-medium');
+                link.classList.remove('border-transparent');
+              } else {
+                link.classList.remove('border-blue-500', 'text-blue-600', 'dark:text-blue-400', 'font-medium');
+                link.classList.add('border-transparent');
+              }
+            });
+          }
+        });
+      },
+      { rootMargin: '-80px 0% -60% 0%' }
+    );
+
+    document.querySelectorAll('article h1, article h2, article h3').forEach((h) => {
+      observer.observe(h);
+    });
+  }
+
+  setupTocHighlight();
+  document.addEventListener('astro:after-swap', setupTocHighlight);
+</script>

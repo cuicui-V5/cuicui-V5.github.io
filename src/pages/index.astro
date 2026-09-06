@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { sortPostsByDate, getAllCategories } from '../utils/posts';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = sortPostsByDate(allPosts);
+const recentPosts = sortedPosts.slice(0, 6);
+const categories = getAllCategories(allPosts);
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="mb-14 sm:mb-20 pt-4 sm:pt-8">
+    <div class="flex items-center gap-5 sm:gap-6 mb-6">
+      <img
+        src="/avatar.jpg"
+        alt="cuicui"
+        class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-zinc-200 dark:border-zinc-800 shadow-sm"
+      />
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
+          cuicui
+        </h1>
+        <p class="text-xs sm:text-sm font-mono text-zinc-400 dark:text-zinc-500 mt-1">
+          Stay curious • Think deeply • Build simply
+        </p>
+      </div>
+    </div>
+
+    <!-- Quote & Bio -->
+    <blockquote class="border-l-2 border-zinc-300 dark:border-zinc-700 pl-4 py-1 text-sm sm:text-base italic text-zinc-600 dark:text-zinc-400 mb-6">
+      “弱小和无知从不是生存的障碍，傲慢才是。”
+    </blockquote>
+
+    <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+      欢迎来到我的数字自留地。这里记录技术折腾、思考随笔与各类有趣的问题解决方案。不随波逐流，在信息纷繁的世界里保留属于自己的秩序。
+    </p>
+
+    <!-- Quick Stats -->
+    <div class="mt-8 flex items-center gap-6 text-xs font-mono text-zinc-500 dark:text-zinc-400 border-t border-b border-zinc-200/80 dark:border-zinc-800/80 py-3">
+      <div>
+        <span class="text-zinc-900 dark:text-zinc-100 font-semibold">{allPosts.length}</span> 篇沉淀文章
+      </div>
+      <span>/</span>
+      <div>
+        <span class="text-zinc-900 dark:text-zinc-100 font-semibold">{categories.length}</span> 个主题分类
+      </div>
+      <span>/</span>
+      <a href="/archive" class="text-blue-600 dark:text-blue-400 hover:underline">
+        完整归档时间线 →
+      </a>
+    </div>
+  </section>
+
+  <!-- Recent Posts Section -->
+  <section>
+    <div class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3 mb-4">
+      <h2 class="text-sm font-semibold tracking-wider text-zinc-900 dark:text-zinc-100 uppercase font-mono flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+        近期文章 / Recent Posts
+      </h2>
+      <a href="/posts" class="text-xs font-mono text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        全部文章 ({allPosts.length}) →
+      </a>
+    </div>
+
+    <div class="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+      {recentPosts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    <!-- More Posts CTA -->
+    <div class="mt-10 text-center">
+      <a
+        href="/posts"
+        class="inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-xs font-mono font-medium border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm"
+      >
+        浏览全部 {allPosts.length} 篇历史文章 →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

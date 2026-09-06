@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sortPostsByDate } from '../utils/posts';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = sortPostsByDate(allPosts);
+
+// Group by Year
+const postsByYear = sortedPosts.reduce((acc, post) => {
+  const year = new Date(post.data.date).getFullYear().toString();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {} as Record<string, typeof sortedPosts>);
+
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="文章归档 - cuicui'Blog" description="cuicui'Blog 历史文章时间线归档">
+  <div class="mb-10 pb-6 border-b border-zinc-200 dark:border-zinc-800">
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
+      归档 / Archive
+    </h1>
+    <p class="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-mono">
+      时光荏苒，共留存 {sortedPosts.length} 篇文字记录
+    </p>
+  </div>
+
+  <div class="space-y-12">
+    {years.map((year) => (
+      <section>
+        <div class="flex items-center gap-3 mb-6">
+          <h2 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 font-mono">
+            {year}
+          </h2>
+          <span class="text-xs font-mono text-zinc-400 dark:text-zinc-500">
+            ({postsByYear[year].length} 篇)
+          </span>
+          <div class="flex-1 h-px bg-zinc-200 dark:border-zinc-800"></div>
+        </div>
+
+        <ul class="space-y-4 pl-2 border-l border-zinc-200 dark:border-zinc-800">
+          {postsByYear[year].map((post) => {
+            const date = new Date(post.data.date);
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return (
+              <li class="group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 pl-4 -ml-px border-l-2 border-transparent hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                <time class="text-xs font-mono text-zinc-400 dark:text-zinc-500 shrink-0">
+                  {month}-{day}
+                </time>
+                <a
+                  href={`/posts/${post.slug}`}
+                  class="text-sm font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1"
+                >
+                  {post.data.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

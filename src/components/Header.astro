@@ -1,0 +1,96 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { label: '文章', href: '/posts' },
+  { label: '归档', href: '/archive' },
+  { label: '标签', href: '/tags' },
+  { label: '关于', href: '/about' },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md transition-colors">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <!-- Brand -->
+    <a href="/" class="group flex items-center gap-2">
+      <span class="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:opacity-80 transition-opacity font-mono">
+        cuicui<span class="text-zinc-400 dark:text-zinc-500">.</span>
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      {navItems.map((item) => {
+        const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`transition-colors hover:text-zinc-900 dark:hover:text-zinc-100 ${
+              isActive
+                ? 'text-zinc-900 dark:text-zinc-100 font-semibold'
+                : 'text-zinc-500 dark:text-zinc-400'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Action Tools -->
+    <div class="flex items-center gap-2">
+      <!-- Search Button -->
+      <button
+        type="button"
+        data-open-search
+        aria-label="Search posts"
+        class="flex items-center gap-2 px-2.5 py-1.5 text-xs text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 bg-zinc-100/80 dark:bg-zinc-800/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-700/80 rounded-lg border border-zinc-200/50 dark:border-zinc-700/50 transition-colors"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <span class="hidden sm:inline">搜索</span>
+        <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-white dark:bg-zinc-900 rounded border border-zinc-200 dark:border-zinc-700 text-zinc-400">
+          Ctrl K
+        </kbd>
+      </button>
+
+      <!-- Theme Switcher -->
+      <ThemeToggle />
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle navigation menu"
+        class="md:hidden p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden border-b border-zinc-200 dark:border-zinc-800 px-4 py-3 bg-white dark:bg-zinc-900 space-y-2">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class="block py-2 text-sm text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100"
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script is:inline>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  menuBtn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { sortPostsByDate } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const sorted = sortPostsByDate(posts);
+
+  return sorted.map((post, index) => {
+    return {
+      params: { slug: post.slug },
+      props: {
+        post,
+        prevPost: index < sorted.length - 1 ? sorted[index + 1] : undefined,
+        nextPost: index > 0 ? sorted[index - 1] : undefined,
+      },
+    };
+  });
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+
+let Content: any;
+let headings: any[] = [];
+
+if (typeof (post as any).render === 'function') {
+  const rendered = await (post as any).render();
+  Content = rendered.Content;
+  headings = rendered.headings;
+} else {
+  const rendered = await render(post);
+  Content = rendered.Content;
+  headings = rendered.headings;
+}
+---
+
+<PostLayout post={post} headings={headings} prevPost={prevPost} nextPost={nextPost}>
+  <Content />
+</PostLayout>

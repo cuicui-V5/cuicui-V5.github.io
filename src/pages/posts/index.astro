@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { sortPostsByDate, getAllCategories } from '../../utils/posts';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = sortPostsByDate(allPosts);
+const categories = getAllCategories(allPosts);
+---
+
+<BaseLayout title="所有文章 - cuicui'Blog" description="浏览 cuicui 博客的所有技术与思考文章">
+  <div class="mb-10 pb-6 border-b border-zinc-200 dark:border-zinc-800">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
+          文章 / Posts
+        </h1>
+        <p class="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-mono">
+          共收录 {sortedPosts.length} 篇历史记录
+        </p>
+      </div>
+
+      <a
+        href="/archive"
+        class="text-xs font-mono text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center gap-1 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        时间线归档
+      </a>
+    </div>
+
+    <!-- Category Pills -->
+    {categories.length > 0 && (
+      <div class="mt-6 flex flex-wrap gap-2">
+        <span class="text-xs text-zinc-400 self-center mr-1 font-mono">分类:</span>
+        {categories.map(({ category, count }) => (
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300">
+            <span>{category}</span>
+            <span class="text-[10px] text-zinc-400 font-mono">({count})</span>
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <!-- Posts List -->
+  <div class="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+    {sortedPosts.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+</BaseLayout>
