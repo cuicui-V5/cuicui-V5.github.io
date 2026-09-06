@@ -90,23 +90,35 @@ D:\myProject\blog\
 
 ---
 
-## 三、本地开发与构建命令
+## 三、本地开发与管理工作台 (Admin Studio)
 
 在项目根目录下打开终端：
 
 ```bash
-# 1. 启动本地热重载开发服务器（默认地址: http://localhost:4321）
+# 🖥️ 推荐：一键启动可视化文章管理后台 (Admin Studio)
+# 浏览器自动打开 http://localhost:3456
+# 支持可视化编辑、标签分类管理、截图 Ctrl+V 直接粘贴自动转存、一键构建推送
+npm run admin
+
+# 🌐 启动 Astro 博客前台热重载开发服务器（默认地址: http://localhost:4321）
 npm run dev
 
-# 2. 执行静态类型与内容集合语法校验（写完文章推荐运行）
+# 🔍 执行静态类型与内容集合语法校验
 npm run check
 
-# 3. 生产环境完整静态构建（输出产物到 dist/ 目录）
+# 📦 生产环境完整静态构建（输出产物到 dist/ 目录）
 npm run build
 
-# 4. 本地启动服务预览生产环境 dist 产物
+# 👁️ 本地启动服务预览生产环境 dist 产物
 npm run preview
 ```
+
+> **💡 Admin Studio 功能亮点**：
+> - **双栏实时编辑**：左边写 Markdown，右边实时预览渲染；
+> - **截图一键粘贴**：按 `Ctrl + V` 直接把剪贴板图片贴进编辑器，后台自动在 `public/images/posts/<slug>/` 保存文件并生成 Markdown 语法；
+> - **元数据可视化**：时间选择器、分类下拉框、多标签管理、草稿开关；
+> - **一键部署上线**：界面右上角/左下角点击「一键编译推送到 GitHub」，全自动运行打包并 `git push` 到远程。
+
 
 ---
 

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cuicui'Blog - 文章管理后台 (Admin Studio)</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Marked.js for Markdown Preview -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Highlight.js for Syntax Highlighting in Preview -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .dark ::-webkit-scrollbar-thumb { background: #334155; }
+    
+    /* Typography Preview */
+    .preview-content {
+      line-height: 1.75;
+    }
+    .preview-content h1 { font-size: 1.875rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(148,163,184,0.2); padding-bottom: 0.5rem; }
+    .preview-content h2 { font-size: 1.5rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+    .preview-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; }
+    .preview-content p { margin-bottom: 1rem; }
+    .preview-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+    .preview-content ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1rem; }
+    .preview-content blockquote { border-left: 3px solid #6366f1; background: rgba(99,102,241,0.06); padding: 0.75rem 1rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1rem; }
+    .preview-content pre { background: #0f172a; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1rem; }
+    .preview-content code { font-family: ui-monospace, monospace; font-size: 0.875em; }
+    .preview-content :not(pre) > code { background: rgba(99,102,241,0.1); color: #6366f1; padding: 0.2em 0.4em; border-radius: 0.25rem; }
+    .preview-content img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .preview-content table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    .preview-content th, .preview-content td { border: 1px solid rgba(148,163,184,0.3); padding: 0.5rem 0.75rem; text-align: left; }
+    .preview-content th { background: rgba(148,163,184,0.1); }
+  </style>
+</head>
+<body class="h-full bg-slate-50 dark:bg-[#0b0c10] text-slate-800 dark:text-slate-200 flex flex-col font-sans overflow-hidden">
+
+  <!-- Main Container -->
+  <div class="flex-1 flex overflow-hidden">
+    
+    <!-- Sidebar: Post List -->
+    <aside class="w-80 sm:w-96 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#10121a] shrink-0">
+      
+      <!-- Top Brand & Search -->
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="font-mono font-bold text-lg text-slate-900 dark:text-slate-100">
+              cuicui<span class="text-indigo-500 font-extrabold text-xl">.</span>
+            </span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
+              Studio
+            </span>
+          </div>
+          
+          <button id="theme-btn" class="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="切换暗黑模式">
+            🌓
+          </button>
+        </div>
+
+        <!-- Create Button -->
+        <button id="new-post-btn" class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs sm:text-sm shadow-sm transition-all hover:shadow-indigo-500/20">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          新建文章 (New Post)
+        </button>
+
+        <!-- Filter Input -->
+        <div class="relative">
+          <svg class="w-4 h-4 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            id="search-input"
+            type="text"
+            placeholder="筛选标题、分类或标签..."
+            class="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+
+      <!-- Post List Container -->
+      <div id="posts-list" class="flex-1 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800/60 p-2 space-y-1">
+        <div class="p-8 text-center text-xs text-slate-400 animate-pulse">正在加载文章列表...</div>
+      </div>
+
+      <!-- Bottom Status & One-Click Deploy -->
+      <div class="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 space-y-2">
+        <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <span id="post-count-label">共 0 篇文章</span>
+          <span class="text-emerald-500 flex items-center gap-1">● 本地服务已就绪</span>
+        </div>
+        <button
+          id="deploy-btn"
+          class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-medium text-xs shadow-sm transition-all"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+          </svg>
+          一键编译并推送到 GitHub (Deploy)
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace (Editor + Metadata + Preview) -->
+    <main class="flex-1 flex flex-col min-w-0 bg-white dark:bg-[#0c0d12]">
+      
+      <!-- Top Metadata & Action Bar -->
+      <header class="border-b border-slate-200 dark:border-slate-800 p-4 bg-white/90 dark:bg-[#10121a]/90 backdrop-blur-sm space-y-3 shrink-0">
+        
+        <!-- Row 1: Title & Actions -->
+        <div class="flex items-center justify-between gap-4">
+          <input
+            id="post-title"
+            type="text"
+            placeholder="在此输入文章标题..."
+            class="flex-1 text-xl sm:text-2xl font-bold bg-transparent border-none text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-0"
+          />
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              id="save-btn"
+              class="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-xs transition-all"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+              </svg>
+              保存 (Ctrl+S)
+            </button>
+            <button
+              id="delete-btn"
+              class="p-2 rounded-xl text-rose-500 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
+              title="删除文章"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Row 2: Metadata Fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+          <!-- Slug -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <span class="text-slate-400 font-mono">Slug:</span>
+            <input id="post-slug" type="text" class="flex-1 bg-transparent font-mono focus:outline-none text-slate-700 dark:text-slate-300" placeholder="文件别名">
+          </div>
+
+          <!-- Date -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <span class="text-slate-400 font-mono">时间:</span>
+            <input id="post-date" type="text" class="flex-1 bg-transparent font-mono focus:outline-none text-slate-700 dark:text-slate-300" placeholder="YYYY-MM-DD HH:mm:ss">
+          </div>
+
+          <!-- Category -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <span class="text-slate-400 font-mono">分类:</span>
+            <input id="post-category" list="category-options" type="text" class="flex-1 bg-transparent focus:outline-none text-slate-700 dark:text-slate-300" placeholder="选择或输入分类">
+            <datalist id="category-options">
+              <option value="硬件折腾"></option>
+              <option value="软件技巧"></option>
+              <option value="技术分享"></option>
+              <option value="Web前端"></option>
+              <option value="思考随笔"></option>
+            </datalist>
+          </div>
+
+          <!-- Tags & Draft -->
+          <div class="flex items-center justify-between gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+            <div class="flex items-center gap-1.5 flex-1 min-w-0">
+              <span class="text-slate-400 font-mono shrink-0">标签:</span>
+              <input id="post-tags" type="text" class="flex-1 bg-transparent focus:outline-none text-slate-700 dark:text-slate-300" placeholder="逗号分隔标签">
+            </div>
+            <label class="flex items-center gap-1 text-[11px] text-slate-500 cursor-pointer shrink-0">
+              <input id="post-draft" type="checkbox" class="rounded text-indigo-600 focus:ring-0">
+              <span>草稿</span>
+            </label>
+          </div>
+        </div>
+
+      </header>
+
+      <!-- Formatting Toolbar -->
+      <div class="flex items-center gap-1 px-4 py-1.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/30 text-xs text-slate-600 dark:text-slate-400 shrink-0 overflow-x-auto">
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="**加粗**"><strong>B</strong></button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="*斜体*"><em>I</em></button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="# 一级标题\n">H1</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="## 二级标题\n">H2</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="### 三级标题\n">H3</button>
+        <span class="text-slate-300 dark:text-slate-700">|</span>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="> 引用内容\n">引用</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="```javascript\n\n```\n">代码块</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="[链接描述](https://example.com)">链接</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="| 列1 | 列2 |\n| --- | --- |\n| 内容1 | 内容2 |\n">表格</button>
+        <span class="text-slate-300 dark:text-slate-700">|</span>
+        <span class="text-[11px] text-indigo-500 font-mono ml-auto flex items-center gap-1">
+          <span>💡 提示：支持直接按 <kbd class="px-1 py-0.5 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-900">Ctrl+V</kbd> 粘贴截图自动上传</span>
+        </span>
+      </div>
+
+      <!-- Split Pane: Editor (Left) & Preview (Right) -->
+      <div class="flex-1 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800 overflow-hidden">
+        
+        <!-- Left: Textarea Editor -->
+        <div class="h-full flex flex-col relative">
+          <textarea
+            id="editor"
+            class="flex-1 w-full p-4 font-mono text-sm leading-relaxed bg-white dark:bg-[#0c0d12] text-slate-800 dark:text-slate-200 resize-none focus:outline-none focus:ring-0"
+            placeholder="在此开始撰写 Markdown 博客内容... 直接按 Ctrl+V 可粘贴剪贴板截图"
+            spellcheck="false"
+          ></textarea>
+          
+          <!-- Image Paste Upload Indicator -->
+          <div id="upload-toast" class="hidden absolute bottom-4 right-4 bg-indigo-600 text-white text-xs px-3 py-2 rounded-xl shadow-lg flex items-center gap-2 animate-bounce">
+            <svg class="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span>正在转存剪贴板图片...</span>
+          </div>
+        </div>
+
+        <!-- Right: Live Markdown Preview -->
+        <div class="h-full overflow-y-auto p-6 bg-slate-50/50 dark:bg-[#0e1017]">
+          <div class="text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center justify-between">
+            <span>实时排版渲染预览 (Live Preview)</span>
+            <span id="word-count" class="text-slate-400">0 字</span>
+          </div>
+          <div id="preview" class="preview-content text-slate-800 dark:text-slate-200 text-sm"></div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Deploy Log Modal -->
+  <div id="deploy-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[85vh]">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-800/50">
+        <div class="flex items-center gap-2">
+          <span id="deploy-spinner" class="animate-spin text-indigo-500">⏳</span>
+          <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100 font-mono">一键编译并推送 (Build & Push)</h3>
+        </div>
+        <button id="close-modal-btn" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 text-xs border border-slate-300 dark:border-slate-700 rounded-md">
+          关闭
+        </button>
+      </div>
+
+      <div class="p-4 flex-1 overflow-y-auto font-mono text-xs bg-slate-950 text-slate-200 space-y-1" id="deploy-log">
+        <div class="text-slate-400">正在执行: npm run check && npm run build && git push ...</div>
+      </div>
+      
+      <div class="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 flex justify-end">
+        <button id="modal-ok-btn" class="px-4 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold">
+          完成
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Application Script -->
+  <script>
+    // State Management
+    let currentPosts = [];
+    let currentSlug = null;
+    let isDark = localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    // Initialize Theme
+    function applyTheme() {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    applyTheme();
+
+    document.getElementById('theme-btn').addEventListener('click', () => {
+      isDark = !isDark;
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      applyTheme();
+    });
+
+    // Configure Marked
+    marked.setOptions({
+      highlight: function(code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+      },
+      breaks: true,
+      gfm: true
+    });
+
+    // DOM Elements
+    const postsListEl = document.getElementById('posts-list');
+    const searchInput = document.getElementById('search-input');
+    const postCountLabel = document.getElementById('post-count-label');
+    const titleInput = document.getElementById('post-title');
+    const slugInput = document.getElementById('post-slug');
+    const dateInput = document.getElementById('post-date');
+    const categoryInput = document.getElementById('post-category');
+    const tagsInput = document.getElementById('post-tags');
+    const draftCheckbox = document.getElementById('post-draft');
+    const editor = document.getElementById('editor');
+    const preview = document.getElementById('preview');
+    const wordCount = document.getElementById('word-count');
+    const saveBtn = document.getElementById('save-btn');
+    const deleteBtn = document.getElementById('delete-btn');
+    const newPostBtn = document.getElementById('new-post-btn');
+    const deployBtn = document.getElementById('deploy-btn');
+    const uploadToast = document.getElementById('upload-toast');
+    const deployModal = document.getElementById('deploy-modal');
+    const deployLog = document.getElementById('deploy-log');
+    const deploySpinner = document.getElementById('deploy-spinner');
+
+    // 1. Fetch Post List
+    async function loadPosts() {
+      try {
+        const res = await fetch('/api/posts');
+        currentPosts = await res.json();
+        renderPostList(currentPosts);
+        postCountLabel.textContent = `共 ${currentPosts.length} 篇文章`;
+
+        // Load first post if none selected
+        if (!currentSlug && currentPosts.length > 0) {
+          selectPost(currentPosts[0].slug);
+        }
+      } catch (err) {
+        console.error('Failed to load posts', err);
+        postsListEl.innerHTML = '<div class="p-4 text-xs text-rose-500">无法加载文章列表，请确认管理后台服务已启动。</div>';
+      }
+    }
+
+    // 2. Render Post List in Sidebar
+    function renderPostList(posts) {
+      if (posts.length === 0) {
+        postsListEl.innerHTML = '<div class="p-6 text-center text-xs text-slate-400">未找到匹配文章</div>';
+        return;
+      }
+
+      postsListEl.innerHTML = posts.map(p => {
+        const isActive = p.slug === currentSlug;
+        const mainCat = p.categories && p.categories[0] ? p.categories[0] : '';
+        return `
+          <div
+            onclick="selectPost('${p.slug}')"
+            class="group p-3 rounded-xl cursor-pointer transition-all ${
+              isActive
+                ? 'bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 shadow-2xs'
+                : 'hover:bg-slate-100/70 dark:hover:bg-slate-900/40 border border-transparent'
+            }"
+          >
+            <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono mb-1">
+              <span>${p.date.slice(0, 10)}</span>
+              ${mainCat ? `<span>•</span><span class="text-indigo-600 dark:text-indigo-400">${mainCat}</span>` : ''}
+              ${p.draft ? '<span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">草稿</span>' : ''}
+            </div>
+            <div class="text-xs sm:text-sm font-semibold line-clamp-1 ${isActive ? 'text-indigo-700 dark:text-indigo-300' : 'text-slate-800 dark:text-slate-200'}">
+              ${p.title}
+            </div>
+            ${p.tags && p.tags.length ? `
+              <div class="mt-1.5 flex flex-wrap gap-1">
+                ${p.tags.slice(0, 3).map(t => `<span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500">#${t}</span>`).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 3. Search Filter
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (!q) {
+        renderPostList(currentPosts);
+        return;
+      }
+      const filtered = currentPosts.filter(p => {
+        const titleMatch = p.title.toLowerCase().includes(q);
+        const catMatch = p.categories && p.categories.some(c => c.toLowerCase().includes(q));
+        const tagMatch = p.tags && p.tags.some(t => t.toLowerCase().includes(q));
+        return titleMatch || catMatch || tagMatch;
+      });
+      renderPostList(filtered);
+    });
+
+    // 4. Select and Load Post
+    window.selectPost = async function(slug) {
+      currentSlug = slug;
+      renderPostList(currentPosts);
+
+      try {
+        const res = await fetch(`/api/posts/${slug}`);
+        const post = await res.json();
+
+        titleInput.value = post.title || '';
+        slugInput.value = post.slug || '';
+        dateInput.value = post.date || '';
+        categoryInput.value = (post.categories || []).join(', ');
+        tagsInput.value = (post.tags || []).join(', ');
+        draftCheckbox.checked = Boolean(post.draft);
+        editor.value = post.body || '';
+
+        updatePreview();
+      } catch (err) {
+        alert('读取文章内容失败: ' + err.message);
+      }
+    };
+
+    // 5. Update Preview & Word Count
+    function updatePreview() {
+      const markdown = editor.value;
+      preview.innerHTML = marked.parse(markdown);
+      const cleanText = markdown.replace(/[#*`_~>\-]/g, '').trim();
+      wordCount.textContent = `${cleanText.length} 字`;
+    }
+
+    editor.addEventListener('input', updatePreview);
+
+    // 6. Save Post (PUT /api/posts/:slug)
+    async function savePost() {
+      if (!currentSlug) return;
+
+      const title = titleInput.value.trim();
+      const newSlug = slugInput.value.trim();
+      const date = dateInput.value.trim();
+      const categories = categoryInput.value.split(/[,，]/).map(s => s.trim()).filter(Boolean);
+      const tags = tagsInput.value.split(/[,，]/).map(s => s.trim()).filter(Boolean);
+      const draft = draftCheckbox.checked;
+      const body = editor.value;
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = '保存中...';
+
+      try {
+        const res = await fetch(`/api/posts/${currentSlug}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title,
+            newSlug,
+            date,
+            categories,
+            tags,
+            draft,
+            body
+          })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          saveBtn.textContent = '✓ 已保存!';
+          saveBtn.classList.replace('bg-indigo-600', 'bg-emerald-600');
+          currentSlug = data.slug;
+          await loadPosts();
+          setTimeout(() => {
+            saveBtn.textContent = '保存 (Ctrl+S)';
+            saveBtn.classList.replace('bg-emerald-600', 'bg-indigo-600');
+            saveBtn.disabled = false;
+          }, 1500);
+        } else {
+          alert('保存失败: ' + (data.error || '未知错误'));
+          saveBtn.textContent = '保存 (Ctrl+S)';
+          saveBtn.disabled = false;
+        }
+      } catch (err) {
+        alert('保存网络异常: ' + err.message);
+        saveBtn.textContent = '保存 (Ctrl+S)';
+        saveBtn.disabled = false;
+      }
+    }
+
+    saveBtn.addEventListener('click', savePost);
+
+    // Shortcut: Ctrl+S to save
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        savePost();
+      }
+    });
+
+    // Tab key in editor: insert 2 spaces
+    editor.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + '  ' + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + 2;
+        updatePreview();
+      }
+    });
+
+    // 7. New Post Flow
+    newPostBtn.addEventListener('click', async () => {
+      const title = prompt('请输入新文章标题:', '我的新文章');
+      if (!title) return;
+
+      try {
+        const res = await fetch('/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title })
+        });
+        const data = await res.json();
+        if (data.success) {
+          currentSlug = data.slug;
+          await loadPosts();
+          selectPost(data.slug);
+        }
+      } catch (err) {
+        alert('创建新文章失败: ' + err.message);
+      }
+    });
+
+    // 8. Delete Post Flow
+    deleteBtn.addEventListener('click', async () => {
+      if (!currentSlug) return;
+      const confirmDelete = confirm(`确认要删除文章【${titleInput.value}】吗？此操作将同时清理该文章配图目录，不可撤销。`);
+      if (!confirmDelete) return;
+
+      try {
+        const res = await fetch(`/api/posts/${currentSlug}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+          currentSlug = null;
+          await loadPosts();
+        }
+      } catch (err) {
+        alert('删除失败: ' + err.message);
+      }
+    });
+
+    // 9. CORE FEATURE: Paste Image Auto-Upload
+    editor.addEventListener('paste', async (e) => {
+      if (!currentSlug) return;
+      const items = (e.clipboardData || window.clipboardData).items;
+      let imageFile = null;
+
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          imageFile = items[i].getAsFile();
+          break;
+        }
+      }
+
+      if (!imageFile) return; // Normal text paste
+
+      e.preventDefault();
+      uploadToast.classList.remove('hidden');
+
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64 = reader.result;
+        try {
+          const res = await fetch('/api/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              slug: currentSlug,
+              base64: base64,
+            })
+          });
+          const result = await res.json();
+          uploadToast.classList.add('hidden');
+
+          if (result.success) {
+            // Insert Markdown image at cursor
+            const imageMarkdown = `\n![图片描述](${result.url})\n`;
+            const startPos = editor.selectionStart;
+            const endPos = editor.selectionEnd;
+            editor.value = editor.value.substring(0, startPos) + imageMarkdown + editor.value.substring(endPos);
+            editor.selectionStart = editor.selectionEnd = startPos + imageMarkdown.length;
+            updatePreview();
+          } else {
+            alert('图片转存失败: ' + (result.error || '未知错误'));
+          }
+        } catch (err) {
+          uploadToast.classList.add('hidden');
+          alert('图片上传网络失败: ' + err.message);
+        }
+      };
+      reader.readAsDataURL(imageFile);
+    });
+
+    // 10. Toolbar Insert Helpers
+    document.querySelectorAll('.tool-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const snippet = btn.getAttribute('data-insert');
+        if (!snippet) return;
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + snippet + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + snippet.length;
+        editor.focus();
+        updatePreview();
+      });
+    });
+
+    // 11. One-Click Build & Deploy
+    deployBtn.addEventListener('click', async () => {
+      const commitMsg = prompt('请输入本次发布的主题或修改简述 (留空默认):', `feat(content): 更新博文 - ${new Date().toLocaleDateString()}`);
+      if (commitMsg === null) return;
+
+      deployModal.classList.remove('hidden');
+      deploySpinner.classList.add('animate-spin');
+      deployLog.innerHTML = '<div class="text-indigo-400">🚀 正在启动自动化构建与代码推送流水线...</div>\n<div>正在校验并打包 Astro 静态产物...</div>';
+
+      try {
+        const res = await fetch('/api/deploy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: commitMsg })
+        });
+        const data = await res.json();
+        deploySpinner.classList.remove('animate-spin');
+
+        if (data.success) {
+          deployLog.innerHTML += `\n<div class="text-emerald-400 font-bold">✓ 构建与推送到 GitHub (main & master) 全部成功！</div>\n<pre class="mt-2 text-slate-400">${data.output}</pre>`;
+        } else {
+          deployLog.innerHTML += `\n<div class="text-rose-400 font-bold">✗ 构建或推送遇到问题：</div>\n<pre class="mt-2 text-rose-300">${data.error || ''}\n${data.output || ''}</pre>`;
+        }
+      } catch (err) {
+        deploySpinner.classList.remove('animate-spin');
+        deployLog.innerHTML += `\n<div class="text-rose-400 font-bold">网络通信异常: ${err.message}</div>`;
+      }
+    });
+
+    document.getElementById('close-modal-btn').addEventListener('click', () => {
+      deployModal.classList.add('hidden');
+    });
+    document.getElementById('modal-ok-btn').addEventListener('click', () => {
+      deployModal.classList.add('hidden');
+    });
+
+    // Start App
+    loadPosts();
+  </script>
+</body>
+</html>
