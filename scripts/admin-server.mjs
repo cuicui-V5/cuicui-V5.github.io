@@ -268,7 +268,9 @@ const server = http.createServer(async (req, res) => {
       const body = await parseJsonBody(req);
       const title = body.title?.trim() || '新文章';
       const now = new Date();
-      const datePrefix = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      const pad = (n) => String(n).padStart(2, '0');
+      const datePrefix = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+      const localDateStr = `${datePrefix} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
       
       let slug = body.slug ? sanitizeSlug(body.slug) : `${datePrefix}-${sanitizeSlug(title)}`;
       if (!slug) slug = `${datePrefix}-untitled`;
@@ -280,7 +282,7 @@ const server = http.createServer(async (req, res) => {
 
       const postData = {
         title,
-        date: body.date || now.toISOString().replace('T', ' ').slice(0, 19),
+        date: body.date || localDateStr,
         description: body.description || '',
         categories: Array.isArray(body.categories) ? body.categories : body.categories ? [body.categories] : ['思考随笔'],
         tags: Array.isArray(body.tags) ? body.tags : body.tags ? [body.tags] : ['随笔'],

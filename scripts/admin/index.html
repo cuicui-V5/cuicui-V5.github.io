@@ -208,19 +208,22 @@
 
       <!-- Formatting Toolbar -->
       <div class="flex items-center gap-1 px-4 py-1.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/30 text-xs text-slate-600 dark:text-slate-400 shrink-0 overflow-x-auto">
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="**加粗**"><strong>B</strong></button>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="*斜体*"><em>I</em></button>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="# 一级标题\n">H1</button>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="## 二级标题\n">H2</button>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="### 三级标题\n">H3</button>
+        <button class="tool-btn px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 font-bold" data-format="bold" title="加粗 (Ctrl+B)">B</button>
+        <button class="tool-btn px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 italic" data-format="italic" title="斜体 (Ctrl+I)">I</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 line-through" data-format="strikethrough" title="删除线">S</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 font-mono" data-format="inline-code" title="行内代码">`Code`</button>
         <span class="text-slate-300 dark:text-slate-700">|</span>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="> 引用内容\n">引用</button>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="```javascript\n\n```\n">代码块</button>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="[链接描述](https://example.com)">链接</button>
-        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-insert="| 列1 | 列2 |\n| --- | --- |\n| 内容1 | 内容2 |\n">表格</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 font-bold" data-format="h1" title="一级标题">H1</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 font-bold" data-format="h2" title="二级标题">H2</button>
+        <button class="tool-btn px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 font-bold" data-format="h3" title="三级标题">H3</button>
+        <span class="text-slate-300 dark:text-slate-700">|</span>
+        <button class="tool-btn px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-format="quote" title="引用块">引用</button>
+        <button class="tool-btn px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-format="codeblock" title="多行代码块">代码块</button>
+        <button class="tool-btn px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-format="link" title="插入链接">链接</button>
+        <button class="tool-btn px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800" data-format="table" title="插入表格">表格</button>
         <span class="text-slate-300 dark:text-slate-700">|</span>
         <span class="text-[11px] text-indigo-500 font-mono ml-auto flex items-center gap-1">
-          <span>💡 提示：支持直接按 <kbd class="px-1 py-0.5 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-900">Ctrl+V</kbd> 粘贴截图自动上传</span>
+          <span>💡 提示：按 <kbd class="px-1 py-0.5 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-900">Ctrl+V</kbd> 粘贴截图自动上传</span>
         </span>
       </div>
 
@@ -520,6 +523,13 @@
       }
     });
 
+    // Helper: Local Date Time String (YYYY-MM-DD HH:mm:ss)
+    function getLocalTimeString() {
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+
     // 7. New Post Flow
     newPostBtn.addEventListener('click', async () => {
       const title = prompt('请输入新文章标题:', '我的新文章');
@@ -529,7 +539,10 @@
         const res = await fetch('/api/posts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title })
+          body: JSON.stringify({
+            title,
+            date: getLocalTimeString()
+          })
         });
         const data = await res.json();
         if (data.success) {
@@ -612,18 +625,142 @@
       reader.readAsDataURL(imageFile);
     });
 
-    // 10. Toolbar Insert Helpers
+    // 10. Smart Formatting Toolbar
+    function applyFormat(action) {
+      const start = editor.selectionStart;
+      const end = editor.selectionEnd;
+      const selectedText = editor.value.substring(start, end);
+      const fullText = editor.value;
+
+      let prefix = '';
+      let suffix = '';
+      let defaultPlaceholder = '';
+
+      switch (action) {
+        case 'bold':
+          prefix = '**';
+          suffix = '**';
+          break;
+        case 'italic':
+          prefix = '*';
+          suffix = '*';
+          break;
+        case 'strikethrough':
+          prefix = '~~';
+          suffix = '~~';
+          break;
+        case 'inline-code':
+          prefix = '`';
+          suffix = '`';
+          break;
+        case 'h1':
+          prefix = '# ';
+          defaultPlaceholder = '一级标题';
+          break;
+        case 'h2':
+          prefix = '## ';
+          defaultPlaceholder = '二级标题';
+          break;
+        case 'h3':
+          prefix = '### ';
+          defaultPlaceholder = '三级标题';
+          break;
+        case 'quote':
+          prefix = '> ';
+          defaultPlaceholder = '引用内容';
+          break;
+        case 'codeblock':
+          prefix = '```javascript\n';
+          suffix = '\n```';
+          break;
+        case 'link':
+          prefix = '[';
+          suffix = '](https://)';
+          defaultPlaceholder = '链接描述';
+          break;
+        case 'table':
+          const tableTemplate = '\n| 列1 | 列2 | 列3 |\n| :--- | :--- | :--- |\n| 内容1 | 内容2 | 内容3 |\n';
+          editor.value = fullText.substring(0, start) + tableTemplate + fullText.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + tableTemplate.length;
+          editor.focus();
+          updatePreview();
+          return;
+        default:
+          return;
+      }
+
+      if (['h1', 'h2', 'h3', 'quote'].includes(action)) {
+        const lineStartIndex = fullText.lastIndexOf('\n', start - 1) + 1;
+        const isAtLineStart = start === lineStartIndex;
+        const leadingNewline = (!isAtLineStart && start > 0) ? '\n' : '';
+
+        if (selectedText.length > 0) {
+          const replacement = leadingNewline + prefix + selectedText + suffix;
+          editor.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+          editor.selectionStart = start + leadingNewline.length + prefix.length;
+          editor.selectionEnd = start + replacement.length;
+        } else {
+          const replacement = leadingNewline + prefix + defaultPlaceholder + suffix;
+          editor.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+          editor.selectionStart = start + leadingNewline.length + prefix.length;
+          editor.selectionEnd = start + leadingNewline.length + prefix.length + defaultPlaceholder.length;
+        }
+      } else if (action === 'codeblock') {
+        const leadingNewline = (start > 0 && fullText[start - 1] !== '\n') ? '\n' : '';
+        const trailingNewline = (end < fullText.length && fullText[end] !== '\n') ? '\n' : '';
+        if (selectedText.length > 0) {
+          const replacement = leadingNewline + prefix + selectedText + suffix + trailingNewline;
+          editor.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+          editor.selectionStart = start + leadingNewline.length + prefix.length;
+          editor.selectionEnd = start + leadingNewline.length + prefix.length + selectedText.length;
+        } else {
+          const replacement = leadingNewline + prefix + suffix + trailingNewline;
+          editor.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+          const cursorPosition = start + leadingNewline.length + prefix.length;
+          editor.selectionStart = editor.selectionEnd = cursorPosition;
+        }
+      } else {
+        // Inline: bold, italic, strikethrough, inline-code, link
+        if (selectedText.length > 0) {
+          const replacement = prefix + selectedText + suffix;
+          editor.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+          editor.selectionStart = start + prefix.length;
+          editor.selectionEnd = start + prefix.length + selectedText.length;
+        } else {
+          if (defaultPlaceholder.length > 0) {
+            const replacement = prefix + defaultPlaceholder + suffix;
+            editor.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+            editor.selectionStart = start + prefix.length;
+            editor.selectionEnd = start + prefix.length + defaultPlaceholder.length;
+          } else {
+            const replacement = prefix + suffix;
+            editor.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+            // Move cursor to EXACT MIDDLE
+            editor.selectionStart = editor.selectionEnd = start + prefix.length;
+          }
+        }
+      }
+
+      editor.focus();
+      updatePreview();
+    }
+
     document.querySelectorAll('.tool-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const snippet = btn.getAttribute('data-insert');
-        if (!snippet) return;
-        const start = editor.selectionStart;
-        const end = editor.selectionEnd;
-        editor.value = editor.value.substring(0, start) + snippet + editor.value.substring(end);
-        editor.selectionStart = editor.selectionEnd = start + snippet.length;
-        editor.focus();
-        updatePreview();
+        const action = btn.getAttribute('data-format');
+        if (action) applyFormat(action);
       });
+    });
+
+    // Editor keyboard shortcuts (Ctrl+B, Ctrl+I)
+    editor.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
+        e.preventDefault();
+        applyFormat('bold');
+      } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'i') {
+        e.preventDefault();
+        applyFormat('italic');
+      }
     });
 
     // 11. One-Click Build & Deploy
