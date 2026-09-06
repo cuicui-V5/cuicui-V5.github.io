@@ -10,21 +10,21 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
 ---
 
 {filteredHeadings.length > 0 && (
-  <nav class="toc-container text-xs text-zinc-500 dark:text-zinc-400">
-    <div class="font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-200 mb-3 text-[11px] flex items-center gap-1.5">
-      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <nav class="toc-container text-xs text-slate-500 dark:text-slate-400">
+    <div class="font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-3 text-[11px] flex items-center gap-2">
+      <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h7" />
       </svg>
-      目录
+      文章目录
     </div>
-    <ul class="space-y-2 border-l border-zinc-200 dark:border-zinc-800">
+    <ul class="space-y-1 border-l border-slate-200 dark:border-slate-800">
       {filteredHeadings.map((heading) => {
-        const indentClass = heading.depth === 3 ? 'pl-6' : heading.depth === 2 ? 'pl-4' : 'pl-2';
+        const indentClass = heading.depth === 3 ? 'pl-6' : heading.depth === 2 ? 'pl-4' : 'pl-2.5';
         return (
           <li>
             <a
               href={`#${heading.slug}`}
-              class={`toc-link block -ml-px border-l-2 border-transparent ${indentClass} py-0.5 hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors line-clamp-1`}
+              class={`toc-link block -ml-px border-l-2 border-transparent ${indentClass} py-1 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all line-clamp-1 text-slate-600 dark:text-slate-400`}
               data-slug={heading.slug}
             >
               {heading.text}
@@ -45,11 +45,11 @@ const filteredHeadings = headings.filter((h) => h.depth >= 1 && h.depth <= 3);
             const id = entry.target.getAttribute('id');
             document.querySelectorAll('.toc-link').forEach((link) => {
               if (link.getAttribute('data-slug') === id) {
-                link.classList.add('border-blue-500', 'text-blue-600', 'dark:text-blue-400', 'font-medium');
-                link.classList.remove('border-transparent');
+                link.classList.add('border-indigo-500', 'text-indigo-600', 'dark:text-indigo-400', 'bg-indigo-50/70', 'dark:bg-indigo-950/40', 'rounded-r-md', 'font-medium');
+                link.classList.remove('border-transparent', 'text-slate-600', 'dark:text-slate-400');
               } else {
-                link.classList.remove('border-blue-500', 'text-blue-600', 'dark:text-blue-400', 'font-medium');
-                link.classList.add('border-transparent');
+                link.classList.remove('border-indigo-500', 'text-indigo-600', 'dark:text-indigo-400', 'bg-indigo-50/70', 'dark:bg-indigo-950/40', 'rounded-r-md', 'font-medium');
+                link.classList.add('border-transparent', 'text-slate-600', 'dark:text-slate-400');
               }
             });
           }

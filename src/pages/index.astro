@@ -2,84 +2,173 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
-import { sortPostsByDate, getAllCategories } from '../utils/posts';
+import { sortPostsByDate, getAllCategories, getAllTags, getCategoryBadgeStyle, getTagBadgeStyle } from '../utils/posts';
 
 const allPosts = await getCollection('blog');
 const sortedPosts = sortPostsByDate(allPosts);
-const recentPosts = sortedPosts.slice(0, 6);
+const recentPosts = sortedPosts.slice(0, 7);
 const categories = getAllCategories(allPosts);
+const topTags = getAllTags(allPosts).slice(0, 15);
 ---
 
 <BaseLayout>
-  <!-- Hero Section -->
-  <section class="mb-14 sm:mb-20 pt-4 sm:pt-8">
-    <div class="flex items-center gap-5 sm:gap-6 mb-6">
-      <img
-        src="/avatar.jpg"
-        alt="cuicui"
-        class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-zinc-200 dark:border-zinc-800 shadow-sm"
-      />
-      <div>
-        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
-          cuicui
-        </h1>
-        <p class="text-xs sm:text-sm font-mono text-zinc-400 dark:text-zinc-500 mt-1">
-          Stay curious • Think deeply • Build simply
+  <!-- Hero Section with Light Pastel Aura -->
+  <section class="relative overflow-hidden rounded-3xl p-8 sm:p-12 mb-12 bg-gradient-to-br from-indigo-50/90 via-sky-50/40 to-purple-50/60 dark:from-indigo-950/30 dark:via-slate-900/50 dark:to-purple-950/20 border border-indigo-100/80 dark:border-indigo-900/50 shadow-[0_8px_30px_rgba(99,102,241,0.06)]">
+    <!-- Decorative background glow blobs -->
+    <div class="absolute -top-16 -right-16 w-64 h-64 bg-indigo-200/40 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-16 -left-16 w-64 h-64 bg-sky-200/40 dark:bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-5 mb-5">
+          <img
+            src="/avatar.jpg"
+            alt="cuicui"
+            class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover ring-4 ring-white/80 dark:ring-slate-800/80 shadow-md"
+          />
+          <div>
+            <div class="flex items-center gap-3">
+              <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 font-mono">
+                cuicui
+              </h1>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                数字花园
+              </span>
+            </div>
+            <p class="text-xs sm:text-sm font-mono text-slate-500 dark:text-slate-400 mt-1">
+              Stay curious • Think deeply • Build simply
+            </p>
+          </div>
+        </div>
+
+        <!-- Philosophical Quote -->
+        <blockquote class="my-4 rounded-xl bg-white/60 dark:bg-slate-900/60 border-l-4 border-indigo-500 p-4 text-sm sm:text-base italic text-slate-700 dark:text-slate-300 backdrop-blur-xs shadow-2xs">
+          “弱小和无知从不是生存的障碍，傲慢才是。”
+        </blockquote>
+
+        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          欢迎来到我的个人数字自留地。这里沉淀技术折腾的实战手记、思考随笔与各类有意思的解决方案。不设限，保持好奇心与探究精神。
         </p>
       </div>
-    </div>
 
-    <!-- Quote & Bio -->
-    <blockquote class="border-l-2 border-zinc-300 dark:border-zinc-700 pl-4 py-1 text-sm sm:text-base italic text-zinc-600 dark:text-zinc-400 mb-6">
-      “弱小和无知从不是生存的障碍，傲慢才是。”
-    </blockquote>
-
-    <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
-      欢迎来到我的数字自留地。这里记录技术折腾、思考随笔与各类有趣的问题解决方案。不随波逐流，在信息纷繁的世界里保留属于自己的秩序。
-    </p>
-
-    <!-- Quick Stats -->
-    <div class="mt-8 flex items-center gap-6 text-xs font-mono text-zinc-500 dark:text-zinc-400 border-t border-b border-zinc-200/80 dark:border-zinc-800/80 py-3">
-      <div>
-        <span class="text-zinc-900 dark:text-zinc-100 font-semibold">{allPosts.length}</span> 篇沉淀文章
+      <!-- Quick Stats Widget on Right -->
+      <div class="shrink-0 flex md:flex-col gap-3 sm:gap-4 border-t md:border-t-0 md:border-l border-indigo-100/80 dark:border-indigo-900/50 pt-4 md:pt-0 md:pl-8">
+        <div class="p-3.5 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-indigo-100/60 dark:border-indigo-900/40 min-w-[130px] shadow-2xs">
+          <div class="text-xs text-slate-400 dark:text-slate-500 font-mono">沉淀文章</div>
+          <div class="text-xl font-bold font-mono text-indigo-600 dark:text-indigo-400 mt-0.5">{allPosts.length} <span class="text-xs font-normal text-slate-400">篇</span></div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-indigo-100/60 dark:border-indigo-900/40 min-w-[130px] shadow-2xs">
+          <div class="text-xs text-slate-400 dark:text-slate-500 font-mono">主题分类</div>
+          <div class="text-xl font-bold font-mono text-sky-600 dark:text-sky-400 mt-0.5">{categories.length} <span class="text-xs font-normal text-slate-400">个</span></div>
+        </div>
       </div>
-      <span>/</span>
-      <div>
-        <span class="text-zinc-900 dark:text-zinc-100 font-semibold">{categories.length}</span> 个主题分类
-      </div>
-      <span>/</span>
-      <a href="/archive" class="text-blue-600 dark:text-blue-400 hover:underline">
-        完整归档时间线 →
-      </a>
     </div>
   </section>
 
-  <!-- Recent Posts Section -->
-  <section>
-    <div class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3 mb-4">
-      <h2 class="text-sm font-semibold tracking-wider text-zinc-900 dark:text-zinc-100 uppercase font-mono flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-        近期文章 / Recent Posts
-      </h2>
-      <a href="/posts" class="text-xs font-mono text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-        全部文章 ({allPosts.length}) →
-      </a>
+  <!-- Two-Column Layout on Wide Screens -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-10">
+    <!-- Left Main Column: Recent Posts -->
+    <div class="lg:col-span-8">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-6">
+        <h2 class="text-sm font-semibold tracking-wider text-slate-900 dark:text-slate-100 uppercase font-mono flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+          近期文章 / Recent Notes
+        </h2>
+        <a href="/posts" class="text-xs font-mono text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+          全部文章 ({allPosts.length}) →
+        </a>
+      </div>
+
+      <div class="space-y-4">
+        {recentPosts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+
+      <!-- More Posts CTA -->
+      <div class="mt-8 text-center">
+        <a
+          href="/posts"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-xs font-mono font-medium border border-indigo-200/80 dark:border-indigo-800/80 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 transition-all shadow-xs"
+        >
+          查看全部 {allPosts.length} 篇历史文章 →
+        </a>
+      </div>
     </div>
 
-    <div class="divide-y divide-zinc-100 dark:divide-zinc-800/60">
-      {recentPosts.map((post) => (
-        <PostCard post={post} />
-      ))}
-    </div>
+    <!-- Right Column: Sidebar Widgets -->
+    <aside class="lg:col-span-4 space-y-6">
+      <!-- Category Widget -->
+      <div class="p-6 rounded-2xl bg-white/70 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/80 shadow-xs">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono mb-4 flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+          主题分类 / Categories
+        </h3>
+        <div class="space-y-2">
+          {categories.map(({ category, count }) => {
+            const style = getCategoryBadgeStyle(category);
+            return (
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30 transition-colors">
+                <span class="flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-300">
+                  <span class={`w-2 h-2 rounded-full ${style.dot}`}></span>
+                  {category}
+                </span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/60">
+                  {count}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-    <!-- More Posts CTA -->
-    <div class="mt-10 text-center">
-      <a
-        href="/posts"
-        class="inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-xs font-mono font-medium border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors shadow-sm"
-      >
-        浏览全部 {allPosts.length} 篇历史文章 →
-      </a>
-    </div>
-  </section>
+      <!-- Hot Tags Widget -->
+      <div class="p-6 rounded-2xl bg-white/70 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/80 shadow-xs">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono mb-4 flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          热门标签 / Tags
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {topTags.map(({ tag, count }) => {
+            const tagStyle = getTagBadgeStyle(tag);
+            return (
+              <a
+                href={`/tags/${encodeURIComponent(tag)}`}
+                class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all ${tagStyle.bg} ${tagStyle.text} ${tagStyle.border} ${tagStyle.hover}`}
+              >
+                <span>#{tag}</span>
+                <span class="text-[10px] opacity-70 font-mono">({count})</span>
+              </a>
+            );
+          })}
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 text-right">
+          <a href="/tags" class="text-xs font-mono text-indigo-600 dark:text-indigo-400 hover:underline">
+            查看全部标签 →
+          </a>
+        </div>
+      </div>
+
+      <!-- Timeline Shortcut Widget -->
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-50/50 via-sky-50/30 to-white dark:from-indigo-950/20 dark:via-slate-900/40 dark:to-slate-900/20 border border-indigo-100/80 dark:border-indigo-900/40 shadow-xs">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 font-mono mb-2">
+          时间线归档
+        </h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+          按年份查看全部历史轨迹，感受文字记录随时间的沉淀。
+        </p>
+        <a
+          href="/archive"
+          class="inline-flex items-center gap-1.5 text-xs font-mono text-indigo-600 dark:text-indigo-400 font-medium hover:underline"
+        >
+          进入时间轴归档 →
+        </a>
+      </div>
+    </aside>
+  </div>
 </BaseLayout>

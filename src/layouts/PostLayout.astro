@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
 import BaseLayout from './BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
-import { formatDate, getPostReadingTime } from '../utils/posts';
+import { formatDate, getPostReadingTime, getCategoryBadgeStyle, getTagBadgeStyle } from '../utils/posts';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -19,73 +19,79 @@ const stats = getPostReadingTime(post.body);
 
 <BaseLayout title={`${post.data.title} - cuicui'Blog`} description={post.data.description}>
   <!-- Top Reading Progress Indicator -->
-  <div id="reading-progress" class="fixed top-0 left-0 h-[2.5px] bg-blue-500 z-50 transition-all duration-75" style="width: 0%"></div>
+  <div id="reading-progress" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 z-50 transition-all duration-75" style="width: 0%"></div>
 
   <article class="relative">
     <!-- Back Link -->
     <a
       href="/posts"
-      class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 mb-8 transition-colors"
+      class="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 mb-8 transition-colors px-3 py-1.5 rounded-lg bg-slate-100/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/50"
     >
       <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
-      返回所有文章
+      返回全部文章
     </a>
 
     <!-- Header Section -->
-    <header class="mb-10 pb-8 border-b border-zinc-200 dark:border-zinc-800">
-      <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-zinc-400 dark:text-zinc-500 mb-3">
-        <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
-        <span>•</span>
-        <span>约 {stats.words} 字</span>
-        <span>•</span>
-        <span>阅读时长 {stats.minutes} 分钟</span>
-        {post.data.categories && post.data.categories.length > 0 && (
-          <>
-            <span>•</span>
-            <span class="text-zinc-600 dark:text-zinc-300 font-sans">{post.data.categories.join(' / ')}</span>
-          </>
-        )}
+    <header class="mb-10 pb-8 border-b border-slate-200 dark:border-slate-800">
+      <div class="flex flex-wrap items-center gap-3 text-xs mb-4">
+        {post.data.categories && post.data.categories.map((cat) => {
+          const style = getCategoryBadgeStyle(cat);
+          return (
+            <span class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${style.bg} ${style.text} ${style.border}`}>
+              <span class={`w-1.5 h-1.5 rounded-full ${style.dot}`}></span>
+              {cat}
+            </span>
+          );
+        })}
+        <time datetime={post.data.date.toISOString()} class="font-mono text-slate-400 dark:text-slate-500">{formattedDate}</time>
+        <span class="text-slate-300 dark:text-slate-700">•</span>
+        <span class="text-slate-500 dark:text-slate-400">共约 {stats.words} 字</span>
+        <span class="text-slate-300 dark:text-slate-700">•</span>
+        <span class="text-slate-500 dark:text-slate-400">预计阅读 {stats.minutes} 分钟</span>
       </div>
 
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 leading-tight">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 leading-tight">
         {post.data.title}
       </h1>
 
       {post.data.tags && post.data.tags.length > 0 && (
-        <div class="mt-4 flex flex-wrap gap-2">
-          {post.data.tags.map((tag) => (
-            <a
-              href={`/tags/${encodeURIComponent(tag)}`}
-              class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-            >
-              #{tag}
-            </a>
-          ))}
+        <div class="mt-5 flex flex-wrap gap-2">
+          {post.data.tags.map((tag) => {
+            const style = getTagBadgeStyle(tag);
+            return (
+              <a
+                href={`/tags/${encodeURIComponent(tag)}`}
+                class={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium border transition-colors ${style.bg} ${style.text} ${style.border} ${style.hover}`}
+              >
+                #{tag}
+              </a>
+            );
+          })}
         </div>
       )}
     </header>
 
-    <!-- Main Content & Sidebar Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+    <!-- Main Content & Sidebar Grid (Expanded Viewport) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14">
       <!-- Article Body -->
-      <div class="lg:col-span-3 min-w-0">
-        <div class="prose prose-zinc dark:prose-invert max-w-none text-zinc-800 dark:text-zinc-200 leading-relaxed break-words">
+      <div class="lg:col-span-8 xl:col-span-9 min-w-0">
+        <div class="prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 leading-relaxed break-words">
           <slot />
         </div>
 
         <!-- Prev / Next Navigation -->
-        <nav class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <nav class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {prevPost ? (
             <a
               href={`/posts/${prevPost.slug}`}
-              class="group p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+              class="group p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600 bg-white/60 dark:bg-slate-900/40 transition-all shadow-xs"
             >
-              <div class="text-[11px] font-mono text-zinc-400 mb-1 flex items-center gap-1">
+              <div class="text-[11px] font-mono text-indigo-500 dark:text-indigo-400 mb-1.5 flex items-center gap-1">
                 <span>← 上一篇</span>
               </div>
-              <div class="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-blue-500 transition-colors line-clamp-1">
+              <div class="text-sm font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
                 {prevPost.data.title}
               </div>
             </a>
@@ -94,12 +100,12 @@ const stats = getPostReadingTime(post.body);
           {nextPost ? (
             <a
               href={`/posts/${nextPost.slug}`}
-              class="group p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors text-right"
+              class="group p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600 bg-white/60 dark:bg-slate-900/40 transition-all shadow-xs text-right"
             >
-              <div class="text-[11px] font-mono text-zinc-400 mb-1 flex items-center justify-end gap-1">
+              <div class="text-[11px] font-mono text-indigo-500 dark:text-indigo-400 mb-1.5 flex items-center justify-end gap-1">
                 <span>下一篇 →</span>
               </div>
-              <div class="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-blue-500 transition-colors line-clamp-1">
+              <div class="text-sm font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
                 {nextPost.data.title}
               </div>
             </a>
@@ -107,9 +113,9 @@ const stats = getPostReadingTime(post.body);
         </nav>
       </div>
 
-      <!-- Desktop Sticky TOC -->
-      <aside class="hidden lg:block lg:col-span-1">
-        <div class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+      <!-- Desktop Sticky TOC with Glass Card -->
+      <aside class="hidden lg:block lg:col-span-4 xl:col-span-3">
+        <div class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto p-5 rounded-2xl bg-white/70 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-sm shadow-xs">
           <TableOfContents headings={headings} />
         </div>
       </aside>
@@ -144,10 +150,10 @@ const stats = getPostReadingTime(post.body);
         try {
           await navigator.clipboard.writeText(code);
           button.textContent = '已复制!';
-          button.classList.add('text-green-400');
+          button.classList.add('text-indigo-400');
           setTimeout(() => {
             button.textContent = '复制';
-            button.classList.remove('text-green-400');
+            button.classList.remove('text-indigo-400');
           }, 2000);
         } catch (err) {
           button.textContent = '失败';

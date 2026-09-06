@@ -2,30 +2,30 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="mt-auto border-t border-zinc-200/80 dark:border-zinc-800/80 py-10 transition-colors">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 dark:text-zinc-400">
+<footer class="mt-auto border-t border-slate-200/80 dark:border-slate-800/80 py-10 transition-colors bg-white/40 dark:bg-[#0c0d14]/40 backdrop-blur-xs">
+  <div class="max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
     <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
-      <span>© {currentYear} cuicui</span>
-      <span class="hidden sm:inline">•</span>
-      <span class="italic text-zinc-400 dark:text-zinc-500">“弱小和无知从不是生存的障碍，傲慢才是”</span>
+      <span class="font-medium text-slate-700 dark:text-slate-300">© {currentYear} cuicui</span>
+      <span class="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
+      <span class="italic text-slate-500 dark:text-slate-400">“弱小和无知从不是生存的障碍，傲慢才是”</span>
     </div>
 
     <div class="flex items-center gap-4">
       <a
         href="/rss.xml"
-        class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1"
+        class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-8.18v4.819c10.563.064 19.135 8.629 19.2 19.181h4.798c-.064-13.208-10.778-23.93-23.998-24z"/>
         </svg>
-        RSS
+        RSS 订阅
       </a>
-      <span>•</span>
+      <span class="text-slate-300 dark:text-slate-700">•</span>
       <a
         href="https://github.com/cuicui-V5/cuicui-V5.github.io"
-        class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1"
+        class="hover:text-slate-900 dark:hover:text-slate-100 transition-colors flex items-center gap-1.5"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -34,11 +34,11 @@ const currentYear = new Date().getFullYear();
         </svg>
         GitHub
       </a>
-      <span>•</span>
+      <span class="text-slate-300 dark:text-slate-700">•</span>
       <button
         id="back-to-top"
         type="button"
-        class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+        class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
         aria-label="Back to top"
       >
         回顶端 ↑

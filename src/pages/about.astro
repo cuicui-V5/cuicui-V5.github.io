@@ -3,72 +3,82 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="关于 - cuicui'Blog" description="关于 cuicui 与这个自留地">
-  <div class="max-w-2xl">
-    <!-- Header -->
-    <div class="flex items-center gap-6 mb-10 pb-8 border-b border-zinc-200 dark:border-zinc-800">
-      <img
-        src="/avatar.jpg"
-        alt="cuicui"
-        class="w-20 h-20 rounded-2xl object-cover border-2 border-zinc-200 dark:border-zinc-800 shadow-sm"
-      />
-      <div>
-        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 font-mono">
-          cuicui
-        </h1>
-        <p class="text-sm font-mono text-zinc-400 dark:text-zinc-500 mt-1">
-          探寻技术与秩序的平衡点
-        </p>
+  <div class="max-w-3xl">
+    <!-- Header Card -->
+    <div class="relative overflow-hidden rounded-3xl p-8 sm:p-10 mb-10 bg-gradient-to-br from-indigo-50/80 via-sky-50/40 to-purple-50/50 dark:from-indigo-950/30 dark:via-slate-900/50 dark:to-purple-950/20 border border-indigo-100/80 dark:border-indigo-900/50 shadow-xs">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <img
+          src="/avatar.jpg"
+          alt="cuicui"
+          class="w-20 h-20 rounded-2xl object-cover ring-4 ring-white/80 dark:ring-slate-800/80 shadow-md"
+        />
+        <div>
+          <div class="flex items-center gap-3">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 font-mono">
+              cuicui
+            </h1>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/60">
+              Explorer
+            </span>
+          </div>
+          <p class="text-sm font-mono text-slate-500 dark:text-slate-400 mt-1">
+            探寻技术、工具与个人秩序的平衡点
+          </p>
+        </div>
       </div>
     </div>
 
     <!-- Content -->
-    <div class="space-y-8 text-sm sm:text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
-      <blockquote class="border-l-2 border-zinc-300 dark:border-zinc-700 pl-4 py-1 text-sm italic text-zinc-500 dark:text-zinc-400">
+    <div class="space-y-8 text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
+      <blockquote class="rounded-2xl bg-white/60 dark:bg-slate-900/50 border-l-4 border-indigo-500 p-5 text-sm sm:text-base italic text-slate-700 dark:text-slate-300 shadow-2xs">
         “弱小和无知从不是生存的障碍，傲慢才是。” —— 《三体》
       </blockquote>
 
-      <section class="space-y-3">
-        <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 font-mono">
-          关于这里
+      <section class="space-y-3 p-6 sm:p-8 rounded-3xl bg-white/60 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 shadow-xs">
+        <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+          关于这里 / About The Garden
         </h2>
         <p>
-          这是我的个人博客与数字花园。早年在这里记录过一些探索网络与代码的笔记，如今它依然是我整理思路、沉淀实践经验与记录思考的自留地。
+          这是我的个人博客与数字花园。早年在这里记录过很多探索代码的笔记，如今它依然是我整理思路、沉淀实践经验与记录思考的自留地。
         </p>
         <p>
-          我相信工具应当简洁实用，认知应当保持开放，面对复杂的世界，保持好奇心与独立思考永远是最重要的能力。
+          我相信工具应当简洁实用，认知应当保持开放。在快速变化的技术浪潮中，保持好奇心、专注解决实际问题比追逐标签更具生命力。
         </p>
       </section>
 
-      <section class="space-y-3">
-        <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 font-mono">
-          博客演进
+      <section class="space-y-3 p-6 sm:p-8 rounded-3xl bg-white/60 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 shadow-xs">
+        <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+          技术演进
         </h2>
-        <p class="text-zinc-600 dark:text-zinc-400">
-          本站从最初基于 Hexo 构建的静态页面，平滑演进到了现代化的 Astro 架构。去除了繁杂的视觉噪音，回归阅读与排版的纯粹本真，拥有 100% 静态零运行时开销。
+        <p class="text-slate-600 dark:text-slate-400">
+          本站最初基于 Hexo 构建，现已全面重构升级至现代化的 Astro 架构。页面拥有极速纯静态零运行时开销，去除了沉闷与单调，融入了柔和的轻色调视觉体系。
         </p>
       </section>
 
-      <section class="space-y-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
-        <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 font-mono">
+      <section class="space-y-3 p-6 sm:p-8 rounded-3xl bg-white/60 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 shadow-xs">
+        <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
           连接与订阅
         </h2>
-        <ul class="space-y-2 text-sm font-mono">
+        <ul class="space-y-2.5 text-sm font-mono">
           <li class="flex items-center gap-2">
-            <span class="text-zinc-400">GitHub:</span>
+            <span class="text-slate-400">GitHub:</span>
             <a
               href="https://github.com/cuicui-V5"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-blue-600 dark:text-blue-400 hover:underline"
+              class="text-indigo-600 dark:text-indigo-400 hover:underline"
             >
               @cuicui-V5
             </a>
           </li>
           <li class="flex items-center gap-2">
-            <span class="text-zinc-400">RSS 订阅:</span>
+            <span class="text-slate-400">RSS 订阅:</span>
             <a
               href="/rss.xml"
-              class="text-blue-600 dark:text-blue-400 hover:underline"
+              class="text-indigo-600 dark:text-indigo-400 hover:underline"
             >
               /rss.xml
             </a>

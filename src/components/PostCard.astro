@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatDate } from '../utils/posts';
+import { formatDate, getPostReadingTime, getCategoryBadgeStyle, getTagBadgeStyle } from '../utils/posts';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -8,42 +8,58 @@ interface Props {
 
 const { post } = Astro.props;
 const formattedDate = formatDate(post.data.date);
+const stats = getPostReadingTime(post.body);
+const mainCategory = post.data.categories && post.data.categories.length > 0 ? post.data.categories[0] : null;
+const categoryStyle = mainCategory ? getCategoryBadgeStyle(mainCategory) : null;
 ---
 
-<article class="group relative flex flex-col items-start py-6 transition-all">
-  <div class="flex items-center gap-3 text-xs text-zinc-400 dark:text-zinc-500 font-mono">
-    <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
-    {post.data.categories && post.data.categories.length > 0 && (
-      <>
-        <span>•</span>
-        <span class="text-zinc-500 dark:text-zinc-400">{post.data.categories[0]}</span>
-      </>
+<article class="group relative flex flex-col p-6 rounded-2xl bg-white/70 dark:bg-slate-900/50 border border-slate-200/70 dark:border-slate-800/70 hover:border-indigo-300 dark:hover:border-indigo-500/40 hover:shadow-[0_8px_25px_rgba(99,102,241,0.07)] transition-all duration-300 backdrop-blur-xs mb-4">
+  <!-- Top meta line -->
+  <div class="flex flex-wrap items-center gap-2.5 text-xs text-slate-500 dark:text-slate-400 mb-2.5">
+    {mainCategory && categoryStyle && (
+      <span class={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium border ${categoryStyle.bg} ${categoryStyle.text} ${categoryStyle.border}`}>
+        <span class={`w-1.5 h-1.5 rounded-full ${categoryStyle.dot}`}></span>
+        {mainCategory}
+      </span>
     )}
+
+    <time datetime={post.data.date.toISOString()} class="font-mono text-slate-400 dark:text-slate-500">
+      {formattedDate}
+    </time>
+
+    <span class="text-slate-300 dark:text-slate-700">•</span>
+    <span class="text-slate-400 dark:text-slate-500">{stats.minutes} 分钟阅读</span>
   </div>
 
-  <h2 class="mt-2 text-lg sm:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+  <!-- Title -->
+  <h2 class="text-lg sm:text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
     <a href={`/posts/${post.slug}`}>
       <span class="absolute inset-0 z-0"></span>
       {post.data.title}
     </a>
   </h2>
 
+  <!-- Description -->
   {post.data.description && (
-    <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+    <p class="mt-2.5 text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
       {post.data.description}
     </p>
   )}
 
+  <!-- Tags -->
   {post.data.tags && post.data.tags.length > 0 && (
-    <div class="mt-3 flex flex-wrap gap-1.5 z-10">
-      {post.data.tags.slice(0, 4).map((tag) => (
-        <a
-          href={`/tags/${encodeURIComponent(tag)}`}
-          class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-        >
-          #{tag}
-        </a>
-      ))}
+    <div class="mt-4 flex flex-wrap gap-2 z-10">
+      {post.data.tags.slice(0, 5).map((tag) => {
+        const tagStyle = getTagBadgeStyle(tag);
+        return (
+          <a
+            href={`/tags/${encodeURIComponent(tag)}`}
+            class={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium border transition-colors ${tagStyle.bg} ${tagStyle.text} ${tagStyle.border} ${tagStyle.hover}`}
+          >
+            #{tag}
+          </a>
+        );
+      })}
     </div>
   )}
 </article>

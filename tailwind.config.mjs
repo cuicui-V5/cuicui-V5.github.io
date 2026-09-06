@@ -7,52 +7,84 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent: {
-          50: '#f4f4f5',
-          100: '#e4e4e7',
-          200: '#d4d4d8',
-          300: '#a1a1aa',
-          400: '#71717a',
-          500: '#52525b',
-          600: '#3f3f46',
-          700: '#27272a',
-          800: '#18181b',
-          900: '#09090b',
+        brand: {
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
         },
       },
       typography: () => ({
         DEFAULT: {
           css: {
-            maxWidth: '68ch',
+            maxWidth: '100%',
             color: 'inherit',
             a: {
-              color: 'inherit',
+              color: '#4f46e5',
               textDecoration: 'underline',
-              textDecorationThickness: '1px',
+              textDecorationColor: '#c7d2fe',
+              textDecorationThickness: '1.5px',
               textUnderlineOffset: '3px',
               fontWeight: '500',
+              transition: 'color 0.15s, text-decoration-color 0.15s',
               '&:hover': {
-                color: '#3b82f6',
+                color: '#4338ca',
+                textDecorationColor: '#4f46e5',
               },
+            },
+            blockquote: {
+              borderLeftColor: '#818cf8',
+              borderLeftWidth: '3px',
+              backgroundColor: 'rgba(99, 102, 241, 0.04)',
+              padding: '0.75rem 1.25rem',
+              borderRadius: '0 0.5rem 0.5rem 0',
+              fontStyle: 'normal',
             },
             'code::before': { content: '""' },
             'code::after': { content: '""' },
             code: {
               fontWeight: '500',
-              backgroundColor: 'rgba(125, 125, 125, 0.1)',
+              color: '#4f46e5',
+              backgroundColor: 'rgba(99, 102, 241, 0.08)',
               padding: '0.2em 0.4em',
-              borderRadius: '0.25rem',
+              borderRadius: '0.375rem',
               fontSize: '0.875em',
             },
             pre: {
-              border: '1px solid rgba(125, 125, 125, 0.15)',
-              borderRadius: '0.5rem',
-              padding: '1rem',
+              border: '1px solid rgba(148, 163, 184, 0.2)',
+              borderRadius: '0.75rem',
+              padding: '1.25rem',
             },
             'h1, h2, h3, h4': {
               color: 'inherit',
               fontWeight: '600',
               letterSpacing: '-0.02em',
+            },
+          },
+        },
+        invert: {
+          css: {
+            a: {
+              color: '#a5b4fc',
+              textDecorationColor: '#4338ca',
+              '&:hover': {
+                color: '#c7d2fe',
+                textDecorationColor: '#a5b4fc',
+              },
+            },
+            blockquote: {
+              borderLeftColor: '#6366f1',
+              backgroundColor: 'rgba(99, 102, 241, 0.08)',
+            },
+            code: {
+              color: '#a5b4fc',
+              backgroundColor: 'rgba(99, 102, 241, 0.15)',
             },
           },
         },
