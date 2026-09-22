@@ -9,7 +9,7 @@ export async function GET(context: any) {
   return rss({
     title: "cuicui'Blog",
     description: '弱小和无知从不是生存的障碍，傲慢才是',
-    site: context.site || 'https://cuijunyu.win',
+    site: context.site || 'https://www.cuijunyu.win',
     items: sorted.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,

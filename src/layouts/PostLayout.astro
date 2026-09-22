@@ -15,9 +15,39 @@ interface Props {
 const { post, headings, prevPost, nextPost } = Astro.props;
 const formattedDate = formatDate(post.data.date);
 const stats = getPostReadingTime(post.body);
+
+const articleUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description || post.data.title,
+  datePublished: post.data.date.toISOString(),
+  dateModified: post.data.date.toISOString(),
+  inLanguage: 'zh-CN',
+  author: {
+    '@type': 'Person',
+    name: 'cuicui',
+    url: new URL('/about', Astro.site).toString(),
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'cuicui',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': articleUrl,
+  },
+  keywords: post.data.tags ? post.data.tags.join(', ') : undefined,
+  articleSection: post.data.categories ? post.data.categories.join(', ') : undefined,
+};
 ---
 
-<BaseLayout title={`${post.data.title} - cuicui'Blog`} description={post.data.description}>
+<BaseLayout title={`${post.data.title} - cuicui'Blog`} description={post.data.description} type="article">
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
   <!-- Top Reading Progress Indicator -->
   <div id="reading-progress" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 z-50 transition-all duration-75" style="width: 0%"></div>
 
