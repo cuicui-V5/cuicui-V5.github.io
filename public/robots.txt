@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.cuijunyu.win/sitemap-index.xml
+Sitemap: https://www.cuijunyu.win/sitemap.xml
+Sitemap: https://www.cuijunyu.win/sitemap-0.xml
