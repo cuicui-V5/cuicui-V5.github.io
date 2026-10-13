@@ -4,22 +4,39 @@ import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   const paths: any[] = [];
+  const seen = new Set<string>();
 
   for (const post of posts) {
     const d = post.data.date;
     const pad = (n: number) => String(n).padStart(2, '0');
     const ymd = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
-    
-    // In Hexo: permalink was :year:month:day/:title/
-    // Slug is YYYY-MM-DD-title
     const slug = post.slug;
-    const m = slug.match(/^\d{4}-\d{2}-\d{2}-(.*)$/);
-    if (m) {
-      const hexoTitle = m[1];
-      paths.push({
-        params: { year: ymd, title: hexoTitle },
-        props: { target: `/posts/${slug}/` },
-      });
+
+    // 1. Original filename title (case-preserved from post.id)
+    const rawId = post.id.replace(/\.(md|mdx)$/, '');
+    const mRaw = rawId.match(/^\d{4}-\d{2}-\d{2}-(.*)$/);
+    if (mRaw) {
+      const key = `${ymd}/${mRaw[1]}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        paths.push({
+          params: { year: ymd, title: mRaw[1] },
+          props: { target: `/posts/${slug}/` },
+        });
+      }
+    }
+
+    // 2. Slug title (lowercased)
+    const mSlug = slug.match(/^\d{4}-\d{2}-\d{2}-(.*)$/);
+    if (mSlug) {
+      const key = `${ymd}/${mSlug[1]}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        paths.push({
+          params: { year: ymd, title: mSlug[1] },
+          props: { target: `/posts/${slug}/` },
+        });
+      }
     }
   }
 
