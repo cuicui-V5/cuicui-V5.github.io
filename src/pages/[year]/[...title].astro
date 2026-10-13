@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const paths: any[] = [];
+
+  for (const post of posts) {
+    const d = post.data.date;
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const ymd = `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+    
+    // In Hexo: permalink was :year:month:day/:title/
+    // Slug is YYYY-MM-DD-title
+    const slug = post.slug;
+    const m = slug.match(/^\d{4}-\d{2}-\d{2}-(.*)$/);
+    if (m) {
+      const hexoTitle = m[1];
+      paths.push({
+        params: { year: ymd, title: hexoTitle },
+        props: { target: `/posts/${slug}/` },
+      });
+    }
+  }
+
+  return paths;
+}
+
+interface Props {
+  target: string;
+}
+
+const { target } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>301 永久重定向 - cuicui'Blog</title>
+    <link rel="canonical" href={`https://www.cuijunyu.win${target}`} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <meta name="robots" content="noindex, follow" />
+  </head>
+  <body>
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target);
+    </script>
+    <p style="font-family: system-ui, sans-serif; padding: 2rem; color: #475569;">
+      文章已迁移至新地址，正在自动跳转：<a href={target} style="color: #4f46e5; text-decoration: underline;">{target}</a>
+    </p>
+  </body>
+</html>

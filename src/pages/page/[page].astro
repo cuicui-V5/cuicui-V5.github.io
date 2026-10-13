@@ -1,0 +1,25 @@
+---
+export function getStaticPaths() {
+  return Array.from({ length: 15 }, (_, i) => ({
+    params: { page: String(i + 1) },
+  }));
+}
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>301 永久重定向 - cuicui'Blog</title>
+    <link rel="canonical" href="https://www.cuijunyu.win/posts/" />
+    <meta http-equiv="refresh" content="0;url=/posts/" />
+    <meta name="robots" content="noindex, follow" />
+  </head>
+  <body>
+    <script is:inline>
+      window.location.replace('/posts/');
+    </script>
+    <p style="font-family: system-ui, sans-serif; padding: 2rem; color: #475569;">
+      正在自动跳转至文章列表页：<a href="/posts/" style="color: #4f46e5; text-decoration: underline;">/posts/</a>
+    </p>
+  </body>
+</html>

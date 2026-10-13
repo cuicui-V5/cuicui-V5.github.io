@@ -1,5 +1,9 @@
 {
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/sitemap-0.xml" }
+  ],
+  "redirects": [
+    { "source": "/categories/:path*", "destination": "/tags", "permanent": true },
+    { "source": "/page/:path*", "destination": "/posts", "permanent": true }
   ]
 }
