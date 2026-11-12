@@ -1,0 +1,71 @@
+---
+// Comments.astro - Giscus Comment Integration
+---
+
+<div class="comments-section mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+  <div class="flex items-center gap-2 mb-6 text-sm font-semibold text-slate-800 dark:text-slate-200">
+    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+    <span>评论互动</span>
+  </div>
+  <div id="giscus-container" class="giscus min-h-[160px]"></div>
+</div>
+
+<script is:inline>
+  function loadGiscus() {
+    const container = document.getElementById('giscus-container');
+    if (!container) return;
+
+    // 清空历史容器以支持页面切换
+    container.innerHTML = '';
+
+    const isDark = document.documentElement.classList.contains('dark');
+    const theme = isDark ? 'noborder_dark' : 'noborder_light';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'cuicui-V5/cuicui-V5.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDOI8kGwA');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDOI8kGwM4DK-qe');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', theme);
+    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  // 监听主题切换，动态发送消息通知 Giscus iframe 改变主题
+  function syncGiscusTheme() {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    const isDark = document.documentElement.classList.contains('dark');
+    const theme = isDark ? 'noborder_dark' : 'noborder_light';
+    iframe.contentWindow?.postMessage(
+      { giscus: { setConfig: { theme } } },
+      'https://giscus.app'
+    );
+  }
+
+  if (!window.__giscus_theme_observer_installed) {
+    window.__giscus_theme_observer_installed = true;
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          syncGiscusTheme();
+        }
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true });
+  }
+
+  loadGiscus();
+  document.addEventListener('astro:after-swap', loadGiscus);
+</script>

@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
 import BaseLayout from './BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import Comments from '../components/Comments.astro';
 import { formatDate, getPostReadingTime, getCategoryBadgeStyle, getTagBadgeStyle } from '../utils/posts';
 
 interface Props {
@@ -141,6 +142,10 @@ const jsonLd = {
             </a>
           ) : <div />}
         </nav>
+
+        {post.data.comments !== false && (
+          <Comments />
+        )}
       </div>
 
       <!-- Desktop Sticky TOC with Glass Card -->
